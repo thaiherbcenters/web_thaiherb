@@ -1,0 +1,145 @@
+import { useState, useEffect } from 'react';
+import { Link, NavLink, useLocation } from 'react-router-dom';
+import './Navbar.css';
+
+const Navbar = () => {
+    const [isScrolled, setIsScrolled] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isOemDropdownOpen, setIsOemDropdownOpen] = useState(false);
+    const location = useLocation();
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 50);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    useEffect(() => {
+        setIsMobileMenuOpen(false);
+        setIsOemDropdownOpen(false);
+    }, [location]);
+
+    const navLinks = [
+        { path: '/', label: 'หน้าแรก' },
+        { path: '/products', label: 'ผลิตภัณฑ์' },
+        {
+            path: '/oem',
+            label: 'OEM',
+            hasDropdown: true,
+            dropdownItems: [
+                { path: '/oem', label: 'ผลิต OEM ครบวงจร' },
+                { path: '/oem/highlights', label: 'จุดเด่น OEM ของเรา' },
+                { path: '/oem/services', label: 'บริการของเรา' },
+            ]
+        },
+        { path: '/training', label: 'อบรมและกิจกรรม' },
+        { path: '/contact', label: 'ติดต่อเรา' },
+    ];
+
+    return (
+        <nav className={`navbar ${isScrolled ? 'navbar-scrolled' : ''}`}>
+            <div className="navbar-container">
+                {/* Logo */}
+                <Link to="/" className="navbar-logo">
+                    <img src="/logo-icon.png" alt="Thai Herb Centers" className="logo-icon" />
+                    <div className="logo-text">
+                        <span className="logo-name">THAI HERB CENTERS</span>
+                        <span className="logo-tagline">ไทยเฮิร์บ เซ็นเตอร์</span>
+                    </div>
+                </Link>
+
+                {/* Desktop Menu */}
+                <ul className="navbar-menu">
+                    {navLinks.map((link) => (
+                        <li
+                            key={link.path}
+                            className={`navbar-item ${link.hasDropdown ? 'has-dropdown' : ''}`}
+                            onMouseEnter={() => link.hasDropdown && setIsOemDropdownOpen(true)}
+                            onMouseLeave={() => link.hasDropdown && setIsOemDropdownOpen(false)}
+                        >
+                            <NavLink
+                                to={link.path}
+                                className={({ isActive }) =>
+                                    `navbar-link ${isActive && !link.hasDropdown ? 'active' : ''} ${link.hasDropdown && location.pathname.startsWith('/oem') ? 'active' : ''
+                                    }`
+                                }
+                            >
+                                {link.label}
+                                {link.hasDropdown && (
+                                    <svg className="dropdown-arrow" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                    </svg>
+                                )}
+                            </NavLink>
+
+                            {/* Dropdown */}
+                            {link.hasDropdown && (
+                                <div className={`dropdown-menu ${isOemDropdownOpen ? 'open' : ''}`}>
+                                    {link.dropdownItems.map((item) => (
+                                        <NavLink
+                                            key={item.path}
+                                            to={item.path}
+                                            className={({ isActive }) => `dropdown-item ${isActive ? 'active' : ''}`}
+                                            end={item.path === '/oem'}
+                                        >
+                                            {item.label}
+                                        </NavLink>
+                                    ))}
+                                </div>
+                            )}
+                        </li>
+                    ))}
+                </ul>
+
+                {/* Mobile Toggle */}
+                <button
+                    className={`navbar-toggle ${isMobileMenuOpen ? 'open' : ''}`}
+                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                >
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+
+            {/* Mobile Menu */}
+            <div className={`navbar-mobile ${isMobileMenuOpen ? 'open' : ''}`}>
+                <ul className="mobile-menu">
+                    {navLinks.map((link) => (
+                        <li key={link.path} className="mobile-item">
+                            {link.hasDropdown ? (
+                                <>
+                                    <button
+                                        className="mobile-link"
+                                        onClick={() => setIsOemDropdownOpen(!isOemDropdownOpen)}
+                                    >
+                                        {link.label}
+                                        <svg className={`dropdown-arrow ${isOemDropdownOpen ? 'open' : ''}`} viewBox="0 0 20 20" fill="currentColor">
+                                            <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                        </svg>
+                                    </button>
+                                    <div className={`mobile-dropdown ${isOemDropdownOpen ? 'open' : ''}`}>
+                                        {link.dropdownItems.map((item) => (
+                                            <NavLink key={item.path} to={item.path} className="mobile-dropdown-item" end={item.path === '/oem'}>
+                                                {item.label}
+                                            </NavLink>
+                                        ))}
+                                    </div>
+                                </>
+                            ) : (
+                                <NavLink to={link.path} className={({ isActive }) => `mobile-link ${isActive ? 'active' : ''}`}>
+                                    {link.label}
+                                </NavLink>
+                            )}
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </nav>
+    );
+};
+
+export default Navbar;

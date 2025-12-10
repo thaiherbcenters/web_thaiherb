@@ -1,0 +1,227 @@
+/* Training Page Styles */
+
+/* Events Grid */
+.events-section {
+    background: var(--bg-cream);
+}
+
+.event-card {
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.event-status {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    background: var(--gold);
+    color: var(--primary-green-dark);
+    border-radius: 50px;
+    z-index: 1;
+}
+
+.event-image {
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    background: linear-gradient(135deg, var(--bg-soft) 0%, var(--bg-light) 100%);
+}
+
+.event-content {
+    padding: var(--spacing-lg);
+}
+
+.event-content h3 {
+    font-size: 1.1rem;
+    margin-bottom: var(--spacing-md);
+    color: var(--text-primary);
+}
+
+.event-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.event-detail {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.detail-icon {
+    font-size: 1rem;
+}
+
+.event-btn {
+    width: 100%;
+}
+
+/* Why Join */
+.why-join {
+    background: var(--bg-white);
+}
+
+.why-join-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-2xl);
+    align-items: center;
+}
+
+.why-join-content .badge {
+    margin-bottom: var(--spacing-sm);
+}
+
+.why-join-content h2 {
+    margin-bottom: var(--spacing-xs);
+}
+
+.benefits-list {
+    margin-top: var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.benefits-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1rem;
+    color: var(--text-secondary);
+}
+
+.benefit-icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gold);
+    color: var(--primary-green-dark);
+    border-radius: 50%;
+    font-size: 0.8rem;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.why-join-image .image-placeholder {
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, var(--bg-soft) 0%, var(--bg-light) 100%);
+    border: 3px solid var(--gold);
+    border-radius: var(--radius-xl);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-md);
+}
+
+.why-join-image .image-placeholder span {
+    font-size: 5rem;
+}
+
+.why-join-image .image-placeholder p {
+    font-size: 1.25rem;
+    color: var(--primary-green);
+    font-weight: 600;
+}
+
+/* Past Events */
+.past-events {
+    background: var(--bg-soft);
+}
+
+.past-event-card {
+    background: var(--bg-white);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    border: 1px solid #E0E0E0;
+    text-align: center;
+    transition: var(--transition-normal);
+}
+
+.past-event-card:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--gold);
+}
+
+.past-event-icon {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+.past-event-card h4 {
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.past-event-date {
+    font-size: 0.85rem;
+    color: var(--primary-green);
+    margin-bottom: 0.25rem;
+}
+
+.past-event-participants {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* CTA */
+.training-cta {
+    background: var(--bg-white);
+}
+
+.training-cta .cta-box {
+    text-align: center;
+    padding: var(--spacing-2xl);
+    background: linear-gradient(135deg, var(--primary-green) 0%, var(--primary-green-dark) 100%);
+    border-radius: var(--radius-xl);
+    color: white;
+    border: 3px solid var(--gold);
+}
+
+.training-cta .cta-box h2 {
+    color: white;
+    margin-bottom: var(--spacing-sm);
+}
+
+.training-cta .cta-box p {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: var(--spacing-lg);
+}
+
+.training-cta .cta-box .btn-primary {
+    background: var(--gold);
+    color: var(--primary-green-dark);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .why-join-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-xl);
+    }
+
+    .why-join-image {
+        max-width: 350px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .events-grid {
+        grid-template-columns: 1fr;
+    }
+}

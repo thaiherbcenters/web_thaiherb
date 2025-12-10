@@ -1,0 +1,150 @@
+/* Products Page - Light Theme */
+
+.products-page .page-header {
+    background: var(--bg-soft);
+}
+
+.products-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.filter-btn {
+    padding: 0.5rem 1.25rem;
+    font-family: var(--font-family);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    background: var(--bg-white);
+    border: var(--border-light);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.filter-btn:hover {
+    border-color: var(--primary-green);
+    color: var(--primary-green);
+}
+
+.filter-btn.active {
+    background: var(--primary-green);
+    color: white;
+    border-color: var(--primary-green);
+}
+
+/* Product Card */
+.products-grid .product-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+}
+
+.product-tag {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    border-radius: 50px;
+}
+
+.tag-hot {
+    background: #ff6b6b;
+    color: white;
+}
+
+.tag-new {
+    background: var(--primary-green);
+    color: white;
+}
+
+.products-grid .product-image {
+
+    margin-bottom: var(--spacing-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-soft);
+    border-radius: var(--radius-md);
+}
+
+.product-img-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-img-icon {
+    transform: scale(1.1);
+}
+
+.products-grid .product-emoji {
+    font-size: 2.5rem;
+}
+
+.products-grid .product-category {
+    font-size: 0.75rem;
+    color: var(--primary-green);
+    font-weight: 500;
+}
+
+.products-grid .product-name {
+    color: var(--text-primary);
+    margin: 0.25rem 0;
+    font-size: 1rem;
+}
+
+.product-description {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: var(--spacing-sm);
+}
+
+.product-btn {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 0.8rem;
+}
+
+/* OEM CTA */
+.oem-cta-card {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+    padding: var(--spacing-lg);
+    background: var(--bg-soft);
+    border-radius: var(--radius-lg);
+}
+
+.oem-cta-icon {
+    font-size: 2.5rem;
+}
+
+.oem-cta-content {
+    flex: 1;
+}
+
+.oem-cta-content h3 {
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+}
+
+.oem-cta-content p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .oem-cta-card {
+        flex-direction: column;
+        text-align: center;
+    }
+}
