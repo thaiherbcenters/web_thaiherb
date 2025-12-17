@@ -42,16 +42,30 @@
     align-items: center;
     text-align: center;
     position: relative;
+    height: 100%;
+    padding: var(--spacing-lg);
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.products-grid .product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--gold-light);
 }
 
 .product-tag {
+
     position: absolute;
     top: 12px;
     right: 12px;
-    padding: 0.2rem 0.6rem;
-    font-size: 0.7rem;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
     font-weight: 600;
     border-radius: 50px;
+    z-index: 2;
+    box-shadow: var(--shadow-sm);
 }
 
 .tag-hot {
@@ -65,19 +79,22 @@
 }
 
 .products-grid .product-image {
-
+    width: 100%;
+    height: 180px;
     margin-bottom: var(--spacing-md);
     display: flex;
     align-items: center;
     justify-content: center;
     background: var(--bg-soft);
     border-radius: var(--radius-md);
+    overflow: hidden;
 }
 
 .product-img-icon {
     width: 100%;
     height: 100%;
     object-fit: contain;
+    padding: 1rem;
     transition: transform 0.3s ease;
 }
 
@@ -86,31 +103,65 @@
 }
 
 .products-grid .product-emoji {
-    font-size: 2.5rem;
+    font-size: 4rem;
+}
+
+.product-content {
+    flex-grow: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .products-grid .product-category {
-    font-size: 0.75rem;
+    font-size: 0.85rem;
     color: var(--primary-green);
     font-weight: 500;
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .products-grid .product-name {
     color: var(--text-primary);
-    margin: 0.25rem 0;
-    font-size: 1rem;
+    margin: 0.25rem 0 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.4;
 }
 
-.product-description {
-    font-size: 0.8rem;
+.product-desc {
+    font-size: 0.9rem;
     color: var(--text-muted);
     margin-bottom: var(--spacing-sm);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 2.8em;
+}
+
+.product-footer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: auto;
+    padding-top: var(--spacing-sm);
+    border-top: 1px solid var(--bg-light);
+}
+
+.product-price {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary-green-dark);
 }
 
 .product-btn {
-    width: 100%;
-    padding: 0.5rem;
-    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
 }
 
 /* OEM CTA */
@@ -146,5 +197,16 @@
     .oem-cta-card {
         flex-direction: column;
         text-align: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .products-filter {
+        gap: 0.25rem;
+    }
+
+    .filter-btn {
+        padding: 0.4rem 1rem;
+        font-size: 0.8rem;
     }
 }

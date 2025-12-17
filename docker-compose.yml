@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  thaiherb:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: thaiherb-app
+    ports:
+      - "80:80"
+    restart: unless-stopped
+    # Health check
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s

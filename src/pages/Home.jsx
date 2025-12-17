@@ -1,40 +1,44 @@
 import { Link } from 'react-router-dom';
 import './Home.css';
+import { products } from '../data/products';
 
 const Home = () => {
     const services = [
         {
-            icon: '🌿',
+            icon: '/images/service-products.png',
             title: 'ผลิตภัณฑ์สมุนไพร',
-            description: 'ผลิตภัณฑ์สมุนไพรคุณภาพสูงจากธรรมชาติ'
+            description: 'ผลิตภัณฑ์สมุนไพรคุณภาพสูงจากธรรมชาติ',
+            link: '/products'
         },
         {
-            icon: '🏭',
+            icon: '/images/service-oem.png',
             title: 'บริการ OEM',
-            description: 'รับผลิตสินค้าสมุนไพรตามแบรนด์ของคุณ'
+            description: 'รับผลิตสินค้าสมุนไพรตามแบรนด์ของคุณ',
+            link: '/oem'
         },
         {
-            icon: '✨',
-            title: 'มาตรฐาน อย.',
-            description: 'ผลิตภัณฑ์ผ่านการรับรองมาตรฐาน'
+            icon: '/images/service-training.jpg',
+            title: 'การอบรมเเละกิจกรรม',
+            description: 'บริการอบรมให้ความรู้และกิจกรรมส่งเสริมอาชีพด้านสมุนไพร',
+            link: '/training'
         }
     ];
 
     return (
         <div className="home-page">
             {/* Hero Section - Split Design */}
+            {/* Hero Section - Unified Design */}
             <section className="hero">
-                {/* Left - Green Background */}
-                <div className="hero-left">
+                <div className="container">
                     <div className="hero-content">
                         <h1>
                             วิสาหกิจชุมชน<br />
-                            <span className="text-white">ไทยเฮิร์บ เซ็นเตอร์</span>
+                            <span className="text-white">ไทย เฮิร์บ เซ็นเตอร์</span>
                         </h1>
                         <p className="hero-subtitle">THAI HERB CENTERS</p>
                         <p className="hero-description">
                             ผู้เชี่ยวชาญด้านผลิตภัณฑ์สมุนไพรไทย พร้อมบริการ OEM ครบวงจร
-                            ด้วยประสบการณ์กว่า 15 ปี และโรงงานมาตรฐาน GMP
+                            <br /> และมีมาตรฐาน GMP
                         </p>
                         <div className="hero-buttons">
                             <Link to="/products" className="btn btn-white">
@@ -45,35 +49,13 @@ const Home = () => {
                             </Link>
                         </div>
 
-                        {/* Stats inside left section */}
-                        <div className="hero-stats">
-                            <div className="stat-item">
-                                <span className="stat-number">500+</span>
-                                <span className="stat-label">ผลิตภัณฑ์</span>
-                            </div>
-                            <div className="stat-item">
-                                <span className="stat-number">200+</span>
-                                <span className="stat-label">ลูกค้า OEM</span>
-                            </div>
-                            <div className="stat-item">
-                                <span className="stat-number">15+</span>
-                                <span className="stat-label">ปีประสบการณ์</span>
-                            </div>
-                            <div className="stat-item">
-                                <span className="stat-number">100%</span>
-                                <span className="stat-label">มาตรฐาน อย.</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Right - Image Background */}
-                <div className="hero-right">
-                    <div className="hero-image-overlay"></div>
-                    <div className="hero-image-content">
-                        <div className="image-badge">
-                            <span>🌿</span>
-                            <p>คุณภาพจากธรรมชาติ</p>
+                        {/* Certifications Banner */}
+                        <div className="hero-certifications">
+                            <img
+                                src="/images/certifications-banner.png"
+                                alt="ได้รับมาตรฐาน GMP, OTOP, Green Industry"
+                                className="cert-banner-img"
+                            />
                         </div>
                     </div>
                 </div>
@@ -88,11 +70,19 @@ const Home = () => {
 
                     <div className="services-grid grid grid-3">
                         {services.map((service, index) => (
-                            <div key={index} className="service-card card">
-                                <div className="service-icon">{service.icon}</div>
-                                <h3>{service.title}</h3>
-                                <p>{service.description}</p>
-                            </div>
+                            <Link key={index} to={service.link} className="service-card-link">
+                                <div className="service-card card">
+                                    <div className="service-icon">
+                                        {service.icon.startsWith('/') ? (
+                                            <img src={service.icon} alt={service.title} />
+                                        ) : (
+                                            service.icon
+                                        )}
+                                    </div>
+                                    <h3>{service.title}</h3>
+                                    <p>{service.description}</p>
+                                </div>
+                            </Link>
                         ))}
                     </div>
                 </div>

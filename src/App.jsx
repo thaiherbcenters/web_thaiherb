@@ -4,11 +4,11 @@ import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import Home from './pages/Home';
 import Products from './pages/Products';
+import ProductDetail from './pages/ProductDetail';
 import Contact from './pages/Contact';
 import Training from './pages/Training';
 import OemOverview from './pages/oem/OemOverview';
-import OemHighlights from './pages/oem/OemHighlights';
-import OemServices from './pages/oem/OemServices';
+import Checkout from './pages/Checkout';
 import './index.css';
 
 function App() {
@@ -21,9 +21,9 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/products" element={<Products />} />
+            <Route path="/products/:id" element={<ProductDetail />} />
+            <Route path="/checkout" element={<Checkout />} />
             <Route path="/oem" element={<OemOverview />} />
-            <Route path="/oem/highlights" element={<OemHighlights />} />
-            <Route path="/oem/services" element={<OemServices />} />
             <Route path="/training" element={<Training />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>

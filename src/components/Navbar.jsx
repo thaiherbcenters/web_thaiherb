@@ -25,16 +25,7 @@ const Navbar = () => {
     const navLinks = [
         { path: '/', label: 'หน้าแรก' },
         { path: '/products', label: 'ผลิตภัณฑ์' },
-        {
-            path: '/oem',
-            label: 'OEM',
-            hasDropdown: true,
-            dropdownItems: [
-                { path: '/oem', label: 'ผลิต OEM ครบวงจร' },
-                { path: '/oem/highlights', label: 'จุดเด่น OEM ของเรา' },
-                { path: '/oem/services', label: 'บริการของเรา' },
-            ]
-        },
+        { path: '/oem', label: 'OEM' },
         { path: '/training', label: 'อบรมและกิจกรรม' },
         { path: '/contact', label: 'ติดต่อเรา' },
     ];
@@ -47,7 +38,7 @@ const Navbar = () => {
                     <img src="/logo-icon.png" alt="Thai Herb Centers" className="logo-icon" />
                     <div className="logo-text">
                         <span className="logo-name">THAI HERB CENTERS</span>
-                        <span className="logo-tagline">ไทยเฮิร์บ เซ็นเตอร์</span>
+                        <span className="logo-tagline">ไทย เฮิร์บ เซ็นเตอร์</span>
                     </div>
                 </Link>
 
@@ -95,14 +86,16 @@ const Navbar = () => {
                 </ul>
 
                 {/* Mobile Toggle */}
-                <button
-                    className={`navbar-toggle ${isMobileMenuOpen ? 'open' : ''}`}
-                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                >
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
+                <div className="mobile-controls">
+                    <button
+                        className={`navbar-toggle ${isMobileMenuOpen ? 'open' : ''}`}
+                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                    >
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
             </div>
 
             {/* Mobile Menu */}

@@ -1,110 +1,107 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Training.css';
 
 const Training = () => {
+    const [selectedImage, setSelectedImage] = useState(null);
+
     const upcomingEvents = [
         {
             id: 1,
-            title: 'อบรมการผลิตสมุนไพรเบื้องต้น',
+            title: 'อบรมการทำยาดมสมุนไพรสูตรโบราณ',
             date: '15 มกราคม 2567',
-            time: '09:00 - 16:00 น.',
-            location: 'ศูนย์ฝึกอบรม ไทยเฮิร์บ เซ็นเตอร์',
-            price: 'ฟรี',
+            time: '09:00 - 16:00',
+            location: 'Thai Herb Centers นนทบุรี',
+            price: '1,500 บาท',
             image: '🌿',
             status: 'เปิดรับสมัคร'
         },
         {
             id: 2,
-            title: 'Workshop สร้างแบรนด์สมุนไพร',
+            title: 'Workshop การทำเทียนหอมไขถั่วเหลือง',
             date: '22 มกราคม 2567',
-            time: '09:00 - 17:00 น.',
-            location: 'ศูนย์ฝึกอบรม ไทยเฮิร์บ เซ็นเตอร์',
-            price: '1,500 บาท',
-            image: '🏭',
-            status: 'เปิดรับสมัคร'
-        },
-        {
-            id: 3,
-            title: 'สัมมนาเทรนด์สมุนไพร 2567',
-            date: '5 กุมภาพันธ์ 2567',
-            time: '13:00 - 17:00 น.',
-            location: 'Online (Zoom)',
-            price: 'ฟรี',
-            image: '📊',
-            status: 'เร็วๆ นี้'
+            time: '13:00 - 16:00',
+            location: 'Thai Herb Centers นนทบุรี',
+            price: '990 บาท',
+            image: '🕯️',
+            status: 'ว่าง 5 ที่นั่ง'
         }
     ];
 
     const pastEvents = [
         {
-            title: 'อบรมมาตรฐาน GMP สำหรับโรงงานสมุนไพร',
-            date: 'ธันวาคม 2566',
-            participants: '45 คน',
-            image: '✅'
+            id: 101,
+            title: 'อบรมการแปรรูปสมุนไพรเบื้องต้น รุ่นที่ 5',
+            date: '10 ธันวาคม 2566',
+            participants: 30,
+            image: '/images/training-gallery/ku/ku-1.jpg'
         },
         {
-            title: 'Workshop การตลาดออนไลน์สำหรับผลิตภัณฑ์สมุนไพร',
-            date: 'พฤศจิกายน 2566',
-            participants: '32 คน',
-            image: '📱'
+            id: 102,
+            title: 'กิจกรรมปลูกสมุนไพรเพื่อชุมชน',
+            date: '5 ธันวาคม 2566',
+            participants: 50,
+            image: '/images/training-gallery/ku/ku-2.jpg'
         },
         {
-            title: 'ทัศนศึกษาโรงงานผลิตสมุนไพร',
-            date: 'ตุลาคม 2566',
-            participants: '28 คน',
-            image: '🏭'
+            id: 103,
+            title: 'Workshop ทำสบู่สมุนไพร',
+            date: '20 พฤศจิกายน 2566',
+            participants: 20,
+            image: '/images/training-gallery/phuket/main.jpg'
         }
     ];
 
     return (
         <div className="training-page page">
-            {/* Page Header */}
-            <div className="page-header">
-                <div className="container">
-                    <span className="badge">Training & Events</span>
-                    <h1>อบรมและ<span className="text-gold">กิจกรรม</span></h1>
-                    <p>
-                        เรียนรู้และพัฒนาทักษะด้านสมุนไพรกับผู้เชี่ยวชาญ
+            <section className="page-hero">
+                <div className="container page-hero-content">
+                    <span className="badge animate-fadeInUp">อบรมและกิจกรรม</span>
+                    <h1 className="animate-fadeInUp" style={{ animationDelay: '0.1s' }}>
+                        การอบรมและกิจกรรม <span className="text-gold">Activity</span>
+                    </h1>
+                    <p className="animate-fadeInUp" style={{ animationDelay: '0.2s' }}>
+                        เสริมสร้างความรู้และทักษะด้านสมุนไพร
                     </p>
                 </div>
-            </div>
+            </section>
 
             {/* Upcoming Events */}
             <section className="events-section section">
                 <div className="container">
                     <div className="section-title">
-                        <h2>กิจกรรม<span>ที่กำลังจะมาถึง</span></h2>
-                        <p>ลงทะเบียนเข้าร่วมกิจกรรมและอบรมต่างๆ ของเรา</p>
+                        <h2 className="animate-fadeInUp">กิจกรรมที่กำลังจะมาถึง</h2>
                     </div>
-
-                    <div className="events-grid grid grid-3">
-                        {upcomingEvents.map((event) => (
+                    <div className="events-grid grid grid-2">
+                        {upcomingEvents.map(event => (
                             <div key={event.id} className="event-card card">
                                 <div className="event-status">{event.status}</div>
-                                <div className="event-image">{event.image}</div>
+                                <div className="event-image">
+                                    {event.image}
+                                </div>
                                 <div className="event-content">
                                     <h3>{event.title}</h3>
                                     <div className="event-details">
                                         <div className="event-detail">
                                             <span className="detail-icon">📅</span>
-                                            <span>{event.date}</span>
+                                            <span>วันที่: {event.date}</span>
                                         </div>
                                         <div className="event-detail">
                                             <span className="detail-icon">⏰</span>
-                                            <span>{event.time}</span>
+                                            <span>เวลา: {event.time}</span>
                                         </div>
                                         <div className="event-detail">
                                             <span className="detail-icon">📍</span>
-                                            <span>{event.location}</span>
+                                            <span>สถานที่: {event.location}</span>
                                         </div>
                                         <div className="event-detail">
                                             <span className="detail-icon">💰</span>
-                                            <span>{event.price}</span>
+                                            <span>ค่าลงทะเบียน: {event.price}</span>
                                         </div>
                                     </div>
-                                    <button className="btn btn-primary event-btn">
-                                        ลงทะเบียน
-                                    </button>
+                                    <Link to="/contact" className="btn btn-primary event-btn">
+                                        สมัครเข้าร่วม
+                                    </Link>
                                 </div>
                             </div>
                         ))}
@@ -117,56 +114,64 @@ const Training = () => {
                 <div className="container">
                     <div className="why-join-grid">
                         <div className="why-join-content">
-                            <span className="badge">ทำไมต้องเข้าร่วม</span>
-                            <h2>ประโยชน์ที่คุณจะได้รับ</h2>
-                            <div className="divider"></div>
+                            <span className="badge">การอบรมและกิจกรรม</span>
+                            <h2>ทำไมต้องอบรมกับเรา?</h2>
                             <ul className="benefits-list">
                                 <li>
                                     <span className="benefit-icon">✓</span>
-                                    เรียนรู้จากผู้เชี่ยวชาญโดยตรง
+                                    วิทยากรผู้เชี่ยวชาญตัวจริง
                                 </li>
                                 <li>
                                     <span className="benefit-icon">✓</span>
-                                    ปฏิบัติจริงในโรงงานมาตรฐาน GMP
+                                    เน้นการปฏิบัติจริง ทำเป็นอาชีพได้
                                 </li>
                                 <li>
                                     <span className="benefit-icon">✓</span>
-                                    ได้รับใบประกาศนียบัตร
+                                    อุปกรณ์และสถานที่มาตรฐาน
                                 </li>
                                 <li>
                                     <span className="benefit-icon">✓</span>
                                     เครือข่ายผู้ประกอบการสมุนไพร
-                                </li>
-                                <li>
-                                    <span className="benefit-icon">✓</span>
-                                    สิทธิพิเศษสำหรับบริการ OEM
                                 </li>
                             </ul>
                         </div>
                         <div className="why-join-image">
                             <div className="image-placeholder">
                                 <span>🎓</span>
-                                <p>เรียนรู้และเติบโต</p>
+                                <p>Thai Herb Academy</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* Past Events */}
+            {/* Past Events Gallery */}
             <section className="past-events section">
                 <div className="container">
                     <div className="section-title">
-                        <h2>กิจกรรม<span>ที่ผ่านมา</span></h2>
+                        <h2 className="animate-fadeInUp">กิจกรรมที่ผ่านมา</h2>
                     </div>
-
-                    <div className="past-events-grid grid grid-3">
-                        {pastEvents.map((event, index) => (
-                            <div key={index} className="past-event-card">
-                                <div className="past-event-icon">{event.image}</div>
-                                <h4>{event.title}</h4>
-                                <p className="past-event-date">{event.date}</p>
-                                <p className="past-event-participants">ผู้เข้าร่วม: {event.participants}</p>
+                    <div className="events-grid grid grid-3">
+                        {pastEvents.map(event => (
+                            <div key={event.id} className="past-event-card">
+                                <div className="past-event-image-container">
+                                    {event.image.startsWith('/') ? (
+                                        <img src={event.image} alt={event.title} className="past-event-img" />
+                                    ) : (
+                                        <span className="past-event-icon">📷</span>
+                                    )}
+                                </div>
+                                <div className="past-event-content">
+                                    <h4>{event.title}</h4>
+                                    <p className="past-event-date">{event.date}</p>
+                                    <p className="past-event-participants">ผู้เข้าร่วม: {event.participants} คน</p>
+                                    <button
+                                        className="btn btn-outline past-event-btn"
+                                        onClick={() => setSelectedImage(event.image.startsWith('/') ? event.image : null)}
+                                    >
+                                        ดูภาพกิจกรรม
+                                    </button>
+                                </div>
                             </div>
                         ))}
                     </div>
@@ -177,14 +182,24 @@ const Training = () => {
             <section className="training-cta section">
                 <div className="container">
                     <div className="cta-box">
-                        <h2>สนใจจัดอบรมเฉพาะองค์กร?</h2>
-                        <p>ติดต่อเราเพื่อออกแบบหลักสูตรที่เหมาะกับองค์กรของคุณ</p>
+                        <h2>สนใจสร้างแบรนด์สมุนไพรของคุณ?</h2>
+                        <p>ติดต่อเราเพื่อรับคำปรึกษาฟรี</p>
                         <Link to="/contact" className="btn btn-primary">
                             ติดต่อเรา
                         </Link>
                     </div>
                 </div>
             </section>
+
+            {/* Image Modal */}
+            {selectedImage && (
+                <div className="gallery-modal" onClick={() => setSelectedImage(null)}>
+                    <div className="gallery-content" onClick={e => e.stopPropagation()}>
+                        <button className="gallery-close" onClick={() => setSelectedImage(null)}>&times;</button>
+                        <img src={selectedImage} alt="Gallery" className="gallery-image" />
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

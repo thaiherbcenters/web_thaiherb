@@ -185,4 +185,9 @@
     .form-row {
         grid-template-columns: 1fr;
     }
+
+    .contact-form-wrapper,
+    .contact-info-card {
+        padding: var(--spacing-md);
+    }
 }

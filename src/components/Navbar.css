@@ -5,9 +5,10 @@
     left: 0;
     right: 0;
     z-index: 1000;
-    padding: 0.75rem 0;
+
     background: var(--bg-white);
     transition: var(--transition-normal);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .navbar-scrolled {
@@ -31,8 +32,8 @@
 }
 
 .logo-icon {
-    width: 45px;
-    height: 45px;
+    width: 60px;
+    height: 60px;
     object-fit: contain;
 }
 
@@ -255,5 +256,14 @@
 @media (max-width: 480px) {
     .logo-text {
         display: none;
+    }
+
+    .navbar-container {
+        padding: 0 var(--spacing-sm);
+    }
+
+    .logo-icon {
+        width: 35px;
+        height: 35px;
     }
 }
