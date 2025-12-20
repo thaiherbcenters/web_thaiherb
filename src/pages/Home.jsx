@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import './Home.css';
-import { products } from '../data/products';
+
 
 const Home = () => {
     const services = [

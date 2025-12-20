@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     container_name: thaiherb-app
     ports:
-      - "80:80"
+      - "3000:80"
     restart: unless-stopped
     # Health check
     healthcheck:

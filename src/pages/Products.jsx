@@ -1,20 +1,63 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { products } from '../data/products';
+import api from '../services/api';
 import './Products.css';
 
 const Products = () => {
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     const [activeCategory, setActiveCategory] = useState('ทั้งหมด');
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const data = await api.getProducts();
+                setProducts(data);
+            } catch (err) {
+                console.error('Error loading products:', err);
+                setError('ไม่สามารถโหลดข้อมูลสินค้าได้');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchProducts();
+    }, []);
 
     // Extract unique categories from products
     const categories = useMemo(() => {
+        if (!products.length) return ['ทั้งหมด'];
         const cats = new Set(products.map(p => p.category));
         return ['ทั้งหมด', ...Array.from(cats)];
-    }, []);
+    }, [products]);
 
     const filteredProducts = activeCategory === 'ทั้งหมด'
         ? products
         : products.filter(p => p.category === activeCategory);
+
+    if (loading) {
+        return (
+            <div className="products-page page">
+                <div className="container section text-center">
+                    <p>กำลังโหลดข้อมูลสินค้า...</p>
+                </div>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="products-page page">
+                <div className="container section text-center">
+                    <p className="text-error">{error}</p>
+                    <button onClick={() => window.location.reload()} className="btn btn-outline">
+                        ลองใหม่อีกครั้ง
+                    </button>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="products-page page">
@@ -55,10 +98,10 @@ const Products = () => {
                                             {product.tag}
                                         </span>
                                     )}
-                                    {product.icon.startsWith('/') ? (
+                                    {product.icon && product.icon.startsWith('/') ? (
                                         <img src={product.icon} alt={product.name} />
                                     ) : (
-                                        <span className="product-emoji">{product.icon}</span>
+                                        <span className="product-emoji">{product.icon || '🌿'}</span>
                                     )}
                                 </div>
                                 <div className="product-content">
@@ -66,6 +109,7 @@ const Products = () => {
                                     <h3>{product.name}</h3>
                                     <p className="product-desc">{product.description}</p>
                                     <div className="product-footer">
+                                        <div className="product-price">฿{product.price}</div>
                                         <Link to={`/products/${product.id}`} className="btn btn-outline btn-sm product-btn">
                                             ดูรายละเอียด
                                         </Link>

@@ -1,13 +1,41 @@
+import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { products } from '../data/products';
+import api from '../services/api';
 import './ProductDetail.css';
 
 const ProductDetail = () => {
     const { id } = useParams();
-    const product = products.find(p => p.id === parseInt(id));
+    const [product, setProduct] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchProduct = async () => {
+            setLoading(true);
+            try {
+                const data = await api.getProductById(id);
+                if (data) {
+                    setProduct(data);
+                    setError(null);
+                } else {
+                    setError('ไม่พบสินค้านี้');
+                }
+            } catch (err) {
+                console.error('Error loading product:', err);
+                setError('เกิดข้อผิดพลาดในการโหลดข้อมูลสินค้า');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        if (id) {
+            fetchProduct();
+        }
+    }, [id]);
 
     // Helper to get color class for category
     const getCategoryClass = (category) => {
+        if (!category) return '';
         if (['ยาแคปซูล', 'ยาดองสมุนไพร'].includes(category)) return 'cat-medicine';
         if (['ยาหม่อง', 'ยาน้ำมันนวด', 'ยาดม', 'ลูกประคบสมุนไพร'].includes(category)) return 'cat-external';
         if (['เทียนหอม', 'ไม้หอม'].includes(category)) return 'cat-spa';
@@ -15,12 +43,22 @@ const ProductDetail = () => {
         return '';
     };
 
-    if (!product) {
+    if (loading) {
+        return (
+            <div className="product-detail-page page">
+                <div className="container section text-center">
+                    <p>กำลังโหลดข้อมูลสินค้า...</p>
+                </div>
+            </div>
+        );
+    }
+
+    if (error || !product) {
         return (
             <div className="product-detail-page page">
                 <div className="container">
                     <div className="error-message">
-                        <h2>ไม่พบสินค้า</h2>
+                        <h2>{error || 'ไม่พบสินค้า'}</h2>
                         <Link to="/products" className="btn btn-primary">กลับไปหน้าสินค้า</Link>
                     </div>
                 </div>
@@ -34,10 +72,10 @@ const ProductDetail = () => {
             <div className="container">
                 <div className="product-detail-container">
                     <div className="product-detail-image">
-                        {product.icon.startsWith('/') ? (
+                        {product.icon && product.icon.startsWith('/') ? (
                             <img src={product.icon} alt={product.name} />
                         ) : (
-                            <span className="product-emoji-large">{product.icon}</span>
+                            <span className="product-emoji-large">{product.icon || '🌿'}</span>
                         )}
                     </div>
                     <div className="product-detail-info">
@@ -56,7 +94,7 @@ const ProductDetail = () => {
                         </div>
                         <h1 className="product-title">{product.name}</h1>
                         <div className="product-price">
-                            ราคา: <span className="price-amount">฿{product.price}</span>
+                            ราคา: <span className="price-amount">฿{parseInt(product.price).toLocaleString()}</span>
                         </div>
 
 
@@ -70,11 +108,11 @@ const ProductDetail = () => {
                                 </div>
                                 <div className="spec-item">
                                     <span className="spec-label">สถานะ:</span>
-                                    <span className="spec-value">{product.tag || 'พร้อมส่ง'}</span>
+                                    <span className="spec-value">{product.stock > 0 ? 'พร้อมส่ง' : 'สินค้าหมด'}</span>
                                 </div>
                                 <div className="spec-item">
-                                    <span className="spec-label">เลขทะเบียนที่:</span>
-                                    <span className="spec-value">{product.regNo || 'G 123/66'}</span>
+                                    <span className="spec-label">รหัสสินค้า:</span>
+                                    <span className="spec-value">{product.product_code}</span>
                                 </div>
                                 <div className="spec-item">
                                     <span className="spec-label">SKU:</span>
