@@ -72,14 +72,14 @@ fi
 # 3. Build และ Run Docker Container
 # =====================================================
 echo "🔨 กำลัง Build Docker Image..."
-docker-compose up -d --build
+sudo docker-compose up -d --build
 
 # =====================================================
 # 4. ตรวจสอบสถานะ
 # =====================================================
 echo ""
 echo "📊 สถานะ Container:"
-docker ps --filter "name=thaiherb"
+sudo docker ps --filter "name=thaiherb"
 
 echo ""
 echo "=============================================="
@@ -91,7 +91,7 @@ echo "   - http://localhost"
 echo "   - http://$(hostname -I | awk '{print $1}')"
 echo ""
 echo "📝 คำสั่งที่มีประโยชน์:"
-echo "   ดู logs:      docker-compose logs -f"
-echo "   หยุด:         docker-compose down"
-echo "   รีสตาร์ท:     docker-compose restart"
+echo "   ดู logs:      sudo docker-compose logs -f"
+echo "   หยุด:         sudo docker-compose down"
+echo "   รีสตาร์ท:     sudo docker-compose restart"
 echo ""
