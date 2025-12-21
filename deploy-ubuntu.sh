@@ -15,13 +15,33 @@ echo "⬇️  กำลังดึง Code ล่าสุด..."
 git pull origin main
 
 # =====================================================
-# 1. ปิด Nginx ตัวเก่า (ที่ติดมากับเครื่อง)
+# 1. เคลียร์ Port 80 (ปิด Nginx, Apache, หรือ Process อื่นๆ)
 # =====================================================
+echo "🧹 กำลังเคลียร์ Port 80..."
+
+# หยุด Apache2 ถ้ามี
+if systemctl is-active --quiet apache2; then
+    echo "🛑 หยุด Apache2..."
+    sudo systemctl stop apache2
+    sudo systemctl disable apache2
+fi
+
+# หยุด Nginx ถ้ามี
 if systemctl is-active --quiet nginx; then
-    echo "🛑 ตรวจพบ Nginx ทำงานอยู่... กำลังปิดเพื่อไม่ให้ชนกับ Docker..."
+    echo "🛑 หยุด Nginx..."
     sudo systemctl stop nginx
     sudo systemctl disable nginx
-    echo "✅ ปิด Nginx เรียบร้อย"
+fi
+
+# ฆ่า Process ที่ยังคา Port 80 อยู่ (Nuclear Option)
+if command -v fuser &> /dev/null; then
+    sudo fuser -k 80/tcp || true
+    echo "✅ ฆ่า Process บน Port 80 เรียบร้อย"
+else
+    # ถ้าไม่มี fuser ให้ลงเพิ่ม
+    sudo apt-get install -y psmisc
+    sudo fuser -k 80/tcp || true
+    echo "✅ ฆ่า Process บน Port 80 เรียบร้อย (ติดตั้ง psmisc เพิ่ม)"
 fi
 
 # =====================================================
