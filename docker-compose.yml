@@ -11,7 +11,10 @@ services:
       - "3001:3001" # Optional: expose for local debugging if needed, or remove to keep internal only
     environment:
       - PORT=3001
+      - DB_HOST=host.docker.internal # Connect to Host DB internally
       # Add other env vars here or use env_file
+    extra_hosts:
+      - "host.docker.internal:host-gateway" # Enable access to host machine
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "wget", "-q", "--spider", "http://localhost:3001/api/health"]
