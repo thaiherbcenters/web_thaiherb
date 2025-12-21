@@ -57,6 +57,9 @@ if ! command -v docker &> /dev/null; then
     echo "✅ ติดตั้ง Docker เรียบร้อย"
 else
     echo "✅ Docker ติดตั้งแล้ว: $(docker --version)"
+    # Start docker anyway to be safe
+    sudo systemctl start docker
+    sudo systemctl enable docker
 fi
 
 # =====================================================
