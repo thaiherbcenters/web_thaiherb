@@ -19,6 +19,12 @@ git pull origin main
 # =====================================================
 echo "🧹 กำลังเคลียร์ Port 80..."
 
+# หยุด Container เก่าที่อาจจะค้างอยู่ (Orphan)
+if [ "$(sudo docker ps -q -f name=thaiherb-app)" ]; then
+    echo "🛑 หยุด Container เก่า (thaiherb-app)..."
+    sudo docker rm -f thaiherb-app
+fi
+
 # หยุด Apache2 ถ้ามี
 if systemctl is-active --quiet apache2; then
     echo "🛑 หยุด Apache2..."
