@@ -19,10 +19,11 @@ git pull origin main
 # =====================================================
 echo "🧹 กำลังเคลียร์ Port 80..."
 
-# หยุด Container เก่าที่อาจจะค้างอยู่ (Orphan)
-if [ "$(sudo docker ps -q -f name=thaiherb-app)" ]; then
-    echo "🛑 หยุด Container เก่า (thaiherb-app)..."
-    sudo docker rm -f thaiherb-app
+# หยุด Container ใดๆ ก็ตามที่บังอาจแย่ง Port 80 (Dynamic Filter)
+PORT_80_CONTAINER=$(sudo docker ps -q --filter "publish=80")
+if [ -n "$PORT_80_CONTAINER" ]; then
+    echo "🛑 เจอตัวการยึด Port 80 (ID: $PORT_80_CONTAINER)... สั่งลบทันที!"
+    sudo docker rm -f $PORT_80_CONTAINER
 fi
 
 # หยุด Apache2 ถ้ามี
