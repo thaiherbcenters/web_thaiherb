@@ -1,18 +1,40 @@
 version: '3.8'
 
 services:
-  thaiherb:
+  # Backend API Service
+  backend:
     build:
-      context: .
+      context: ./backend
       dockerfile: Dockerfile
-    container_name: thaiherb-app
+    container_name: thaiherb-api
     ports:
-      - "3000:80"
+      - "3001:3001" # Optional: expose for local debugging if needed, or remove to keep internal only
+    environment:
+      - PORT=3001
+      # Add other env vars here or use env_file
     restart: unless-stopped
-    # Health check
     healthcheck:
-      test: ["CMD", "wget", "-q", "--spider", "http://localhost/"]
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:3001/api/health"]
       interval: 30s
       timeout: 10s
       retries: 3
-      start_period: 10s
+    networks:
+      - app-network
+
+  # Frontend Static Site + Nginx Proxy
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: thaiherb-web
+    ports:
+      - "80:80" # Expose only port 80 to the world
+    restart: unless-stopped
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
