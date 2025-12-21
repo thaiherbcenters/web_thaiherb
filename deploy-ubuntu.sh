@@ -86,9 +86,10 @@ fi
 # 2. เปิด Firewall Port 80
 # =====================================================
 if command -v ufw &> /dev/null; then
-    echo "🔓 เปิด Firewall Port 80..."
+    echo "🔓 เปิด Firewall Port 80 และ 443..."
     sudo ufw allow 80/tcp
-    echo "✅ เปิด Port 80 เรียบร้อย"
+    sudo ufw allow 443/tcp
+    echo "✅ เปิด Port 80, 443 เรียบร้อย"
 fi
 
 # =====================================================

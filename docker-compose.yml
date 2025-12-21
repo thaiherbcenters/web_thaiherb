@@ -29,6 +29,9 @@ services:
     container_name: thaiherb-web
     ports:
       - "80:80" # Expose only port 80 to the world
+      - "443:443" # SSL Port
+    volumes:
+      - ./certs:/etc/nginx/certs:ro # Mount certificates
     restart: unless-stopped
     depends_on:
       - backend
