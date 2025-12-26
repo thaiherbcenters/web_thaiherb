@@ -1,0 +1,111 @@
+/* Language Selector */
+.language-selector {
+    position: relative;
+}
+
+.language-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.4rem 0.6rem;
+    background: transparent;
+    border: 1px solid var(--border-color, rgba(0, 0, 0, 0.1));
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-family: var(--font-family);
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    transition: var(--transition-fast);
+}
+
+.language-toggle:hover {
+    background: var(--bg-soft);
+    border-color: var(--primary-green);
+}
+
+.language-flag {
+    font-size: 1rem;
+    line-height: 1;
+}
+
+.language-name {
+    font-weight: 500;
+}
+
+.language-arrow {
+    width: 12px;
+    height: 12px;
+    transition: var(--transition-fast);
+}
+
+.language-arrow.open {
+    transform: rotate(180deg);
+}
+
+.language-dropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    right: 0;
+    min-width: 100%;
+    background: var(--bg-white);
+    border: 1px solid var(--border-color, rgba(0, 0, 0, 0.1));
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    z-index: 100;
+    animation: dropdownFadeIn 0.2s ease;
+}
+
+@keyframes dropdownFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.language-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-family);
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    transition: var(--transition-fast);
+    text-align: left;
+}
+
+.language-option:hover {
+    background: var(--bg-soft);
+    color: var(--primary-green);
+}
+
+.language-option.active {
+    background: var(--bg-soft);
+    color: var(--primary-green);
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .language-name {
+        display: none;
+    }
+
+    .language-toggle {
+        padding: 0.35rem 0.5rem;
+    }
+
+    .language-dropdown .language-name {
+        display: inline;
+    }
+}

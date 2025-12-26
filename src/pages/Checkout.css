@@ -4,6 +4,32 @@
     min-height: 100vh;
 }
 
+/* Empty Checkout */
+.empty-checkout {
+    text-align: center;
+    padding: var(--spacing-3xl) var(--spacing-lg);
+}
+
+.empty-checkout-icon {
+    font-size: 5rem;
+    margin-bottom: var(--spacing-lg);
+    opacity: 0.5;
+}
+
+.empty-checkout h2 {
+    margin-bottom: var(--spacing-sm);
+    color: var(--text-primary);
+}
+
+.empty-checkout p {
+    color: var(--text-muted);
+    margin-bottom: var(--spacing-xl);
+}
+
+.item-emoji {
+    font-size: 2rem;
+}
+
 
 .checkout-header {
     background: white;
@@ -233,7 +259,7 @@
     position: absolute;
     top: -5px;
     right: -5px;
-    background: var(--gold);
+    background: var(--secondary-blue);
     color: white;
     font-size: 0.75rem;
     width: 20px;
@@ -349,4 +375,300 @@
     .form-group.half {
         grid-column: span 1;
     }
+}
+
+/* Slip Upload Section */
+.slip-upload-section {
+    margin-top: var(--spacing-md);
+}
+
+.slip-upload-zone {
+    border: 2px dashed #ccc;
+    border-radius: var(--radius-md);
+    padding: var(--spacing-xl);
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    background: #fafafa;
+}
+
+.slip-upload-zone:hover {
+    border-color: var(--primary-green);
+    background: rgba(46, 125, 50, 0.03);
+}
+
+.slip-upload-zone.has-file {
+    border-color: var(--primary-green);
+    border-style: solid;
+    background: rgba(46, 125, 50, 0.05);
+}
+
+.slip-upload-zone input[type="file"] {
+    display: none;
+}
+
+.upload-icon {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+.upload-text {
+    color: #666;
+    font-size: 0.95rem;
+}
+
+.upload-hint {
+    font-size: 0.8rem;
+    color: #999;
+    margin-top: var(--spacing-xs);
+}
+
+/* Slip Preview */
+.slip-preview {
+    margin-top: var(--spacing-md);
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+}
+
+.slip-preview img {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: var(--radius-md);
+    border: 2px solid var(--primary-green);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.remove-slip-btn {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #dc3545;
+    color: white;
+    border: 2px solid white;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+}
+
+.remove-slip-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Loading State */
+.btn-place-order:disabled {
+    background: #aaa;
+    cursor: not-allowed;
+}
+
+.btn-place-order.loading {
+    position: relative;
+    color: transparent;
+}
+
+.btn-place-order.loading::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 50%;
+    left: 50%;
+    margin-left: -12px;
+    margin-top: -12px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Success Modal */
+.success-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.success-modal {
+    background: white;
+    padding: var(--spacing-2xl);
+    border-radius: var(--radius-lg);
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.3s;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.success-icon {
+    font-size: 4rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.success-modal h2 {
+    color: var(--primary-green);
+    margin-bottom: var(--spacing-sm);
+}
+
+.success-modal .order-id {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--secondary-blue);
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-sm);
+    background: #f0f7ff;
+    border-radius: var(--radius-sm);
+}
+
+.success-modal p {
+    color: #666;
+    margin-bottom: var(--spacing-lg);
+    line-height: 1.6;
+}
+
+.success-modal .btn {
+    width: 100%;
+}
+
+/* PromptPay QR Code Section */
+.promptpay-qr-section {
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-lg);
+    background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+    border-radius: var(--radius-lg);
+    text-align: center;
+    color: white;
+}
+
+.qr-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+}
+
+.qr-header h4 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: white;
+}
+
+.promptpay-logo {
+    height: 24px;
+    width: auto;
+}
+
+.qr-content {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    display: inline-block;
+}
+
+.qr-image {
+    width: 200px;
+    height: 200px;
+    border-radius: var(--radius-sm);
+}
+
+.qr-amount {
+    margin-top: var(--spacing-sm);
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.qr-amount span {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.qr-amount strong {
+    font-size: 1.5rem;
+    color: var(--primary-green);
+}
+
+.qr-promptpay-id {
+    margin-top: var(--spacing-sm);
+    font-size: 0.85rem;
+    color: #888;
+}
+
+.qr-instruction {
+    margin-top: var(--spacing-sm);
+    font-size: 0.8rem;
+    color: #666;
+    background: #f5f5f5;
+    padding: 0.5rem;
+    border-radius: var(--radius-sm);
+}
+
+.qr-loading {
+    padding: var(--spacing-xl);
+}
+
+.qr-loading .spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    margin: 0 auto var(--spacing-sm);
+    animation: spin 0.8s linear infinite;
+}
+
+.qr-loading p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+}
+
+.qr-error {
+    padding: var(--spacing-lg);
+}
+
+.qr-error p {
+    color: rgba(255, 255, 255, 0.7);
 }

@@ -56,9 +56,9 @@ const Training = () => {
         <div className="training-page page">
             <section className="page-hero">
                 <div className="container page-hero-content">
-                    <span className="badge animate-fadeInUp">อบรมและกิจกรรม</span>
+                    <span className="badge slide-text slide-0">อบรมและกิจกรรม</span>
                     <h1 className="animate-fadeInUp" style={{ animationDelay: '0.1s' }}>
-                        การอบรมและกิจกรรม <span className="text-gold">Activity</span>
+                        การอบรมและกิจกรรม <span className="text-blue">Activity</span>
                     </h1>
                     <p className="animate-fadeInUp" style={{ animationDelay: '0.2s' }}>
                         เสริมสร้างความรู้และทักษะด้านสมุนไพร

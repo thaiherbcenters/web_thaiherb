@@ -18,7 +18,7 @@
     padding: 0.25rem 0.75rem;
     font-size: 0.75rem;
     font-weight: 600;
-    background: var(--gold);
+    background: var(--secondary-blue);
     color: var(--primary-green-dark);
     border-radius: 50px;
     z-index: 1;
@@ -107,7 +107,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--gold);
+    background: var(--secondary-blue);
     color: var(--primary-green-dark);
     border-radius: 50%;
     font-size: 0.8rem;
@@ -118,7 +118,7 @@
 .why-join-image .image-placeholder {
     aspect-ratio: 1;
     background: linear-gradient(135deg, var(--bg-soft) 0%, var(--bg-light) 100%);
-    border: 3px solid var(--gold);
+    border: 3px solid var(--secondary-blue);
     border-radius: var(--radius-xl);
     display: flex;
     flex-direction: column;
@@ -156,7 +156,7 @@
 
 .past-event-card:hover {
     box-shadow: var(--shadow-md);
-    border-color: var(--gold);
+    border-color: var(--secondary-blue);
 }
 
 .past-event-image-container {
@@ -224,7 +224,7 @@
     background: linear-gradient(135deg, var(--primary-green) 0%, var(--primary-green-dark) 100%);
     border-radius: var(--radius-xl);
     color: white;
-    border: 3px solid var(--gold);
+    border: 3px solid var(--secondary-blue);
 }
 
 .training-cta .cta-box h2 {
@@ -238,7 +238,7 @@
 }
 
 .training-cta .cta-box .btn-primary {
-    background: var(--gold);
+    background: var(--secondary-blue);
     color: var(--primary-green-dark);
 }
 
@@ -289,7 +289,7 @@
 
 .gallery-close:hover {
     transform: scale(1.1);
-    color: var(--gold);
+    color: var(--secondary-blue);
 }
 
 .gallery-nav {
@@ -313,7 +313,7 @@
 
 .gallery-nav:hover {
     background: rgba(255, 255, 255, 0.2);
-    color: var(--gold);
+    color: var(--secondary-blue);
 }
 
 .gallery-nav.prev {
@@ -433,7 +433,7 @@
 }
 
 .gallery-grid-item:hover {
-    border-color: var(--gold);
+    border-color: var(--secondary-blue);
     transform: scale(1.05);
 }
 
@@ -470,7 +470,7 @@
 
 .gallery-back-btn:hover {
     background: rgba(255, 255, 255, 0.2);
-    color: var(--gold);
+    color: var(--secondary-blue);
 }
 
 /* Custom Scrollbar for Grid */

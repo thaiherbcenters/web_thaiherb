@@ -128,7 +128,7 @@
 
 .price-amount {
     font-size: 2rem;
-    color: var(--gold-color);
+    color: var(--secondary-blue);
     margin-left: 0.5rem;
 }
 
@@ -255,7 +255,7 @@
 .btn-cart {
     background-color: white;
     color: var(--primary-green);
-    border: 2px solid var(--primary-green);
+    border: 2px solid var(--primary-green) !important;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -263,4 +263,69 @@
 
 .btn-cart:hover {
     transform: translateY(-2px);
+}
+
+.btn-cart.added {
+    background-color: var(--primary-green);
+    color: white;
+    border-color: var(--primary-green);
+}
+
+.btn-cart:disabled {
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Quantity Selector */
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: var(--bg-soft);
+    border-radius: var(--radius-md);
+}
+
+.quantity-label {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.quantity-controls .qty-btn {
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--primary-green);
+    background: var(--bg-white);
+    color: var(--primary-green);
+    border-radius: var(--radius-sm);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quantity-controls .qty-btn:hover:not(:disabled) {
+    background: var(--primary-green);
+    color: white;
+}
+
+.quantity-controls .qty-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.quantity-controls .qty-value {
+    min-width: 40px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.1rem;
 }

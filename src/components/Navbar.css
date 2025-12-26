@@ -24,6 +24,21 @@
     justify-content: space-between;
 }
 
+/* Right Side Group */
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+/* Divider between sections */
+.navbar-divider {
+    width: 1px;
+    height: 24px;
+    background: var(--border-color, rgba(0, 0, 0, 0.1));
+    margin: 0 0.25rem;
+}
+
 /* Logo */
 .navbar-logo {
     display: flex;
@@ -133,6 +148,55 @@
 .dropdown-item.active {
     color: var(--primary-green);
     background: var(--bg-soft);
+}
+
+/* Navbar Social Media */
+.navbar-social {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.navbar-social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-sm);
+    color: var(--text-muted);
+    transition: var(--transition-fast);
+}
+
+.navbar-social-link svg {
+    width: 18px;
+    height: 18px;
+}
+
+.navbar-social-link:hover {
+    transform: translateY(-2px);
+}
+
+.navbar-social-link.facebook:hover {
+    color: #1877F2;
+    background: rgba(24, 119, 242, 0.1);
+}
+
+.navbar-social-link.tiktok:hover {
+    color: #000000;
+    background: rgba(0, 0, 0, 0.08);
+}
+
+.navbar-social-link.line:hover {
+    color: #06C755;
+    background: rgba(6, 199, 85, 0.1);
+}
+
+/* Navbar Actions (Cart + Mobile Toggle) */
+.navbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 /* Mobile Toggle */
@@ -250,6 +314,10 @@
 
     .navbar-mobile {
         display: block;
+    }
+
+    .logo-text {
+        display: none;
     }
 }
 
