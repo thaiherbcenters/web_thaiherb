@@ -16,7 +16,7 @@
 /* Desktop: Use the new wide image */
 @media (min-width: 992px) {
     .hero {
-        background-image: url('/images/hero-bg-desktop.webp');
+        background-image: url('/images/hero-bg-desktop.png');
     }
 }
 
