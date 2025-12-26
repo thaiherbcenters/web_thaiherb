@@ -268,6 +268,8 @@ const OemOverview = () => {
                     <div className="graphic-design-grid">
                         <img src="/images/design/design-1.jpg" alt={language === 'th' ? 'ออกแบบฉลาก' : 'Label Design'} />
                         <img src="/images/design/design-2.jpg" alt={language === 'th' ? 'ออกแบบซอง' : 'Pouch Design'} />
+                        <img src="/images/design/design-3.jpg" alt={language === 'th' ? 'ออกแบบซอง' : 'Pouch Design'} />
+                        <img src="/images/design/design-4.jpg" alt={language === 'th' ? 'ออกแบบซอง' : 'Pouch Design'} />
                     </div>
                 </div>
             </section>

@@ -1,13 +1,14 @@
 import { useState, useMemo, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useCart } from '../context/CartContext';
+// [DISABLED] import { useCart } from '../context/CartContext';
 import { useTranslation } from '../hooks/useTranslation';
 import translations from '../translations';
 import api from '../services/api';
 import './Products.css';
 
 const Products = () => {
-    const { addToCart } = useCart();
+    // [DISABLED] Cart feature
+    // const { addToCart } = useCart();
     const { t, language } = useTranslation();
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -234,6 +235,7 @@ const Products = () => {
                                     <span className="product-category">{getCategoryDisplay(product.category)}</span>
                                     <h3 className="product-name">{getProductName(product.name)}</h3>
                                     <p className="product-desc">{getProductDesc(product.name, product.description)}</p>
+                                    {/* [DISABLED] Price display - uncomment to re-enable
                                     <div className="product-price">
                                         {language === 'th'
                                             ? `฿${parseInt(product.price).toLocaleString()}`
@@ -241,7 +243,9 @@ const Products = () => {
                                                 ? `฿${parseInt(product.price).toLocaleString()} (~$${(parseInt(product.price) / 35).toFixed(2)})`
                                                 : `฿${parseInt(product.price).toLocaleString()} (约¥${(parseInt(product.price) / 5).toFixed(0)})`}
                                     </div>
+                                    */}
                                     <div className="product-actions-row">
+                                        {/* [DISABLED] Add to cart button - uncomment to re-enable
                                         <button
                                             className={`btn-quick-add ${addedProductId === product.id ? 'added' : ''}`}
                                             onClick={(e) => {
@@ -255,6 +259,7 @@ const Products = () => {
                                         >
                                             {addedProductId === product.id ? '✓' : '🛒'}
                                         </button>
+                                        */}
                                         <Link to={`/products/${product.id}`} className="btn btn-primary btn-sm product-btn">
                                             {language === 'th' ? 'ดูรายละเอียด' : language === 'en' ? 'View Details' : '查看详情'}
                                         </Link>

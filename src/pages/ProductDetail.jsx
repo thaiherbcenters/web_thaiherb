@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { useCart } from '../context/CartContext';
+// [DISABLED] import { useCart } from '../context/CartContext';
 import { useTranslation } from '../hooks/useTranslation';
 import translations from '../translations';
 import api from '../services/api';
@@ -9,7 +9,8 @@ import './ProductDetail.css';
 const ProductDetail = () => {
     const { id } = useParams();
     const navigate = useNavigate();
-    const { addToCart } = useCart();
+    // [DISABLED] Cart feature
+    // const { addToCart } = useCart();
     const { t, language } = useTranslation();
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -281,9 +282,11 @@ const ProductDetail = () => {
                             )}
                         </div>
                         <h1 className="product-title">{getProductName(product.name)}</h1>
+                        {/* [DISABLED] Price display - uncomment to re-enable
                         <div className="product-price">
                             {texts.price[language]} <span className="price-amount">{formatPrice(product.price)}</span>
                         </div>
+                        */}
 
 
                         <div className="product-full-details">
@@ -294,6 +297,7 @@ const ProductDetail = () => {
                                     <span className="spec-label">{texts.category[language]}</span>
                                     <span className="spec-value">{getCategoryDisplay(product.category)}</span>
                                 </div>
+                                {/* [DISABLED] Status, Product Code, SKU - uncomment to re-enable
                                 <div className="spec-item">
                                     <span className="spec-label">{texts.status[language]}</span>
                                     <span className="spec-value">
@@ -308,10 +312,11 @@ const ProductDetail = () => {
                                     <span className="spec-label">SKU:</span>
                                     <span className="spec-value">{String(product.id).padStart(6, '0')}</span>
                                 </div>
+                                */}
                             </div>
                         </div>
 
-                        {/* Quantity Selector */}
+                        {/* [DISABLED] Quantity Selector - uncomment to re-enable
                         <div className="quantity-selector">
                             <span className="quantity-label">{texts.quantity[language]}</span>
                             <div className="quantity-controls">
@@ -331,8 +336,10 @@ const ProductDetail = () => {
                                 </button>
                             </div>
                         </div>
+                        */}
 
                         <div className="product-actions">
+                            {/* [DISABLED] Add to cart and Buy Now buttons - uncomment to re-enable
                             <button
                                 onClick={handleAddToCart}
                                 className={`btn btn-cart btn-lg ${addedToCart ? 'added' : ''}`}
@@ -343,6 +350,7 @@ const ProductDetail = () => {
                             <button onClick={handleBuyNow} className="btn btn-primary btn-lg">
                                 {texts.buyNow[language]}
                             </button>
+                            */}
                             <Link to="/products" className="btn btn-outline btn-lg">
                                 {texts.backToProducts[language]}
                             </Link>

@@ -181,6 +181,39 @@
     display: block;
 }
 
+/* Payment Method Info (Single Method Display) */
+.payment-method-info {
+    padding: var(--spacing-md);
+    background: linear-gradient(135deg, rgba(46, 125, 50, 0.08) 0%, rgba(46, 125, 50, 0.03) 100%);
+    border: 2px solid var(--primary-green);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-sm);
+}
+
+.payment-method-badge {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-xs);
+}
+
+.payment-method-badge .badge-icon {
+    font-size: 1.5rem;
+}
+
+.payment-method-badge .badge-text {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--primary-green);
+}
+
+.payment-method-desc {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0;
+    padding-left: 2.3rem;
+}
+
 .bank-info-box {
     margin-top: var(--spacing-md);
     padding: var(--spacing-md);

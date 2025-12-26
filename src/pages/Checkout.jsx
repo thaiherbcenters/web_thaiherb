@@ -401,35 +401,12 @@ const Checkout = () => {
 
                         <div className="form-section">
                             <h3 className="section-title">{texts.payment.title[language]}</h3>
-                            <div className="payment-options">
-                                <label className={`payment-option ${formData.paymentMethod === 'transfer' ? 'selected' : ''}`}>
-                                    <input
-                                        type="radio"
-                                        name="paymentMethod"
-                                        value="transfer"
-                                        checked={formData.paymentMethod === 'transfer'}
-                                        onChange={handleChange}
-                                    />
-                                    <div className="option-content">
-                                        <span className="option-title">{texts.payment.transfer[language]}</span>
-                                        <span className="option-desc">{texts.payment.transferDesc[language]}</span>
-                                    </div>
-                                    <span className="check-icon">✓</span>
-                                </label>
-                                <label className={`payment-option ${formData.paymentMethod === 'cod' ? 'selected' : ''}`}>
-                                    <input
-                                        type="radio"
-                                        name="paymentMethod"
-                                        value="cod"
-                                        checked={formData.paymentMethod === 'cod'}
-                                        onChange={handleChange}
-                                    />
-                                    <div className="option-content">
-                                        <span className="option-title">{texts.payment.cod[language]}</span>
-                                        <span className="option-desc">{texts.payment.codDesc[language]}</span>
-                                    </div>
-                                    <span className="check-icon">✓</span>
-                                </label>
+                            <div className="payment-method-info">
+                                <div className="payment-method-badge">
+                                    <span className="badge-icon">🏦</span>
+                                    <span className="badge-text">{texts.payment.transfer[language]}</span>
+                                </div>
+                                <p className="payment-method-desc">{texts.payment.transferDesc[language]}</p>
                             </div>
 
                             {formData.paymentMethod === 'transfer' && (
