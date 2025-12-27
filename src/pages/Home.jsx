@@ -234,7 +234,7 @@ const Home = () => {
                             {/* Certifications Banner */}
                             <div className="hero-certifications">
                                 <img
-                                    src="/images/certifications-banner.png"
+                                    src="/images/certifications-banner.png?v=2"
                                     alt={language === 'th' ? 'ได้รับมาตรฐาน GMP, OTOP, Green Industry'
                                         : language === 'en' ? 'GMP, OTOP, Green Industry Certified'
                                             : 'GMP、OTOP、绿色工业认证'}
