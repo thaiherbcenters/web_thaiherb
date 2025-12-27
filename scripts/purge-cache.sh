@@ -17,7 +17,7 @@ RESPONSE=$(curl -s -X POST "https://api.cloudflare.com/client/v4/zones/${CF_ZONE
   --data '{"purge_everything":true}')
 
 # Check if successful
-if echo "$RESPONSE" | grep -q '"success":true'; then
+if echo "$RESPONSE" | grep -q '"success": true'; then
     echo "✅ CloudFlare cache purged successfully!"
 else
     echo "❌ Failed to purge cache:"
