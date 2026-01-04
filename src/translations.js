@@ -366,7 +366,7 @@ const translations = {
                 desc: { th: 'บรรเทาอาการปวดเมื่อย เคล็ดขัดยอก', en: 'Relieves muscle pain, sprains', zh: '缓解肌肉疼痛，扭伤' }
             },
             // Inhaler
-            'ยาดมสมุนไพร ตราผลไพร (ขวดเล็ก)': {
+            'ยาดมสมุนไพร ตราผลไพร': {
                 name: { th: 'ยาดมสมุนไพร ตราผลไพร (ขวดเล็ก)', en: 'Herbal Inhaler Small - Ponpri', zh: '草药吸入剂（小瓶）- Ponpri品牌' },
                 desc: { th: 'บรรเทาอาการวิงเวียนศีรษะ หน้ามืด คัดจมูก', en: 'Relieves dizziness, fainting, nasal congestion', zh: '缓解头晕、晕厥、鼻塞' }
             },
@@ -374,8 +374,8 @@ const translations = {
                 name: { th: 'ยาดมสมุนไพร ชุดของขวัญพรีเมียม', en: 'Premium Inhaler Gift Set', zh: '高级吸入剂礼品套装' },
                 desc: { th: 'ยาดมสมุนไพรในบรรจุภัณฑ์หรู เหมาะสำหรับเป็นของขวัญ', en: 'Herbal inhaler in luxury packaging, perfect gift', zh: '豪华包装草药吸入剂，完美礼物' }
             },
-            'ยาดมสมุนไพร ตราผลไพร (ขวดใหญ่)': {
-                name: { th: 'ยาดมสมุนไพร ตราผลไพร (ขวดใหญ่)', en: 'Herbal Inhaler Large - Ponpri', zh: '草药吸入剂（大瓶）- Ponpri品牌' },
+            'ยาดมสมุนไพร ตราผลไพร (จัมโบ้)': {
+                name: { th: 'ยาดมสมุนไพร ตราผลไพร (จัมโบ้)', en: 'Herbal Inhaler Jumbo - Ponpri', zh: '草药吸入剂（大瓶）- Ponpri品牌' },
                 desc: { th: 'ยาดมสมุนไพรขวดใหญ่ จุใจ หอมนาน', en: 'Large herbal inhaler, long-lasting fragrance', zh: '大瓶草药吸入剂，持久芳香' }
             },
             // Herbal Wine
