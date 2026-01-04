@@ -26,7 +26,7 @@ jobs:
           port: ${{ secrets.SERVER_PORT }}
           script: |
             # ไปที่ directory โปรเจกต์
-            cd /var/www/thaiherb
+            cd /home/ubuntu/thaiherb
             
             # Pull code ใหม่
             # Force sync with remote (discard local changes)
