@@ -29,7 +29,9 @@ jobs:
             cd /var/www/thaiherb
             
             # Pull code ใหม่
-            git pull origin main
+            # Force sync with remote (discard local changes)
+            git fetch origin
+            git reset --hard origin/main
             
             # Build และ Restart container
             docker-compose down
