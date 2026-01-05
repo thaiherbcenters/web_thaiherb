@@ -308,32 +308,32 @@ const translations = {
             en: 'View Details',
             zh: '查看详情'
         },
-        // Product items translations
+        // Product items translations - synced with database
         items: {
             // Capsules
             'แคปซูลขมิ้นชัน': {
                 name: { th: 'แคปซูลขมิ้นชัน', en: 'Turmeric Capsules', zh: '姜黄胶囊' },
-                desc: { th: 'บำรุงระบบทางเดินอาหาร ช่วยย่อยอาหาร', en: 'Supports digestive system, aids digestion', zh: '支持消化系统，帮助消化' }
+                desc: { th: 'ขับลม เเก้ท้องอืด ท้องเฟ้อ', en: 'Expels gas, relieves bloating and flatulence', zh: '驱风，缓解腹胀' }
             },
             'แคปซูลยารางจืด': {
                 name: { th: 'แคปซูลยารางจืด', en: 'Rang Jued Capsules', zh: '解毒草胶囊' },
-                desc: { th: 'บรรเทาอาการปวดเมื่อย คลายกล้ามเนื้อ', en: 'Relieves muscle pain and tension', zh: '缓解肌肉疼痛和紧张' }
+                desc: { th: 'เเก้ร้อนใน กระหายน้ำ ลดไข้ เเก้ประจำเดือนมาไม่ปกติ ลดอาการอักเสบ', en: 'Relieves internal heat, thirst, fever, irregular menstruation, reduces inflammation', zh: '清热解毒，止渴，退烧，调经，消炎' }
             },
             'แคปซูลยาตรีผลา': {
                 name: { th: 'แคปซูลยาตรีผลา', en: 'Triphala Capsules', zh: '三果胶囊' },
-                desc: { th: 'บำรุงระบบทางเดินอาหาร ช่วยย่อยอาหาร', en: 'Supports digestive system, aids digestion', zh: '支持消化系统，帮助消化' }
+                desc: { th: 'บรรเทาอาการไอ ขับเสมหะ ปรับสมดุลลำไส้ ต้านอนุมูลอิสระ', en: 'Relieves cough, expels phlegm, balances intestines, antioxidant', zh: '止咳化痰，调节肠道，抗氧化' }
             },
             'แคปซูลฟ้าทะลายโจร': {
                 name: { th: 'แคปซูลฟ้าทะลายโจร', en: 'Andrographis Capsules', zh: '穿心莲胶囊' },
-                desc: { th: 'บำรุงระบบทางเดินอาหาร ช่วยย่อยอาหาร', en: 'Supports digestive system, aids digestion', zh: '支持消化系统，帮助消化' }
+                desc: { th: 'เเก้ไข้', en: 'Relieves fever', zh: '退烧' }
             },
             'ยาผสมเพชรสังฆาต ชนิดแคปซูล ตราผลไพร': {
-                name: { th: 'ยาผสมเพชรสังฆาต ชนิดแคปซูล ตราผลไพร', en: 'Phet Sang Kart Capsules - Ponpri', zh: '宝石胶囊 - Ponpri品牌' },
-                desc: { th: 'บรรเทาอาการริดสีดวงทวาร', en: 'Relieves hemorrhoid symptoms', zh: '缓解痔疮症状' }
+                name: { th: 'ยาผสมเพชรสังฆาต ชนิดแคปซูล ตราผลไพร', en: 'Phet Sang Kart Capsules - Ponpri', zh: '宝石草胶囊 - Ponpri品牌' },
+                desc: { th: 'บรรเทาอาการริดสีดวงทวารหนัก', en: 'Relieves hemorrhoid symptoms', zh: '缓解痔疮症状' }
             },
             'มะระขี้นก ชนิดแคปซูล ตราผลไพร': {
                 name: { th: 'มะระขี้นก ชนิดแคปซูล ตราผลไพร', en: 'Bitter Gourd Capsules - Ponpri', zh: '苦瓜胶囊 - Ponpri品牌' },
-                desc: { th: 'ช่วยลดระดับน้ำตาลในเลือด แก้ไข้', en: 'Helps reduce blood sugar, relieves fever', zh: '帮助降低血糖，退烧' }
+                desc: { th: 'ช่วยลดระดับน้ำตาลในเลือด แก้ไข้ เเก้ร้อนใน', en: 'Helps reduce blood sugar, relieves fever and internal heat', zh: '降血糖，退烧，清热' }
             },
             'มะขามแขก ชนิดแคปซูล ตราผลไพร': {
                 name: { th: 'มะขามแขก ชนิดแคปซูล ตราผลไพร', en: 'Senna Capsules - Ponpri', zh: '番泻叶胶囊 - Ponpri品牌' },
@@ -351,23 +351,23 @@ const translations = {
             // Massage Oil
             'ยาน้ำมันนวดสมุนไพร สูตรร้อน ตราผลไพร': {
                 name: { th: 'ยาน้ำมันนวดสมุนไพร สูตรร้อน ตราผลไพร', en: 'Hot Herbal Massage Oil - Ponpri', zh: '热效草药按摩油 - Ponpri品牌' },
-                desc: { th: 'สูตรร้อน บรรเทาอาการปวดเมื่อย คลายเส้น', en: 'Hot formula, relieves muscle pain', zh: '热效配方，缓解肌肉疼痛' }
+                desc: { th: 'สูตรร้อน บรรเทาอาการปวดเมื่อยตามร่างกาย', en: 'Hot formula, relieves body aches and pains', zh: '热效配方，缓解全身酸痛' }
             },
             'ยาน้ำมัน ตราผลไพร (หัวลูกกลิ้ง)': {
                 name: { th: 'ยาน้ำมัน ตราผลไพร (หัวลูกกลิ้ง)', en: 'Herbal Oil Roll-on - Ponpri', zh: '草药滚珠油 - Ponpri品牌' },
-                desc: { th: 'ยาน้ำมันสมุนไพรแบบพกพา หัวลูกกลิ้ง ใช้งานง่าย', en: 'Portable herbal oil with roll-on applicator', zh: '便携式草药滚珠油，使用方便' }
+                desc: { th: 'บรรเทาอาการปวดเมื่อยตามร่างกาย', en: 'Relieves body aches and pains', zh: '缓解全身酸痛' }
             },
             'ยาน้ำมันสมุนไพร ตราผลไพร (สเปรย์)': {
                 name: { th: 'ยาน้ำมันสมุนไพร ตราผลไพร (สเปรย์)', en: 'Herbal Oil Spray - Ponpri', zh: '草药喷雾油 - Ponpri品牌' },
-                desc: { th: 'ยาน้ำมันสมุนไพรแบบสเปรย์ ฉีดพ่นบรรเทาปวด', en: 'Herbal spray oil for pain relief', zh: '草药喷雾油，缓解疼痛' }
+                desc: { th: 'บรรเทาอาการปวดเมื่อยตามร่างกาย', en: 'Relieves body aches and pains', zh: '缓解全身酸痛' }
             },
             'ยาน้ำมันกระดูกไก่ดำ ตราผลไพร (สเปรย์)': {
                 name: { th: 'ยาน้ำมันกระดูกไก่ดำ ตราผลไพร (สเปรย์)', en: 'Black Chicken Bone Oil Spray - Ponpri', zh: '乌鸡骨油喷雾 - Ponpri品牌' },
-                desc: { th: 'บรรเทาอาการปวดเมื่อย เคล็ดขัดยอก', en: 'Relieves muscle pain, sprains', zh: '缓解肌肉疼痛，扭伤' }
+                desc: { th: 'บรรเทาอาการปวดเมื่อยตามร่างกาย', en: 'Relieves body aches and pains', zh: '缓解全身酸痛' }
             },
             // Inhaler
-            'ยาดมสมุนไพร ตราผลไพร': {
-                name: { th: 'ยาดมสมุนไพร ตราผลไพร (ขวดเล็ก)', en: 'Herbal Inhaler Small - Ponpri', zh: '草药吸入剂（小瓶）- Ponpri品牌' },
+            'ยาดมสมุนไพร ตราผลไพร ': {
+                name: { th: 'ยาดมสมุนไพร ตราผลไพร', en: 'Herbal Inhaler - Ponpri', zh: '草药吸入剂 - Ponpri品牌' },
                 desc: { th: 'บรรเทาอาการวิงเวียนศีรษะ หน้ามืด คัดจมูก', en: 'Relieves dizziness, fainting, nasal congestion', zh: '缓解头晕、晕厥、鼻塞' }
             },
             'ยาดมสมุนไพร ชุดของขวัญพรีเมียม': {
@@ -380,29 +380,29 @@ const translations = {
             },
             // Herbal Wine
             'สวรรค์ชั้น 7 (Beyond Heaven)': {
-                name: { th: 'สวรรค์ชั้น 7', en: 'Beyond Heaven', zh: '七重天' },
+                name: { th: 'สวรรค์ชั้น 7 (Beyond Heaven)', en: 'Beyond Heaven', zh: '七重天' },
                 desc: { th: 'สมุนไพรดองสูตรพิเศษ บำรุงกำลัง', en: 'Special herbal wine, enhances vitality', zh: '特制草药酒，增强活力' }
             },
             'นารีรำพึง (Na Ree Lam Pueng)': {
-                name: { th: 'นารีรำพึง', en: 'Na Ree Lam Pueng', zh: '女性滋补酒' },
+                name: { th: 'นารีรำพึง (Na Ree Lam Pueng)', en: 'Na Ree Lam Pueng', zh: '女性滋补酒' },
                 desc: { th: 'สมุนไพรดองสูตรโบราณ สำหรับสตรี', en: 'Traditional herbal wine for women', zh: '传统女性草药酒' }
             },
             "ราชสีห์คำราม (Lion's Roar)": {
-                name: { th: 'ราชสีห์คำราม', en: "Lion's Roar", zh: '狮子吼' },
+                name: { th: "ราชสีห์คำราม (Lion's Roar)", en: "Lion's Roar", zh: '狮子吼' },
                 desc: { th: 'สมุนไพรดองสูตรเข้มข้น เพิ่มพลัง', en: 'Concentrated herbal wine, boosts energy', zh: '浓缩草药酒，增强能量' }
             },
             'กำลังช้างสาร (Elephant Power)': {
-                name: { th: 'กำลังช้างสาร', en: 'Elephant Power', zh: '大象力量' },
+                name: { th: 'กำลังช้างสาร (Elephant Power)', en: 'Elephant Power', zh: '大象力量' },
                 desc: { th: 'สมุนไพรดองบำรุงร่างกาย แข็งแรงดั่งช้างสาร', en: 'Herbal wine for body strength', zh: '草药酒，增强体力' }
             },
             'สาวน้อยตกเตียง (Never Tiren)': {
-                name: { th: 'สาวน้อยตกเตียง', en: 'Never Tired', zh: '永不疲倦' },
+                name: { th: 'สาวน้อยตกเตียง (Never Tiren)', en: 'Never Tired', zh: '永不疲倦' },
                 desc: { th: 'สมุนไพรดองสูตรเด็ด บำรุงธาตุ', en: 'Premium herbal wine, nourishes body', zh: '高级草药酒，滋养身体' }
             },
             // Honey
             'น้ำผึ้งรากกัญชา-โสมขาว': {
                 name: { th: 'น้ำผึ้งรากกัญชา-โสมขาว', en: 'Cannabis Root & White Ginseng Honey', zh: '大麻根白参蜂蜜' },
-                desc: { th: 'น้ำผึ้งแท้ผสมรากกัญชาและโสมขาว บำรุงสุขภาพ', en: 'Pure honey with cannabis root and white ginseng', zh: '纯蜂蜜配大麻根和白参' }
+                desc: { th: 'น้ำผึ้งแท้ผสมรากกัญชาและโสมขาว บำรุงสุขภาพ', en: 'Pure honey with cannabis root and white ginseng for health', zh: '纯蜂蜜配大麻根和白参，保健' }
             },
             // Candles
             'เทียนหอมไขถั่วเหลือง กลิ่น Rose Garden': {
@@ -419,29 +419,29 @@ const translations = {
             },
             // Herbal Tea
             'ยอดชาขาว ตรา เดอ ที (Assam White Tea)': {
-                name: { th: 'ยอดชาขาว ตรา เดอ ที', en: 'Assam White Tea - De Tea', zh: '白茶尖 - De Tea品牌' },
-                desc: { th: 'ยอดชาขาวโบราณ หอมละมุน ชุ่มคอ', en: 'Traditional white tea tips, smooth aroma', zh: '传统白茶尖，香气柔和' }
+                name: { th: 'ยอดชาขาว ตรา เดอ ที (Assam White Tea)', en: 'Assam White Tea - De Tea', zh: '白茶尖 - De Tea品牌' },
+                desc: { th: 'ยอดชาขาวโบราณ หอมละมุน ชุ่มคอ', en: 'Traditional white tea tips, smooth aroma, refreshing', zh: '传统白茶尖，香气柔和，清爽' }
             },
             'ชากัญชาโสมขาว (Cannabis White Ginseng Tea)': {
-                name: { th: 'ชากัญชาโสมขาว', en: 'Cannabis White Ginseng Tea', zh: '大麻白参茶' },
-                desc: { th: 'ชาสมุนไพรผสมกัญชาและโสมขาว เพื่อสุขภาพ', en: 'Herbal tea with cannabis and white ginseng', zh: '含大麻和白参的草药茶' }
+                name: { th: 'ชากัญชาโสมขาว (Cannabis White Ginseng Tea)', en: 'Cannabis White Ginseng Tea', zh: '大麻白参茶' },
+                desc: { th: 'ชาสมุนไพรผสมกัญชาและโสมขาว เพื่อสุขภาพ', en: 'Herbal tea with cannabis and white ginseng for health', zh: '含大麻和白参的草药茶，保健' }
             },
             'ชุดชาสมุนไพรพรีเมียม (Premium Tea Set)': {
-                name: { th: 'ชุดชาสมุนไพรพรีเมียม', en: 'Premium Herbal Tea Set', zh: '高级草药茶套装' },
-                desc: { th: 'รวมชาสมุนไพรชั้นดีในกล่องหรู เหมาะเป็นของขวัญ', en: 'Premium herbal tea collection in luxury box', zh: '豪华盒装高级草药茶套装' }
+                name: { th: 'ชุดชาสมุนไพรพรีเมียม (Premium Tea Set)', en: 'Premium Herbal Tea Set', zh: '高级草药茶套装' },
+                desc: { th: 'รวมชาสมุนไพรชั้นดีในกล่องหรู เหมาะเป็นของขวัญ', en: 'Premium herbal tea collection in luxury box, perfect gift', zh: '豪华盒装高级草药茶套装，完美礼物' }
             },
             // Diffuser
             'ชุดก้านไม้หอมปรับอากาศ กลิ่น Thai Aromatic': {
                 name: { th: 'ชุดก้านไม้หอมปรับอากาศ กลิ่น Thai Aromatic', en: 'Reed Diffuser - Thai Aromatic', zh: '藤条香薰 - 泰国香味' },
-                desc: { th: 'ชุดก้านไม้หอมปรับอากาศ กลิ่นสมุนไพรไทย หอมสดชื่น', en: 'Reed diffuser with Thai herbs scent', zh: '泰国草药香味藤条香薰' }
+                desc: { th: 'ชุดก้านไม้หอมปรับอากาศ กลิ่นสมุนไพรไทย หอมสดชื่น', en: 'Reed diffuser with Thai herbs scent, fresh fragrance', zh: '泰国草药香味藤条香薰，清新芳香' }
             },
             'ชุดก้านไม้หอมปรับอากาศ กลิ่น Rose Garden': {
                 name: { th: 'ชุดก้านไม้หอมปรับอากาศ กลิ่น Rose Garden', en: 'Reed Diffuser - Rose Garden', zh: '藤条香薰 - 玫瑰花园' },
-                desc: { th: 'ชุดก้านไม้หอมปรับอากาศ กลิ่นกุหลาบ หอมละมุน', en: 'Reed diffuser with rose scent', zh: '玫瑰香味藤条香薰' }
+                desc: { th: 'ชุดก้านไม้หอมปรับอากาศ กลิ่นกุหลาบ หอมละมุน', en: 'Reed diffuser with rose scent, gentle fragrance', zh: '玫瑰香味藤条香薰，柔和芳香' }
             },
             'ชุดก้านไม้หอมปรับอากาศ กลิ่น Morning Glory': {
                 name: { th: 'ชุดก้านไม้หอมปรับอากาศ กลิ่น Morning Glory', en: 'Reed Diffuser - Morning Glory', zh: '藤条香薰 - 牵牛花' },
-                desc: { th: 'ชุดก้านไม้หอมปรับอากาศ กลิ่นดอกผักบุ้ง หอมผ่อนคลาย', en: 'Reed diffuser with morning glory scent', zh: '牵牛花香味藤条香薰' }
+                desc: { th: 'ชุดก้านไม้หอมปรับอากาศ กลิ่นดอกผักบุ้ง หอมผ่อนคลาย', en: 'Reed diffuser with morning glory scent, relaxing fragrance', zh: '牵牛花香味藤条香薰，放松芳香' }
             },
             // Compress Ball
             'ลูกประคบสมุนไพร ตราผลไพร': {
