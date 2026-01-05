@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import './Admin.css';
 
-const API_URL = 'http://localhost:3001';
+// Use empty string for production (nginx proxies /api/ to backend)
+// Use 'http://localhost:3001' for local development without nginx
+const API_URL = '';
 
 const Admin = () => {
     const [products, setProducts] = useState([]);
