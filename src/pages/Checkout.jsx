@@ -56,25 +56,33 @@ const Checkout = () => {
     }, [total, formData.paymentMethod]);
 
     // Translation helper for product names
+    // Thai: use database directly, EN/ZH: fallback to translations.js
     const getProductName = (productName) => {
+        // For Thai language, always use the database value directly
+        if (language === 'th') {
+            return productName;
+        }
+
+        // For other languages, try to find translation in translations.js
         const items = translations?.products?.items;
         const trimmedName = productName?.trim();
 
         if (items && items[trimmedName] && items[trimmedName].name) {
-            return items[trimmedName].name[language] || items[trimmedName].name['th'] || trimmedName;
+            return items[trimmedName].name[language] || productName;
         }
 
         if (items) {
             for (const key of Object.keys(items)) {
                 if (key.startsWith(trimmedName) || trimmedName.startsWith(key.split(' (')[0])) {
                     if (items[key].name) {
-                        return items[key].name[language] || items[key].name['th'] || trimmedName;
+                        return items[key].name[language] || productName;
                     }
                 }
             }
         }
 
-        return trimmedName || productName;
+        // Fallback to database value (Thai)
+        return productName;
     };
 
     // Format price with currency conversion

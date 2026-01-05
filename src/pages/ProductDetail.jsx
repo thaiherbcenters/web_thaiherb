@@ -55,13 +55,20 @@ const ProductDetail = () => {
     };
 
     // Translation helper for product names
+    // Thai: use database directly, EN/ZH: fallback to translations.js
     const getProductName = (productName) => {
+        // For Thai language, always use the database value directly
+        if (language === 'th') {
+            return productName;
+        }
+
+        // For other languages, try to find translation in translations.js
         const items = translations?.products?.items;
         const trimmedName = productName?.trim();
 
         // Try exact match first
         if (items && items[trimmedName] && items[trimmedName].name) {
-            return items[trimmedName].name[language] || items[trimmedName].name['th'] || trimmedName;
+            return items[trimmedName].name[language] || productName;
         }
 
         // Try partial match
@@ -69,23 +76,31 @@ const ProductDetail = () => {
             for (const key of Object.keys(items)) {
                 if (key.startsWith(trimmedName) || trimmedName.startsWith(key.split(' (')[0])) {
                     if (items[key].name) {
-                        return items[key].name[language] || items[key].name['th'] || trimmedName;
+                        return items[key].name[language] || productName;
                     }
                 }
             }
         }
 
-        return trimmedName || productName;
+        // Fallback to database value (Thai)
+        return productName;
     };
 
     // Translation helper for product descriptions
+    // Thai: use database directly, EN/ZH: fallback to translations.js
     const getProductDesc = (productName, originalDesc) => {
+        // For Thai language, always use the database value directly
+        if (language === 'th') {
+            return originalDesc;
+        }
+
+        // For other languages, try to find translation in translations.js
         const items = translations?.products?.items;
         const trimmedName = productName?.trim();
 
         // Try exact match first
         if (items && items[trimmedName] && items[trimmedName].desc) {
-            return items[trimmedName].desc[language] || items[trimmedName].desc['th'] || originalDesc;
+            return items[trimmedName].desc[language] || originalDesc;
         }
 
         // Try partial match
@@ -93,12 +108,13 @@ const ProductDetail = () => {
             for (const key of Object.keys(items)) {
                 if (key.startsWith(trimmedName) || trimmedName.startsWith(key.split(' (')[0])) {
                     if (items[key].desc) {
-                        return items[key].desc[language] || items[key].desc['th'] || originalDesc;
+                        return items[key].desc[language] || originalDesc;
                     }
                 }
             }
         }
 
+        // Fallback to database value (Thai)
         return originalDesc;
     };
 
