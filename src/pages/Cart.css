@@ -104,7 +104,7 @@
 }
 
 .cart-item-name:hover {
-    color: var(--primary-green);
+    color: var(--primary-green-dark);
 }
 
 .cart-item-price,
@@ -139,8 +139,8 @@
 }
 
 .qty-btn:hover {
-    border-color: var(--primary-green);
-    color: var(--primary-green);
+    border-color: var(--primary-green-dark);
+    color: var(--primary-green-dark);
 }
 
 .qty-value {

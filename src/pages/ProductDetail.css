@@ -254,7 +254,7 @@
 /* Add to Cart Button */
 .btn-cart {
     background-color: white;
-    color: var(--primary-green);
+    color: var(--primary-green-dark);
     border: 2px solid var(--primary-green) !important;
     font-weight: 600;
     cursor: pointer;
@@ -266,9 +266,9 @@
 }
 
 .btn-cart.added {
-    background-color: var(--primary-green);
+    background-color: var(--primary-green-dark);
     color: white;
-    border-color: var(--primary-green);
+    border-color: var(--primary-green-dark);
 }
 
 .btn-cart:disabled {
@@ -303,7 +303,7 @@
     height: 36px;
     border: 1px solid var(--primary-green);
     background: var(--bg-white);
-    color: var(--primary-green);
+    color: var(--primary-green-dark);
     border-radius: var(--radius-sm);
     font-size: 1.2rem;
     cursor: pointer;

@@ -257,7 +257,7 @@
 
 .oem-hero-buttons .btn-secondary:hover {
     background: white;
-    color: var(--primary-green);
+    color: var(--primary-green-dark);
 }
 
 
@@ -353,7 +353,7 @@
 }
 
 .detail-check {
-    color: var(--primary-green);
+    color: var(--primary-green-dark);
     font-weight: 600;
 }
 
@@ -389,7 +389,7 @@
 .cert-badge {
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--primary-green);
+    color: var(--primary-green-dark);
     margin-bottom: 0.35rem;
 }
 

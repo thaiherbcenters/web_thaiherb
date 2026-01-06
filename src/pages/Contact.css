@@ -68,7 +68,7 @@
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
-    border-color: var(--primary-green);
+    border-color: var(--primary-green-dark);
     background: var(--bg-white);
 }
 
@@ -105,7 +105,7 @@
 
 .info-content h4 {
     font-size: 0.9rem;
-    color: var(--primary-green);
+    color: var(--primary-green-dark);
     margin-bottom: 0.25rem;
 }
 

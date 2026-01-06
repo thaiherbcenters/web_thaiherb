@@ -817,15 +817,15 @@
 }
 
 .cta-box .btn-primary {
-    background: var(--secondary-blue);
+    background: var(--primary-green);
     color: white;
     font-weight: 600;
     border: none;
 }
 
 .cta-box .btn-primary:hover {
-    background: var(--secondary-blue-light);
-    box-shadow: 0 4px 20px rgba(14, 165, 233, 0.5);
+    background: var(--primary-green-dark);
+    box-shadow: 0 4px 20px rgba(4, 120, 87, 0.5);
 }
 
 /* Responsive */

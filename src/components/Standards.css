@@ -263,7 +263,7 @@
     justify-content: center;
     background: white;
     border-radius: 50%;
-    color: var(--primary-green);
+    color: var(--primary-green-dark);
     font-size: 2rem;
     flex-shrink: 0;
     box-shadow: var(--shadow-sm);

@@ -81,6 +81,10 @@ router.put('/products/:id', async (req, res) => {
         const { id } = req.params;
         const { product_code, name, category, description, icon, tag, price, stock, is_active } = req.body;
 
+        console.log('--- Update Product Request ---');
+        console.log('ID:', id);
+        console.log('Body:', req.body);
+
         const result = await pool.query(`
             UPDATE products 
             SET 
@@ -97,6 +101,11 @@ router.put('/products/:id', async (req, res) => {
             WHERE id = $10
             RETURNING *
         `, [product_code, name, category, description, icon, tag, price, stock, is_active, id]);
+
+        console.log('Update Result Row Count:', result.rowCount);
+        if (result.rows.length > 0) {
+            console.log('Updated Data:', result.rows[0]);
+        }
 
         if (result.rows.length === 0) {
             return res.status(404).json({

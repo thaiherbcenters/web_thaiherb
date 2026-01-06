@@ -60,7 +60,7 @@
 .logo-name {
     font-size: 0.9rem;
     font-weight: 700;
-    color: var(--primary-green);
+    color: var(--primary-green-dark);
     letter-spacing: 0.5px;
 }
 
@@ -93,12 +93,12 @@
 }
 
 .navbar-link:hover {
-    color: var(--primary-green);
+    color: var(--primary-green-dark);
     background: var(--bg-soft);
 }
 
 .navbar-link.active {
-    color: var(--primary-green);
+    color: var(--primary-green-dark);
     background: var(--bg-soft);
 }
 
@@ -146,7 +146,7 @@
 
 .dropdown-item:hover,
 .dropdown-item.active {
-    color: var(--primary-green);
+    color: var(--primary-green-dark);
     background: var(--bg-soft);
 }
 
@@ -277,7 +277,7 @@
 
 .mobile-link:hover,
 .mobile-link.active {
-    color: var(--primary-green);
+    color: var(--primary-green-dark);
     background: var(--bg-soft);
 }
 
@@ -299,7 +299,7 @@
 }
 
 .mobile-dropdown-item.active {
-    color: var(--primary-green);
+    color: var(--primary-green-dark);
 }
 
 /* Responsive */
