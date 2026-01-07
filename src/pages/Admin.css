@@ -258,6 +258,38 @@
     font-weight: 600;
 }
 
+/* Drag Handle for Sortable Rows */
+.drag-handle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    cursor: grab;
+    font-size: 1.2rem;
+    color: #888;
+    background: #f0f0f0;
+    border-radius: var(--radius-sm);
+    transition: all 0.2s;
+    user-select: none;
+}
+
+.drag-handle:hover {
+    background: var(--primary-green);
+    color: white;
+}
+
+.drag-handle:active {
+    cursor: grabbing;
+}
+
+.drag-hint {
+    font-size: 0.8rem;
+    font-weight: normal;
+    color: #888;
+    margin-left: 0.5rem;
+}
+
 .stock-input.low-stock {
     background: #fff3e0;
     border-color: #ff9800;

@@ -12,18 +12,11 @@ router.get('/', async (req, res) => {
         const result = await pool.query(`
             SELECT 
                 id, product_code, name, category, description, 
-                icon, tag, price, stock, is_active,
+                icon, tag, price, stock, is_active, sort_order,
                 created_at, updated_at
             FROM products 
             WHERE is_active = true
-            ORDER BY 
-                CASE 
-                    WHEN tag = 'ขายดี' THEN 1
-                    WHEN tag = 'แนะนำ' THEN 2
-                    WHEN tag = 'ใหม่' THEN 3
-                    ELSE 4
-                END,
-                id ASC
+            ORDER BY COALESCE(sort_order, 999999) ASC, id ASC
         `);
 
         res.json({
@@ -73,18 +66,11 @@ router.get('/category/:category', async (req, res) => {
         const result = await pool.query(`
             SELECT 
                 id, product_code, name, category, description, 
-                icon, tag, price, stock, is_active,
+                icon, tag, price, stock, is_active, sort_order,
                 created_at, updated_at
             FROM products 
             WHERE category = $1 AND is_active = true
-            ORDER BY 
-                CASE 
-                    WHEN tag = 'ขายดี' THEN 1
-                    WHEN tag = 'แนะนำ' THEN 2
-                    WHEN tag = 'ใหม่' THEN 3
-                    ELSE 4
-                END,
-                id ASC
+            ORDER BY COALESCE(sort_order, 999999) ASC, id ASC
         `, [category]);
 
         res.json({

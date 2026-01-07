@@ -69,18 +69,18 @@
 }
 
 .tag-hot {
-    background: #ff6b6b;
-    color: white;
+    background: #e74c3c !important;
+    color: white !important;
 }
 
 .tag-new {
-    background: #2196f3;
-    color: white;
+    background: #3498db !important;
+    color: white !important;
 }
 
 .tag-recommend {
-    background: var(--primary-green);
-    color: white;
+    background: #27ae60 !important;
+    color: white !important;
 }
 
 .products-grid .product-image {

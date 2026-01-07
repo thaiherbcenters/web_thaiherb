@@ -1,4 +1,20 @@
 import { useState, useEffect } from 'react';
+import {
+    DndContext,
+    closestCenter,
+    KeyboardSensor,
+    PointerSensor,
+    useSensor,
+    useSensors,
+} from '@dnd-kit/core';
+import {
+    arrayMove,
+    SortableContext,
+    sortableKeyboardCoordinates,
+    useSortable,
+    verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 import './Admin.css';
 
 // Use empty string for production (nginx proxies /api/ to backend)
@@ -22,6 +38,14 @@ const Admin = () => {
         stock: '',
         is_active: true
     });
+
+    // DnD Sensors
+    const sensors = useSensors(
+        useSensor(PointerSensor),
+        useSensor(KeyboardSensor, {
+            coordinateGetter: sortableKeyboardCoordinates,
+        })
+    );
 
     // Fetch products and stats
     useEffect(() => {
@@ -149,6 +173,41 @@ const Admin = () => {
         } catch (error) {
             console.error('Error updating stock:', error);
         }
+    };
+
+    // Handle drag end - reorder products
+    const handleDragEnd = async (event) => {
+        const { active, over } = event;
+
+        if (!over || active.id === over.id) return;
+
+        const oldIndex = products.findIndex(p => p.id === active.id);
+        const newIndex = products.findIndex(p => p.id === over.id);
+
+        if (oldIndex === -1 || newIndex === -1) return;
+
+        const newProducts = arrayMove(products, oldIndex, newIndex);
+        setProducts(newProducts);
+
+        // Update sort_order for all products in the new order
+        const updatePromises = newProducts.map((product, index) => {
+            const newSortOrder = index + 1;
+            return fetch(`${API_URL}/api/admin/products/${product.id}/sort-order`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ sort_order: newSortOrder })
+            }).catch(err => console.error('Error updating sort order:', err));
+        });
+
+        try {
+            await Promise.all(updatePromises);
+            console.log('Sort order updated successfully');
+        } catch (error) {
+            console.error('Error updating sort orders:', error);
+        }
+
+        // Refresh products to confirm saved state
+        fetchProducts();
     };
 
     const startEdit = (product) => {
@@ -355,7 +414,7 @@ const Admin = () => {
             {/* Products Table */}
             <div className="admin-products">
                 <div className="products-header">
-                    <h2>📋 รายการสินค้า ({products.length})</h2>
+                    <h2>📋 รายการสินค้า ({products.length}) <span className="drag-hint">💡 ลากแถวเพื่อเรียงลำดับ</span></h2>
                     {!showAddForm && !editingProduct && (
                         <button className="btn btn-primary" onClick={() => setShowAddForm(true)}>
                             ➕ เพิ่มสินค้า
@@ -363,136 +422,196 @@ const Admin = () => {
                     )}
                 </div>
 
-                <div className="products-table-wrapper">
-                    <table className="products-table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>รูป</th>
-                                <th>ชื่อสินค้า</th>
-                                <th>หมวดหมู่</th>
-                                <th>ราคา</th>
-                                <th>สต็อก</th>
-                                <th>สถานะ</th>
-                                <th>จัดการ</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {products.map(product => (
-                                <>
-                                    {/* Inline Edit Form */}
-                                    {editingProduct && editingProduct.id === product.id && (
-                                        <tr className="edit-row">
-                                            <td colSpan="8">
-                                                <form className="inline-edit-form" onSubmit={handleEditProduct}>
-                                                    <h4>✏️ แก้ไขสินค้า: {product.name}</h4>
-                                                    <div className="inline-form-grid">
-                                                        <div className="form-group">
-                                                            <label>รหัสสินค้า</label>
-                                                            <input type="text" name="product_code" value={formData.product_code} onChange={handleInputChange} />
-                                                        </div>
-                                                        <div className="form-group">
-                                                            <label>ชื่อสินค้า *</label>
-                                                            <input type="text" name="name" value={formData.name} onChange={handleInputChange} required />
-                                                        </div>
-                                                        <div className="form-group">
-                                                            <label>หมวดหมู่</label>
-                                                            <input type="text" name="category" value={formData.category} onChange={handleInputChange} />
-                                                        </div>
-                                                        <div className="form-group">
-                                                            <label>ราคา (บาท)</label>
-                                                            <input type="number" name="price" value={formData.price} onChange={handleInputChange} required min="0" />
-                                                        </div>
-                                                        <div className="form-group">
-                                                            <label>สต็อก</label>
-                                                            <input type="number" name="stock" value={formData.stock} onChange={handleInputChange} min="0" />
-                                                        </div>
-                                                        <div className="form-group form-group-full">
-                                                            <label>รายละเอียดสินค้า</label>
-                                                            <textarea name="description" value={formData.description} onChange={handleInputChange} rows="2" placeholder="รายละเอียดสินค้า..."></textarea>
-                                                        </div>
-                                                        <div className="form-group">
-                                                            <label>แท็ก</label>
-                                                            <select name="tag" value={formData.tag} onChange={handleInputChange}>
-                                                                <option value="">ไม่มี</option>
-                                                                <option value="ขายดี">ขายดี</option>
-                                                                <option value="แนะนำ">แนะนำ</option>
-                                                                <option value="ใหม่">ใหม่</option>
-                                                            </select>
-                                                        </div>
-                                                        <div className="form-group">
-                                                            <label>สถานะ</label>
-                                                            <select name="is_active" value={formData.is_active} onChange={(e) => setFormData(prev => ({ ...prev, is_active: e.target.value === 'true' }))}>
-                                                                <option value="true">✅ ใช้งาน</option>
-                                                                <option value="false">❌ ไม่ใช้งาน</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div className="inline-form-actions">
-                                                        <button type="submit" className="btn btn-primary">💾 บันทึก</button>
-                                                        <button type="button" className="btn btn-secondary" onClick={cancelEdit}>❌ ยกเลิก</button>
-                                                    </div>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    )}
-                                    {/* Product Row */}
-                                    <tr key={product.id} className={`${!product.is_active ? 'inactive' : ''} ${editingProduct?.id === product.id ? 'editing' : ''}`}>
-                                        <td>{product.id}</td>
-                                        <td>
-                                            {product.icon && product.icon.startsWith('/') ? (
-                                                <img src={product.icon} alt="" className="product-thumb" />
-                                            ) : (
-                                                <span className="product-emoji">{product.icon || '🌿'}</span>
-                                            )}
-                                        </td>
-                                        <td>
-                                            <strong>{product.name}</strong>
-                                            {product.tag && <span className="product-tag">{product.tag}</span>}
-                                        </td>
-                                        <td>{product.category}</td>
-                                        <td>฿{product.price?.toLocaleString()}</td>
-                                        <td>
-                                            <input
-                                                type="number"
-                                                className={`stock-input ${product.stock === 0 ? 'out-of-stock' : product.stock < 10 ? 'low-stock' : ''}`}
-                                                value={product.stock || 0}
-                                                min="0"
-                                                onChange={(e) => handleUpdateStock(product.id, e.target.value)}
-                                            />
-                                        </td>
-                                        <td>
-                                            <span className={`status-badge ${product.is_active ? 'active' : 'inactive'}`}>
-                                                {product.is_active ? '✅ ใช้งาน' : '❌ ปิด'}
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <div className="action-buttons">
-                                                <button
-                                                    className="btn-icon edit"
-                                                    onClick={() => startEdit(product)}
-                                                    title="แก้ไข"
-                                                    disabled={editingProduct !== null}
-                                                >
-                                                    ✏️
-                                                </button>
-                                                <button
-                                                    className="btn-icon delete"
-                                                    onClick={() => handleDeleteProduct(product.id, product.name)}
-                                                    title="ลบ"
-                                                >
-                                                    🗑️
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+                <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+                    <div className="products-table-wrapper">
+                        <table className="products-table">
+                            <thead>
+                                <tr>
+                                    <th style={{ width: '50px' }}>ลาก</th>
+                                    <th>ID</th>
+                                    <th>รูป</th>
+                                    <th>ชื่อสินค้า</th>
+                                    <th>หมวดหมู่</th>
+                                    <th>ราคา</th>
+                                    <th>สต็อก</th>
+                                    <th>สถานะ</th>
+                                    <th>จัดการ</th>
+                                </tr>
+                            </thead>
+                            <SortableContext items={products.map(p => p.id)} strategy={verticalListSortingStrategy}>
+                                <tbody>
+                                    {products.map((product, index) => (
+                                        <SortableProductRow
+                                            key={product.id}
+                                            product={product}
+                                            index={index}
+                                            editingProduct={editingProduct}
+                                            formData={formData}
+                                            handleInputChange={handleInputChange}
+                                            handleEditProduct={handleEditProduct}
+                                            cancelEdit={cancelEdit}
+                                            handleUpdateStock={handleUpdateStock}
+                                            startEdit={startEdit}
+                                            handleDeleteProduct={handleDeleteProduct}
+                                        />
+                                    ))}
+                                </tbody>
+                            </SortableContext>
+                        </table>
+                    </div>
+                </DndContext>
             </div>
         </div>
+    );
+};
+
+// Sortable Product Row Component
+const SortableProductRow = ({
+    product,
+    index,
+    editingProduct,
+    formData,
+    handleInputChange,
+    handleEditProduct,
+    cancelEdit,
+    handleUpdateStock,
+    startEdit,
+    handleDeleteProduct
+}) => {
+    const {
+        attributes,
+        listeners,
+        setNodeRef,
+        transform,
+        transition,
+        isDragging,
+    } = useSortable({ id: product.id });
+
+    const style = {
+        transform: CSS.Transform.toString(transform),
+        transition,
+        opacity: isDragging ? 0.5 : 1,
+        backgroundColor: isDragging ? '#e8f5e9' : undefined,
+    };
+
+    return (
+        <>
+            {/* Inline Edit Form */}
+            {editingProduct && editingProduct.id === product.id && (
+                <tr className="edit-row">
+                    <td colSpan="9">
+                        <form className="inline-edit-form" onSubmit={handleEditProduct}>
+                            <h4>✏️ แก้ไขสินค้า: {product.name}</h4>
+                            <div className="inline-form-grid">
+                                <div className="form-group">
+                                    <label>รหัสสินค้า</label>
+                                    <input type="text" name="product_code" value={formData.product_code} onChange={handleInputChange} />
+                                </div>
+                                <div className="form-group">
+                                    <label>ชื่อสินค้า *</label>
+                                    <input type="text" name="name" value={formData.name} onChange={handleInputChange} required />
+                                </div>
+                                <div className="form-group">
+                                    <label>หมวดหมู่</label>
+                                    <input type="text" name="category" value={formData.category} onChange={handleInputChange} />
+                                </div>
+                                <div className="form-group">
+                                    <label>ราคา (บาท)</label>
+                                    <input type="number" name="price" value={formData.price} onChange={handleInputChange} required min="0" />
+                                </div>
+                                <div className="form-group">
+                                    <label>สต็อก</label>
+                                    <input type="number" name="stock" value={formData.stock} onChange={handleInputChange} min="0" />
+                                </div>
+                                <div className="form-group form-group-full">
+                                    <label>รายละเอียดสินค้า</label>
+                                    <textarea name="description" value={formData.description} onChange={handleInputChange} rows="2" placeholder="รายละเอียดสินค้า..."></textarea>
+                                </div>
+                                <div className="form-group">
+                                    <label>แท็ก</label>
+                                    <select name="tag" value={formData.tag} onChange={handleInputChange}>
+                                        <option value="">ไม่มี</option>
+                                        <option value="ขายดี">ขายดี</option>
+                                        <option value="แนะนำ">แนะนำ</option>
+                                        <option value="ใหม่">ใหม่</option>
+                                    </select>
+                                </div>
+                                <div className="form-group">
+                                    <label>สถานะ</label>
+                                    <select name="is_active" value={formData.is_active} onChange={(e) => handleInputChange({ target: { name: 'is_active', value: e.target.value === 'true' } })}>
+                                        <option value="true">✅ ใช้งาน</option>
+                                        <option value="false">❌ ไม่ใช้งาน</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="inline-form-actions">
+                                <button type="submit" className="btn btn-primary">💾 บันทึก</button>
+                                <button type="button" className="btn btn-secondary" onClick={cancelEdit}>❌ ยกเลิก</button>
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+            )}
+            {/* Product Row */}
+            <tr
+                ref={setNodeRef}
+                style={style}
+                className={`${!product.is_active ? 'inactive' : ''} ${editingProduct?.id === product.id ? 'editing' : ''}`}
+            >
+                <td>
+                    <span className="drag-handle" {...attributes} {...listeners}>
+                        ☰
+                    </span>
+                </td>
+                <td>{product.id}</td>
+                <td>
+                    {product.icon && product.icon.startsWith('/') ? (
+                        <img src={product.icon} alt="" className="product-thumb" />
+                    ) : (
+                        <span className="product-emoji">{product.icon || '🌿'}</span>
+                    )}
+                </td>
+                <td>
+                    <strong>{product.name}</strong>
+                    {product.tag && <span className="product-tag">{product.tag}</span>}
+                </td>
+                <td>{product.category}</td>
+                <td>฿{product.price?.toLocaleString()}</td>
+                <td>
+                    <input
+                        type="number"
+                        className={`stock-input ${product.stock === 0 ? 'out-of-stock' : product.stock < 10 ? 'low-stock' : ''}`}
+                        value={product.stock || 0}
+                        min="0"
+                        onChange={(e) => handleUpdateStock(product.id, e.target.value)}
+                    />
+                </td>
+                <td>
+                    <span className={`status-badge ${product.is_active ? 'active' : 'inactive'}`}>
+                        {product.is_active ? '✅ ใช้งาน' : '❌ ปิด'}
+                    </span>
+                </td>
+                <td>
+                    <div className="action-buttons">
+                        <button
+                            className="btn-icon edit"
+                            onClick={() => startEdit(product)}
+                            title="แก้ไข"
+                            disabled={editingProduct !== null}
+                        >
+                            ✏️
+                        </button>
+                        <button
+                            className="btn-icon delete"
+                            onClick={() => handleDeleteProduct(product.id, product.name)}
+                            title="ลบ"
+                        >
+                            🗑️
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </>
     );
 };
 

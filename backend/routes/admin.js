@@ -13,10 +13,10 @@ router.get('/products', async (req, res) => {
         const result = await pool.query(`
             SELECT 
                 id, product_code, name, category, description, 
-                icon, tag, price, stock, is_active,
+                icon, tag, price, stock, is_active, sort_order,
                 created_at, updated_at
             FROM products 
-            ORDER BY id ASC
+            ORDER BY COALESCE(sort_order, 999999) ASC, id ASC
         `);
 
         res.json({
@@ -224,6 +224,47 @@ router.get('/stats', async (req, res) => {
         res.status(500).json({
             success: false,
             error: 'Failed to fetch stats'
+        });
+    }
+});
+
+// PUT /api/admin/products/:id/sort-order - Update sort order only
+router.put('/products/:id/sort-order', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { sort_order } = req.body;
+
+        if (sort_order === undefined || sort_order < 0) {
+            return res.status(400).json({
+                success: false,
+                error: 'Valid sort_order value is required'
+            });
+        }
+
+        const result = await pool.query(`
+            UPDATE products 
+            SET sort_order = $1, updated_at = NOW()
+            WHERE id = $2
+            RETURNING id, name, sort_order
+        `, [sort_order, id]);
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({
+                success: false,
+                error: 'Product not found'
+            });
+        }
+
+        res.json({
+            success: true,
+            message: 'Sort order updated successfully',
+            data: result.rows[0]
+        });
+    } catch (error) {
+        console.error('Error updating sort order:', error);
+        res.status(500).json({
+            success: false,
+            error: 'Failed to update sort order'
         });
     }
 });

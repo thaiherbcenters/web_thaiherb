@@ -119,26 +119,8 @@ const Products = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                let data = await api.getProducts();
-
-                // Sort products: Best Seller -> Recommended -> New -> Others
-                data = data.sort((a, b) => {
-                    const getPriority = (tag) => {
-                        if (tag === 'ขายดี') return 1;
-                        if (tag === 'แนะนำ') return 2;
-                        if (tag === 'ใหม่') return 3;
-                        return 4;
-                    };
-
-                    const priorityA = getPriority(a.tag);
-                    const priorityB = getPriority(b.tag);
-
-                    if (priorityA !== priorityB) {
-                        return priorityA - priorityB;
-                    }
-                    return a.id - b.id;
-                });
-
+                // Data is already sorted by sort_order from the API
+                const data = await api.getProducts();
                 setProducts(data);
             } catch (err) {
                 console.error('Error loading products:', err);
