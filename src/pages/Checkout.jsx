@@ -252,6 +252,14 @@ const Checkout = () => {
             const result = await response.json();
 
             if (result.success) {
+                // Google Ads Conversion Tracking
+                if (typeof window.gtag === 'function') {
+                    window.gtag('event', 'conversion', {
+                        'send_to': 'AW-17853208151/zxQGCJ3t9dwbENesicFC',
+                        'value': total,
+                        'currency': 'THB'
+                    });
+                }
                 setOrderSuccess(result);
                 clearCart();
             } else {
