@@ -219,7 +219,7 @@ const Standards = () => {
                             </div>
                         </div>
                         <div className="standards-hero-image">
-                            <img src="/images/ceo_award.png" alt="CEO Awards and Certification" />
+                            <img src="/images/ceo_award.png?v=2" alt="CEO Awards and Certification" />
                         </div>
                     </div>
                 </div>
