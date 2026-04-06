@@ -472,15 +472,10 @@ const Home = () => {
             {selectedPost && (
                 <div className="fb-post-modal" onClick={() => setSelectedPost(null)}>
                     <div className="fb-post-modal-content" onClick={(e) => e.stopPropagation()}>
-                        <button style={{
-                            position: 'absolute', top: '15px', right: '15px', background: 'rgba(0,0,0,0.6)', 
-                            color: 'white', border: 'none', borderRadius: '50%', width: '36px', height: '36px', 
-                            cursor: 'pointer', zIndex: 10, display: 'flex', alignItems: 'center', justifyContent: 'center',
-                            fontSize: '1.2rem', backdropFilter: 'blur(4px)'
-                        }} onClick={() => setSelectedPost(null)}>✕</button>
+                        <button className="fb-post-modal-close" onClick={() => setSelectedPost(null)}>✕</button>
                         
                         {selectedPost.isVideo ? (
-                            <div style={{ width: '100%', aspectRatio: '16/9', background: '#000' }}>
+                            <div className="fb-post-modal-video">
                                 <iframe 
                                     src={`https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(selectedPost.permalink_url)}&show_text=false`} 
                                     width="100%" height="100%" 
@@ -493,28 +488,23 @@ const Home = () => {
                                 </iframe>
                             </div>
                         ) : selectedPost.full_picture ? (
-                            <img src={selectedPost.full_picture} alt="Post" style={{ width: '100%', height: 'auto', maxHeight: '55vh', objectFit: 'contain', background: '#f8f9fa' }} />
+                            <div className="fb-post-modal-image">
+                                <img src={selectedPost.full_picture} alt="Post" />
+                            </div>
                         ) : null}
                         
-                        <div style={{ padding: '24px' }}>
-                            <div style={{ fontSize: '0.95rem', color: '#64748b', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style={{color: '#1877F2'}}>
+                        <div className="fb-post-modal-text">
+                            <div className="meta-info">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="fb-icon">
                                     <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                                 </svg>
                                 <span>{new Date(selectedPost.created_time).toLocaleDateString((language || 'th') === 'th' ? 'th-TH' : 'en-US', {
                                     year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'
                                 })}</span>
                             </div>
-                            <p style={{ whiteSpace: 'pre-wrap', lineHeight: '1.7', fontSize: '1.1rem', color: '#334155', margin: 0 }}>
-                                {selectedPost.message || ''}
-                            </p>
-                            <div style={{ marginTop: '24px', paddingTop: '20px', borderTop: '1px solid #e2e8f0', textAlign: 'center' }}>
-                                <a href={selectedPost.permalink_url} target="_blank" rel="noopener noreferrer" style={{
-                                    display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '10px', 
-                                    background: '#1877F2', color: 'white', padding: '12px 24px', 
-                                    borderRadius: '50px', textDecoration: 'none', fontWeight: 'bold',
-                                    transition: 'all 0.2s ease', boxShadow: '0 4px 12px rgba(24, 119, 242, 0.3)'
-                                }}>
+                            <p>{selectedPost.message || ''}</p>
+                            <div className="action-footer">
+                                <a href={selectedPost.permalink_url} target="_blank" rel="noopener noreferrer" className="fb-btn">
                                     เปิดแสดงความคิดเห็นบน Facebook
                                 </a>
                             </div>

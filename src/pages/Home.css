@@ -1096,20 +1096,22 @@
     }
 }
 
-/* FB Post Detail Modal */
+/* ========================================================================= */
+/* Facebook Post Modal (Cinema Fullscreen Mode for Mobiles) */
+/* ========================================================================= */
+
 .fb-post-modal {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0,0,0,0.85);
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
     z-index: 9999;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 20px;
-    box-sizing: border-box;
 }
 
 .fb-post-modal-content {
@@ -1123,18 +1125,127 @@
     display: flex;
     flex-direction: column;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-    box-sizing: border-box;
 }
 
+.fb-post-modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    backdrop-filter: blur(4px);
+    transition: background 0.2s ease;
+}
+
+.fb-post-modal-close:hover {
+    background: rgba(255, 0, 0, 0.8);
+}
+
+.fb-post-modal-video {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: #000;
+}
+
+.fb-post-modal-image img {
+    width: 100%;
+    height: auto;
+    max-height: 55vh;
+    object-fit: contain;
+    background: #f8f9fa;
+}
+
+.fb-post-modal-text {
+    padding: 24px;
+}
+
+.fb-post-modal-text .meta-info {
+    font-size: 0.95rem;
+    color: #64748b;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.fb-post-modal-text p {
+    white-space: pre-wrap;
+    line-height: 1.7;
+    font-size: 1.1rem;
+    color: #334155;
+    margin: 0;
+}
+
+.fb-post-modal-text .action-footer {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid #e2e8f0;
+    text-align: center;
+}
+
+.fb-post-modal-text .fb-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #1877F2;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(24, 119, 242, 0.3);
+}
+
+.fb-post-modal-text .fb-btn:hover {
+    background: #166fe5;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(24, 119, 242, 0.4);
+}
+
+/* 🔥 Cinema Mode (Pseudo-Fullscreen) for Mobiles */
 @media (max-width: 768px) {
     .fb-post-modal {
-        padding: 0;
+        padding: 0; /* Remove padding to fill screen perfectly */
     }
     
     .fb-post-modal-content {
         max-width: 100vw;
         max-height: 100vh;
-        height: 100vh;
-        border-radius: 0;
+        height: 100vh; /* Stretch to fill completely */
+        border-radius: 0; /* Remove rounded corners */
+        background-color: #000; /* Pitch black for cinema effect */
+        justify-content: flex-start; 
+    }
+
+    /* Change text content to dark mode context */
+    .fb-post-modal-text {
+        background-color: #000;
+        flex: 1; /* Stretch to bottom */
+        overflow-y: auto; /* Scroll text if needed */
+        padding-bottom: 40px;
+    }
+
+    .fb-post-modal-text .meta-info {
+        color: #94a3b8;
+    }
+
+    .fb-post-modal-text p {
+        color: #e2e8f0; /* Light text for readability on black */
+    }
+
+    .fb-post-modal-text .action-footer {
+        border-top-color: #334155;
     }
 }
