@@ -4,6 +4,7 @@
     top: 0;
     left: 0;
     right: 0;
+    height: 70px;
     z-index: 1000;
 
     background: var(--bg-white);
@@ -17,6 +18,7 @@
 
 .navbar-container {
     max-width: 1200px;
+    height: 100%;
     margin: 0 auto;
     padding: 0 var(--spacing-md);
     display: flex;
@@ -237,15 +239,17 @@
 /* Mobile Menu */
 .navbar-mobile {
     display: none;
-    position: fixed;
-    top: 56px;
+    position: absolute;
+    top: 100%;
     left: 0;
     right: 0;
-    bottom: 0;
+    height: 100vh;
+    overflow-y: auto;
     background: var(--bg-white);
     padding: var(--spacing-md);
     transform: translateX(100%);
     transition: var(--transition-normal);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .navbar-mobile.open {
@@ -304,6 +308,10 @@
 
 /* Responsive */
 @media (max-width: 768px) {
+    .navbar {
+        height: 48px;
+    }
+    
     .navbar-menu {
         display: none;
     }

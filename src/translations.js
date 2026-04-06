@@ -23,6 +23,11 @@ const translations = {
             th: 'ติดต่อเรา',
             en: 'Contact',
             zh: '联系我们'
+        },
+        news: {
+            th: 'ข่าวสาร',
+            en: 'News',
+            zh: '新闻'
         }
     },
 

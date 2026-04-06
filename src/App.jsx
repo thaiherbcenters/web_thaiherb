@@ -3,12 +3,14 @@ import { CartProvider } from './context/CartContext';
 import { LanguageProvider } from './context/LanguageContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import SocialSidebar from './components/SocialSidebar';
 import ScrollToTop from './components/ScrollToTop';
 import Home from './pages/Home';
 import Products from './pages/Products';
 import ProductDetail from './pages/ProductDetail';
 import Cart from './pages/Cart';
 import Contact from './pages/Contact';
+import News from './pages/News';
 
 import OemOverview from './pages/oem/OemOverview';
 import Checkout from './pages/Checkout';
@@ -23,6 +25,7 @@ function App() {
           <ScrollToTop />
           <div className="app">
             <Navbar />
+            <SocialSidebar />
             <main>
               <Routes>
                 <Route path="/" element={<Home />} />
@@ -32,6 +35,7 @@ function App() {
                 <Route path="/checkout" element={<Checkout />} />
                 <Route path="/oem" element={<OemOverview />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/news" element={<News />} />
                 <Route path="/admin" element={<Admin />} />
               </Routes>
             </main>

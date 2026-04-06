@@ -13,6 +13,13 @@
     transition: background-image 0.3s ease-in-out;
 }
 
+@media (max-width: 768px) {
+    .hero {
+        margin-top: -48px;
+        padding-top: 48px;
+    }
+}
+
 /* Desktop: Use the new wide image */
 @media (min-width: 992px) {
     .hero {
@@ -314,7 +321,7 @@
 .cert-item {
     width: 100%;
     /* Grid items fill their cell automatically */
-    scroll-snap-align: center;
+    scroll-snap-align: start;
     display: flex;
     justify-content: center;
 }
@@ -367,24 +374,45 @@
 }
 
 @media (max-width: 768px) {
+    .cert-carousel-wrapper {
+        position: relative;
+        padding: 0 15px; /* Give space for buttons at the edges */
+        gap: 0;
+        display: block;
+    }
+
     .cert-carousel {
-        grid-auto-columns: 100%;
+        grid-auto-columns: calc((100% - 0.5rem) / 2);
         grid-template-rows: 1fr;
-        /* Force single row on mobile */
+        gap: 0.5rem;
+        padding: 1rem 0;
     }
 
     .cert-item img {
         height: auto;
-        max-height: 500px;
-    }
-
-    .cert-carousel-wrapper {
-        gap: 0.5rem;
+        max-height: 250px;
     }
 
     .cert-nav-btn {
-        width: 36px;
-        height: 36px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 32px;
+        height: 32px;
+        z-index: 20;
+    }
+
+    .cert-nav-prev {
+        left: -5px;
+    }
+
+    .cert-nav-next {
+        right: -5px;
+    }
+
+    .cert-nav-btn svg {
+        width: 18px;
+        height: 18px;
     }
 }
 
@@ -563,6 +591,7 @@
     -ms-overflow-style: none;
     flex: 1;
     min-width: 0;
+    scroll-snap-type: x mandatory;
 }
 
 .facebook-feed-container::-webkit-scrollbar {
@@ -671,6 +700,7 @@
     padding: 1rem 0.5rem;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    scroll-snap-type: x mandatory;
 }
 
 .news-carousel::-webkit-scrollbar {
@@ -686,6 +716,7 @@
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
     transition: all 0.3s ease;
     flex-shrink: 0;
+    scroll-snap-align: center;
 }
 
 .news-card:hover {
@@ -796,8 +827,9 @@
     }
 
     .news-card {
-        min-width: 280px;
-        max-width: 280px;
+        min-width: 100%;
+        max-width: 100%;
+        flex: 0 0 100%;
     }
 
     .news-activities {
@@ -829,7 +861,6 @@
     margin-bottom: var(--spacing-sm);
     color: var(--text-dark);
 }
-
 .cta-box p {
     margin-bottom: var(--spacing-lg);
     color: var(--text-muted);
@@ -846,10 +877,29 @@
     background: var(--primary-green-dark);
     box-shadow: 0 4px 20px rgba(4, 120, 87, 0.5);
 }
+@media (max-width: 1100px) {
+    .hero-content {
+        margin-left: 0;
+        max-width: 600px;
+        padding: 20px;
+    }
 
-/* Responsive */
-/* Responsive */
+    .hero-glass-card {
+        padding: 30px;
+    }
+
+    .hero h1 {
+        font-size: clamp(2rem, 4vw, 3rem);
+    }
+}
+
 @media (max-width: 992px) {
+    .news-card {
+        min-width: 100%;
+        max-width: 100%;
+        flex: 0 0 100%;
+    }
+
     .hero {
         background-position: center right;
     }
@@ -863,7 +913,6 @@
         text-align: center;
         padding: 40px 20px;
         margin: 0 auto;
-        /* Ensure block centering */
     }
 
     .hero-buttons {
@@ -876,7 +925,6 @@
         margin-top: 40px;
     }
 
-    /* Adjust gradient for centered content on smaller screens */
     .hero::before {
         background: linear-gradient(180deg, rgb(255 255 255) 0%, rgb(255 255 255 / 77%) 60%, rgb(255 255 255) 100%);
     }
@@ -918,8 +966,6 @@
     .hero h1 {
         font-size: 2.2rem;
     }
-
-
 }
 
 /* Animations */
@@ -937,7 +983,6 @@
 
 .animate-slide-in {
     opacity: 0;
-    /* Final state will be handled by animation fill-mode or just simple animation */
     animation: slideInLeft 0.8s ease-out forwards;
 }
 
@@ -973,11 +1018,79 @@
         opacity: 1;
         transform: translateY(0);
         filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
-        /* Return to normal shadow or keep gentle glow? User said "glow up", usually implies momentary or sustained. Let's keep a subtle glow/normal shadow at end */
     }
 }
 
 .animate-glow {
     opacity: 0;
     animation: glowFadeIn 1.2s ease-out forwards;
+}
+/* Image Lightbox Modal */
+.image-lightbox-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(8px);
+    animation: fadeIn 0.3s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.lightbox-content {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lightbox-content img {
+    max-width: 100%;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    animation: zoomIn 0.3s ease-out forwards;
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.lightbox-close {
+    position: absolute;
+    top: -40px;
+    right: -10px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    line-height: 1;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    transition: transform 0.2s;
+}
+
+.lightbox-close:hover {
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .lightbox-close {
+        top: -40px;
+        right: 0;
+        font-size: 2.5rem;
+    }
 }

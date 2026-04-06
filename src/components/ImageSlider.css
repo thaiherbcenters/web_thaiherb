@@ -4,7 +4,7 @@
     overflow: hidden;
     /* Create a seamless transition from Hero */
     background: linear-gradient(to bottom, #FFFFFF 0%, var(--bg-light) 100%);
-    padding-bottom: 2rem;
+    padding-bottom: 0;
 }
 
 .slider-container {
@@ -16,7 +16,7 @@
 
 .slider-track {
     display: flex;
-    gap: 1rem;
+    gap: 0;
     width: max-content;
     animation: scroll 40s linear infinite;
     /* Adjust speed here (40s is slow) */
@@ -30,7 +30,7 @@
     width: 300px;
     height: 200px;
     flex-shrink: 0;
-    border-radius: var(--radius-md);
+    border-radius: 0;
     overflow: hidden;
     box-shadow: var(--shadow-sm);
     transition: transform 0.3s ease;

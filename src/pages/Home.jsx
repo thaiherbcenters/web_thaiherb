@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import ImageSlider from '../components/ImageSlider';
 import Standards from '../components/Standards';
 import { useTranslation } from '../hooks/useTranslation';
@@ -10,6 +10,27 @@ const Home = () => {
     const { t, language } = useTranslation();
     const [scrollPosition, setScrollPosition] = useState(0);
     const newsContainerRef = useRef(null);
+    const [facebookPosts, setFacebookPosts] = useState([]);
+    const [fbLoading, setFbLoading] = useState(true);
+    const [selectedImage, setSelectedImage] = useState(null);
+
+    useEffect(() => {
+        const fetchNews = async () => {
+            try {
+                const backendUrl = import.meta.env.VITE_API_URL || '';
+                const response = await fetch(`${backendUrl}/api/news`);
+                const data = await response.json();
+                if (data.status === 'success') {
+                    setFacebookPosts(data.data);
+                }
+            } catch (err) {
+                console.error("Error fetching news for home:", err);
+            } finally {
+                setFbLoading(false);
+            }
+        };
+        fetchNews();
+    }, []);
 
     // News with translations
     const getNews = () => [
@@ -141,7 +162,8 @@ const Home = () => {
     const scrollCert = (direction) => {
         const container = certContainerRef.current;
         if (container) {
-            const scrollAmount = 350;
+            // Scroll by exactly the visible width of the container so it pages exactly
+            const scrollAmount = container.clientWidth;
             const newPosition = direction === 'left'
                 ? Math.max(0, container.scrollLeft - scrollAmount)
                 : container.scrollLeft + scrollAmount;
@@ -156,7 +178,7 @@ const Home = () => {
     const scrollFb = (direction) => {
         const container = fbContainerRef.current;
         if (container) {
-            const scrollAmount = 380;
+            const scrollAmount = container.clientWidth;
             const newPosition = direction === 'left'
                 ? Math.max(0, container.scrollLeft - scrollAmount)
                 : container.scrollLeft + scrollAmount;
@@ -275,7 +297,7 @@ const Home = () => {
 
                         <div className="cert-carousel" ref={certContainerRef}>
                             {certImages.map((img, index) => (
-                                <div key={index} className="cert-item">
+                                <div key={index} className="cert-item" onClick={() => setSelectedImage(img)} style={{ cursor: 'pointer' }}>
                                     <img src={img} alt={`Certificate ${index + 1}`} />
                                 </div>
                             ))}
@@ -348,61 +370,56 @@ const Home = () => {
                         </button>
 
                         <div className="facebook-feed-container" ref={fbContainerRef}>
-                            <iframe
-                                src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fthccenters%2Fposts%2Fpfbid029nwAwHNdzhYec6x2ZPCFa6un9vpxmY8hwZxHHXQxBhq7kZix5DgvTtQhrc9KRQqPl&show_text=true&width=350"
-                                width="350"
-                                height="600"
-                                style={{ border: 'none', overflow: 'hidden' }}
-                                scrolling="no"
-                                frameBorder="0"
-                                allowFullScreen={true}
-                                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                                title="Thai Herb Centers Facebook Post 1"
-                            />
-                            <iframe
-                                src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fthccenters%2Fposts%2Fpfbid0gzSN6WUbardbeVvwNBneeLbZ3eW92LnABHuVZmoyF4DyMv9KDsbojGYwSh1WAMMzl&show_text=true&width=350"
-                                width="350"
-                                height="600"
-                                style={{ border: 'none', overflow: 'hidden' }}
-                                scrolling="no"
-                                frameBorder="0"
-                                allowFullScreen={true}
-                                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                                title="Thai Herb Centers Facebook Post 2"
-                            />
-                            <iframe
-                                src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fthccenters%2Fposts%2Fpfbid02iaW2L8pSmPh6KixQpQ2V2iGGxvAT4RWUYtefW5M7Xbs7mZsbgzA5DuTFCR27fueyl&show_text=true&width=350"
-                                width="350"
-                                height="600"
-                                style={{ border: 'none', overflow: 'hidden' }}
-                                scrolling="no"
-                                frameBorder="0"
-                                allowFullScreen={true}
-                                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                                title="Thai Herb Centers Facebook Post 3"
-                            />
-                            <iframe
-                                src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fthccenters%2Fposts%2Fpfbid0Cn2v9jXatqRdFirHgdEBnNy9rPn7iFYE4XJB57X1RGxTFhxnFpspsBPMR15uA8qdl&show_text=true&width=350"
-                                width="350"
-                                height="600"
-                                style={{ border: 'none', overflow: 'hidden' }}
-                                scrolling="no"
-                                frameBorder="0"
-                                allowFullScreen={true}
-                                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                                title="Thai Herb Centers Facebook Post 4"
-                            />
-                            <iframe
-                                src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fthccenters%2Fposts%2Fpfbid0vUAUDCsNrU2ZoYRLwkotgkZbZWKy4JeoWnEi9caFRN9gNLRhGopnHoZRouTpo5bWl&show_text=true&width=350"
-                                width="350"
-                                height="600"
-                                style={{ border: 'none', overflow: 'hidden' }}
-                                scrolling="no"
-                                frameBorder="0"
-                                allowFullScreen={true}
-                                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                                title="Thai Herb Centers Facebook Post 5"
-                            />
+                            {fbLoading ? (
+                                <div style={{ padding: '2rem', textAlign: 'center', width: '100%', color: '#888' }}>กำลังโหลดข่าวสารล่าสุด...</div>
+                            ) : facebookPosts.length > 0 ? (
+                                facebookPosts.slice(0, 10).map((post) => {
+                                    const dateStr = new Date(post.created_time).toLocaleDateString(language === 'th' ? 'th-TH' : 'en-US', {
+                                        year: 'numeric', month: 'short', day: 'numeric'
+                                    });
+                                    return (
+                                        <div className="news-card" key={post.id} style={{ textDecoration: 'none' }}>
+                                            <div className="news-card-image">
+                                                {post.isVideo ? (
+                                                    <iframe 
+                                                        src={`https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(post.permalink_url)}&show_text=false`} 
+                                                        width="100%" 
+                                                        height="100%" 
+                                                        style={{ border: 'none', overflow: 'hidden', height: '100%', display: 'block' }} 
+                                                        scrolling="no" 
+                                                        frameBorder="0" 
+                                                        allowFullScreen={true} 
+                                                        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+                                                    </iframe>
+                                                ) : post.full_picture ? (
+                                                    <img src={post.full_picture} alt="News" loading="lazy" />
+                                                ) : (
+                                                    <div style={{ background: '#f5f5f5', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ccc' }}>THAI HERB</div>
+                                                )}
+                                                {!post.isVideo && (
+                                                    <div className="news-category">
+                                                        {language === 'th' ? 'ข่าวใหม่' : 'NEW'}
+                                                    </div>
+                                                )}
+                                            </div>
+                                            <div className="news-card-content">
+                                                <span className="news-date">{dateStr}</span>
+                                                <h3>
+                                                     {post.message ? (post.message.length > 70 ? post.message.substring(0, 70) + '...' : post.message) : 'ติดตามข่าวสารและกิจกรรมล่าสุดจากหน้าเพจ'}
+                                                </h3>
+                                                <a href={post.permalink_url} target="_blank" rel="noopener noreferrer" style={{ marginTop: '10px', fontSize: '0.9rem', color: '#1877F2', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '5px', textDecoration: 'none' }}>
+                                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                                                    </svg>
+                                                    เปิดใน Facebook
+                                                </a>
+                                            </div>
+                                        </div>
+                                    );
+                                })
+                            ) : (
+                                <div style={{ padding: '2rem', textAlign: 'center', width: '100%', color: '#888' }}>ยังไม่มีข่าวสารใหม่</div>
+                            )}
                         </div>
 
                         <button
@@ -438,6 +455,16 @@ const Home = () => {
                     </div>
                 </div>
             </section>
+
+            {/* Image Modal (Lightbox) */}
+            {selectedImage && (
+                <div className="image-lightbox-modal" onClick={() => setSelectedImage(null)}>
+                    <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
+                        <button className="lightbox-close" onClick={() => setSelectedImage(null)}>✕</button>
+                        <img src={selectedImage} alt="Full Screen Certificate" />
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

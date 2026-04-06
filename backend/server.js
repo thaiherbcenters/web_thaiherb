@@ -11,6 +11,7 @@ const productRoutes = require('./routes/products');
 const orderRoutes = require('./routes/orders');
 const promptpayRoutes = require('./routes/promptpay');
 const adminRoutes = require('./routes/admin');
+const newsRoutes = require('./routes/news');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -24,6 +25,7 @@ app.use('/api/products', productRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/promptpay', promptpayRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/news', newsRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {

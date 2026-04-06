@@ -1,0 +1,87 @@
+/* Floating Social Sidebar */
+.social-sidebar {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0;
+}
+
+.social-sidebar-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    color: white;
+    text-decoration: none;
+    transition: width 0.3s ease;
+    overflow: hidden;
+}
+
+.social-sidebar-link svg {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+/* Label hidden by default */
+.social-sidebar-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+    max-width: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-width 0.3s ease, opacity 0.3s ease, margin 0.3s ease;
+    margin-right: 0;
+}
+
+/* Hover - expand and show label for ALL buttons */
+.social-sidebar-link:hover {
+    width: 150px;
+}
+
+.social-sidebar-link:hover .social-sidebar-label {
+    max-width: 90px;
+    opacity: 1;
+    margin-right: 8px;
+}
+
+/* LINE */
+.social-sidebar-link.line {
+    background: #06C755;
+    border-radius: 8px 0 0 0;
+}
+
+/* Facebook */
+.social-sidebar-link.facebook {
+    background: #1877F2;
+}
+
+/* TikTok */
+.social-sidebar-link.tiktok {
+    background: #000000;
+    border-radius: 0 0 0 8px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .social-sidebar-link {
+        width: 40px;
+        height: 40px;
+    }
+
+    .social-sidebar-link svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .social-sidebar-link:hover {
+        width: 130px;
+    }
+}

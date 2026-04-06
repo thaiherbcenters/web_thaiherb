@@ -54,20 +54,41 @@ const Standards = () => {
     // Quote translations
     const getQuote = () => {
         if (language === 'th') {
-            return '" พัฒนาองค์ความรู้ เชิดชูสมุนไพรไทย ใส่ใจบริการมวลชน ก้าวสู่สากลอย่างยั่งยืน "';
+            return [
+                '" พัฒนาองค์ความรู้',
+                'เชิดชูสมุนไพรไทย',
+                'ใส่ใจบริการมวลชน',
+                'ก้าวสู่สากลอย่างยั่งยืน "'
+            ];
         } else if (language === 'en') {
-            return '" Developing knowledge, honoring Thai herbs, serving the public with care, stepping into the global stage sustainably "';
+            return [
+                '" Developing knowledge,',
+                'honoring Thai herbs,',
+                'serving the public with care,',
+                'stepping into the global stage sustainably "'
+            ];
         } else {
-            return '" 发展知识，弘扬泰国草药，关心公众服务，可持续走向国际 "';
+            return [
+                '" 发展知识，',
+                '弘扬泰国草药，',
+                '关心公众服务，',
+                '可持续走向国际 "'
+            ];
         }
     };
 
     // Profile translations
+    const getCompanySubtitle = () => {
+        if (language === 'th') return 'ไทย เฮิร์บ เซ็นเตอร์/';
+        if (language === 'en') return 'Thai Herb Centers/';
+        return '泰国草药中心/';
+    };
+
     const getProfile = () => ({
         name: 'ธวัช จรุงพิรวงศ์',
         titles: language === 'th' ? [
-            'ประธานวิสาหกิจชุมชน ไทย เฮิร์บ เซ็นเตอร์',
-            'ที่ปรึกษาสถาบันการเเพทย์เเผนไทย',
+            'ประธานวิสาหกิจชุมชนไทย เฮิร์บ เซ็นเตอร์',
+            'ที่ปรึกษาสถาบันการแพทย์แผนไทย',
             'กรรมการผลักดันสมุนไพรไทยไปสู่ตลาดโลก'
         ] : language === 'en' ? [
             'Chairman of Thai Herb Centers Community Enterprise',
@@ -177,23 +198,29 @@ const Standards = () => {
                     className={`standards-top-section ${isTopImageVisible ? 'visible' : ''}`}
                     ref={topImageRef}
                 >
-                    <div className="standards-info-col">
-                        <div className="standards-quote">
-                            <blockquote>
-                                {getQuote()}
-                            </blockquote>
-                        </div>
-                        <div className="standards-profile">
-                            <h3>{profile.name}</h3>
-                            <div className="profile-details">
-                                {profile.titles.map((title, index) => (
-                                    <p key={index}>{title}</p>
-                                ))}
+                    <div className="standards-top-bg"></div>
+                    <div className="standards-top-inner">
+                        <div className="standards-info-col">
+                            <span className="standards-company-subtitle">{getCompanySubtitle()}</span>
+                            <div className="standards-quote">
+                                <blockquote>
+                                    {getQuote().map((line, i) => (
+                                        <span key={i} className="quote-line">{line}</span>
+                                    ))}
+                                </blockquote>
+                            </div>
+                            <div className="standards-profile">
+                                <h3>{profile.name}</h3>
+                                <div className="profile-details">
+                                    {profile.titles.map((title, index) => (
+                                        <p key={index}>{title}</p>
+                                    ))}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="standards-hero-image">
-                        <img src="/images/ceo_award.png" alt="CEO Awards and Certification" />
+                        <div className="standards-hero-image">
+                            <img src="/images/ceo_award.png" alt="CEO Awards and Certification" />
+                        </div>
                     </div>
                 </div>
 
