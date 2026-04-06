@@ -388,7 +388,9 @@ const Home = () => {
                                                         style={{ border: 'none', overflow: 'hidden', height: '100%', display: 'block' }} 
                                                         scrolling="no" 
                                                         frameBorder="0" 
-                                                        allowFullScreen={true} 
+                                                        allowFullScreen={true}
+                                                        webkitAllowFullScreen={true}
+                                                        mozAllowFullScreen={true}
                                                         allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share; fullscreen">
                                                     </iframe>
                                                 ) : post.full_picture ? (
