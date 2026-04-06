@@ -28,6 +28,9 @@ jobs:
             # ไปที่ directory โปรเจกต์
             cd /home/ubuntu/thaiherb
             
+            # อัปเดตที่อยู่ GitHub ใหม่ให้เซิร์ฟเวอร์
+            git remote set-url origin https://github.com/thaiherbcenters/web_thaiherb.git
+            
             # Pull code ใหม่
             # Force sync with remote (discard local changes)
             git fetch origin
