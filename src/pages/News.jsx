@@ -9,7 +9,7 @@ const News = () => {
     const [filter, setFilter] = useState('all'); // 'all', 'video', 'photo'
     const [activePost, setActivePost] = useState(null); // stores the entire post object
     const [activeImageIndex, setActiveImageIndex] = useState(0); // index for photo gallery
-    const { t } = useTranslation();
+    const { t, language } = useTranslation();
 
     useEffect(() => {
         const fetchNews = async () => {
@@ -45,7 +45,11 @@ const News = () => {
         <div className="news-page">
             <div className="news-header">
                 <h1>{t('navbar.news')}</h1>
-                <p className="news-subtitle">เกาะติดทุกความเคลื่อนไหว และอัปเดตข่าวสารล่าสุดจาก Thai Herb Centers</p>
+                <p className="news-subtitle">
+                    {language === 'th' ? 'เกาะติดทุกความเคลื่อนไหว และอัปเดตข่าวสารล่าสุดจาก Thai Herb Centers'
+                        : language === 'en' ? 'Stay tuned for all the latest updates and news from Thai Herb Centers'
+                            : '随时了解泰国草药中心的最新动态和新闻'}
+                </p>
                 <div className="header-line"></div>
             </div>
 
@@ -67,13 +71,13 @@ const News = () => {
             ) : error ? (
                 <div className="error-container">
                     <div className="error-icon">⚠️</div>
-                    <h3>ไม่สามารถโหลดข่าวสารได้ในขณะนี้</h3>
+                    <h3>{language === 'th' ? 'ไม่สามารถโหลดข่าวสารได้ในขณะนี้' : language === 'en' ? 'Unable to load news at this time' : '目前无法加载新闻'}</h3>
                     <p>{error}</p>
                 </div>
             ) : posts.length === 0 ? (
                 <div className="empty-container">
-                    <h3>ยังไม่มีข่าวสารใหม่</h3>
-                    <p>ติดตามเพจของเราเพื่อรับข่าวสารล่าสุด</p>
+                    <h3>{language === 'th' ? 'ยังไม่มีข่าวสารใหม่' : language === 'en' ? 'No new news yet' : '暂无最新新闻'}</h3>
+                    <p>{language === 'th' ? 'ติดตามเพจของเราเพื่อรับข่าวสารล่าสุด' : language === 'en' ? 'Follow our page for the latest updates' : '关注我们的主页获取最新动态'}</p>
                 </div>
             ) : (() => {
                 const filteredPosts = posts.filter(post => {
@@ -87,20 +91,20 @@ const News = () => {
                 {/* Custom Tabs */}
                 <div className="news-tabs">
                     <button className={`news-tab-btn ${filter === 'all' ? 'active' : ''}`} onClick={() => setFilter('all')}>
-                        {t('navbar.news')} ทั้งหมด
+                        {t('navbar.news')} {language === 'th' ? 'ทั้งหมด' : language === 'en' ? 'All' : '全部'}
                     </button>
                     <button className={`news-tab-btn ${filter === 'video' ? 'active' : ''}`} onClick={() => setFilter('video')}>
-                        วิดีโอคลิป
+                        {language === 'th' ? 'วิดีโอคลิป' : language === 'en' ? 'Video Clips' : '视频'}
                     </button>
                     <button className={`news-tab-btn ${filter === 'photo' ? 'active' : ''}`} onClick={() => setFilter('photo')}>
-                        รูปภาพ/บทความ
+                        {language === 'th' ? 'รูปภาพ/บทความ' : language === 'en' ? 'Photos & Articles' : '照片/文章'}
                     </button>
                 </div>
 
                 {filteredPosts.length === 0 ? (
                     <div className="empty-container">
-                        <h3>ไม่พบโพสต์ในหมวดหมู่นี้</h3>
-                        <p>ลองเปลี่ยนหมวดหมู่เพื่อดูข่าวสารเพิ่มเติมครับ</p>
+                        <h3>{language === 'th' ? 'ไม่พบโพสต์ในหมวดหมู่นี้' : language === 'en' ? 'No posts found in this category' : '未找到该类别的帖子'}</h3>
+                        <p>{language === 'th' ? 'ลองเปลี่ยนหมวดหมู่เพื่อดูข่าวสารเพิ่มเติมครับ' : language === 'en' ? 'Try changing categories to see more news' : '尝试更改类别以查看更多新闻'}</p>
                     </div>
                 ) : (
                 <div className="news-container">
@@ -121,7 +125,7 @@ const News = () => {
                                     </svg>
                                 </div>
                             )}
-                            {!filteredPosts[0].isVideo && <div className="news-badge">ข่าวล่าสุด</div>}
+                            {!filteredPosts[0].isVideo && <div className="news-badge">{language === 'th' ? 'ข่าวล่าสุด' : language === 'en' ? 'Latest' : '最新'}</div>}
                         </div>
                         <div className="featured-content">
                             <div className="news-meta">
@@ -130,17 +134,17 @@ const News = () => {
                                     <svg className="fb-icon-small" viewBox="0 0 24 24" fill="currentColor">
                                         <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                                     </svg>
-                                    โพสต์จากเพจ
+                                    {language === 'th' ? 'โพสต์จากเพจ' : language === 'en' ? 'Facebook Post' : 'Facebook 帖子'}
                                 </span>
                             </div>
                             <h2 className="featured-message">
-                                {filteredPosts[0].message ? (filteredPosts[0].message.length > 120 ? filteredPosts[0].message.substring(0, 120) + '...' : filteredPosts[0].message) : 'อัปเดตกิจกรรมและข่าวสารจากหน้าเพจอย่างเป็นทางการ'}
+                                {filteredPosts[0].message ? (filteredPosts[0].message.length > 120 ? filteredPosts[0].message.substring(0, 120) + '...' : filteredPosts[0].message) : (language === 'th' ? 'อัปเดตกิจกรรมและข่าวสารจากหน้าเพจอย่างเป็นทางการ' : language === 'en' ? 'Official news and updates from our page' : '来自官方页面的活动的更新')}
                             </h2>
                             <p className="featured-excerpt">
                                 {filteredPosts[0].message && filteredPosts[0].message.length > 120 ? filteredPosts[0].message.substring(120, 280) + '...' : ''}
                             </p>
                             <a href={filteredPosts[0].permalink_url} target="_blank" rel="noopener noreferrer" className="read-more-btn" style={{ textDecoration: 'none' }}>
-                                ดูต้นฉบับบน Facebook <span className="arrow">→</span>
+                                {language === 'th' ? 'ดูต้นฉบับบน Facebook' : language === 'en' ? 'View on Facebook' : '在 Facebook 上查看'} <span className="arrow">→</span>
                             </a>
                         </div>
                     </div>
@@ -148,7 +152,7 @@ const News = () => {
                     {filteredPosts.length > 1 && (
                         <>
                             <div className="news-section-title">
-                                <h3>ข่าวสารอื่นๆ</h3>
+                                <h3>{language === 'th' ? 'ข่าวสารอื่นๆ' : language === 'en' ? 'Other News' : '其他新闻'}</h3>
                             </div>
                             <div className="news-grid">
                                 {filteredPosts.slice(1).map((post) => (
@@ -169,7 +173,7 @@ const News = () => {
                                             {!post.isVideo && (
                                                 <div className="hover-overlay-link" style={{ position: 'absolute', inset: 0, zIndex: 1 }}>
                                                     <div className="hover-overlay">
-                                                        <span>ดูรูปภาพ</span>
+                                                        <span>{language === 'th' ? 'ดูรูปภาพ' : language === 'en' ? 'View Image' : '查看图片'}</span>
                                                     </div>
                                                 </div>
                                             )}
@@ -179,10 +183,10 @@ const News = () => {
                                                 <span className="news-date">{formatDate(post.created_time)}</span>
                                             </div>
                                             <p className="grid-message">
-                                                {post.message ? (post.message.length > 130 ? post.message.substring(0, 130) + '...' : post.message) : 'ไม่มีข้อความ...'}
+                                                {post.message ? (post.message.length > 130 ? post.message.substring(0, 130) + '...' : post.message) : (language === 'th' ? 'ไม่มีข้อความ...' : language === 'en' ? 'No text...' : '没有文字...')}
                                             </p>
                                             <a href={post.permalink_url} target="_blank" rel="noopener noreferrer" style={{ marginTop: 'auto', paddingTop: '15px', color: '#10b981', fontWeight: 600, textDecoration: 'none', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '5px' }}>
-                                                ดูต้นฉบับ <span style={{ fontSize: '1.2rem' }}>→</span>
+                                                {language === 'th' ? 'ดูต้นฉบับ' : language === 'en' ? 'View Original' : '查看原贴'} <span style={{ fontSize: '1.2rem' }}>→</span>
                                             </a>
                                         </div>
                                     </div>
@@ -235,7 +239,7 @@ const News = () => {
                                     </div>
                                 ) : (
                                     <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#666' }}>
-                                        ไม่มีรูปภาพ หรือวิดีโอ
+                                        {language === 'th' ? 'ไม่มีรูปภาพ หรือวิดีโอ' : language === 'en' ? 'No images or videos' : '没有图片或视频'}
                                     </div>
                                 )}
                             </div>
@@ -251,10 +255,10 @@ const News = () => {
                                     </div>
                                 </div>
                                 <div className="modal-caption-text">
-                                    {activePost.message || 'ติดตามเรื่องราวและความเคลื่อนไหวล่าสุดจากเพจ Thai Herb Centers ได้ที่นี่'}
+                                    {activePost.message || (language === 'th' ? 'ติดตามเรื่องราวและความเคลื่อนไหวล่าสุดจากเพจ Thai Herb Centers ได้ที่นี่' : language === 'en' ? 'Follow the latest stories and updates from the Thai Herb Centers page here' : '在此处关注泰国草药中心主页的最新故事和动态')}
                                 </div>
                                 <a href={activePost.permalink_url} target="_blank" rel="noopener noreferrer" className="modal-fb-btn">
-                                    เปิดใน Facebook
+                                    {language === 'th' ? 'เปิดใน Facebook' : language === 'en' ? 'Open in Facebook' : '在 Facebook 打开'}
                                 </a>
                             </div>
                         </div>
