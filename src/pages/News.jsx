@@ -207,7 +207,7 @@ const News = () => {
                                         scrolling="no" 
                                         frameBorder="0" 
                                         allowFullScreen={true} 
-                                        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+                                        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share; fullscreen">
                                     </iframe>
                                 ) : activePost.images && activePost.images.length > 0 ? (
                                     <div className="modal-gallery-container">

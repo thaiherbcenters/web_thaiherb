@@ -389,7 +389,7 @@ const Home = () => {
                                                         scrolling="no" 
                                                         frameBorder="0" 
                                                         allowFullScreen={true} 
-                                                        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+                                                        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share; fullscreen">
                                                     </iframe>
                                                 ) : post.full_picture ? (
                                                     <img src={post.full_picture} alt="News" loading="lazy" />
