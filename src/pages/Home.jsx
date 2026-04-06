@@ -13,6 +13,7 @@ const Home = () => {
     const [facebookPosts, setFacebookPosts] = useState([]);
     const [fbLoading, setFbLoading] = useState(true);
     const [selectedImage, setSelectedImage] = useState(null);
+    const [selectedPost, setSelectedPost] = useState(null);
 
     useEffect(() => {
         const fetchNews = async () => {
@@ -378,7 +379,7 @@ const Home = () => {
                                         year: 'numeric', month: 'short', day: 'numeric'
                                     });
                                     return (
-                                        <div className="news-card" key={post.id} style={{ textDecoration: 'none' }}>
+                                        <div className="news-card" key={post.id} style={{ textDecoration: 'none', cursor: 'pointer' }} onClick={() => setSelectedPost(post)}>
                                             <div className="news-card-image">
                                                 {post.isVideo ? (
                                                     <iframe 
@@ -409,7 +410,7 @@ const Home = () => {
                                                 <h3>
                                                      {post.message ? (post.message.length > 70 ? post.message.substring(0, 70) + '...' : post.message) : 'ติดตามข่าวสารและกิจกรรมล่าสุดจากหน้าเพจ'}
                                                 </h3>
-                                                <a href={post.permalink_url} target="_blank" rel="noopener noreferrer" style={{ marginTop: '10px', fontSize: '0.9rem', color: '#1877F2', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '5px', textDecoration: 'none' }}>
+                                                <a href={post.permalink_url} target="_blank" rel="noopener noreferrer" style={{ marginTop: '10px', fontSize: '0.9rem', color: '#1877F2', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '5px', textDecoration: 'none' }} onClick={(e) => e.stopPropagation()}>
                                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                                                         <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                                                     </svg>
@@ -464,6 +465,68 @@ const Home = () => {
                     <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
                         <button className="lightbox-close" onClick={() => setSelectedImage(null)}>✕</button>
                         <img src={selectedImage} alt="Full Screen Certificate" />
+                    </div>
+                </div>
+            )}
+            {/* Facebook Post Detail Modal */}
+            {selectedPost && (
+                <div className="fb-post-modal" style={{
+                    position: 'fixed', top: 0, left: 0, width: '100%', height: '100%',
+                    backgroundColor: 'rgba(0,0,0,0.85)', zIndex: 9999,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px'
+                }} onClick={() => setSelectedPost(null)}>
+                    <div className="fb-post-modal-content" style={{
+                        backgroundColor: '#fff', borderRadius: '16px', width: '100%', maxWidth: '650px',
+                        maxHeight: '90vh', overflowY: 'auto', position: 'relative', display: 'flex', flexDirection: 'column',
+                        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)'
+                    }} onClick={(e) => e.stopPropagation()}>
+                        <button style={{
+                            position: 'absolute', top: '15px', right: '15px', background: 'rgba(0,0,0,0.6)', 
+                            color: 'white', border: 'none', borderRadius: '50%', width: '36px', height: '36px', 
+                            cursor: 'pointer', zIndex: 10, display: 'flex', alignItems: 'center', justifyContent: 'center',
+                            fontSize: '1.2rem', backdropFilter: 'blur(4px)'
+                        }} onClick={() => setSelectedPost(null)}>✕</button>
+                        
+                        {selectedPost.isVideo ? (
+                            <div style={{ width: '100%', aspectRatio: '16/9', background: '#000' }}>
+                                <iframe 
+                                    src={`https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(selectedPost.permalink_url)}&show_text=false`} 
+                                    width="100%" height="100%" 
+                                    style={{ border: 'none', overflow: 'hidden' }} 
+                                    scrolling="no" frameBorder="0" 
+                                    allowFullScreen={true}
+                                    webkitAllowFullScreen={true}
+                                    mozAllowFullScreen={true}
+                                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share; fullscreen">
+                                </iframe>
+                            </div>
+                        ) : selectedPost.full_picture ? (
+                            <img src={selectedPost.full_picture} alt="Post" style={{ width: '100%', height: 'auto', maxHeight: '55vh', objectFit: 'contain', background: '#f8f9fa' }} />
+                        ) : null}
+                        
+                        <div style={{ padding: '24px' }}>
+                            <div style={{ fontSize: '0.95rem', color: '#64748b', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style={{color: '#1877F2'}}>
+                                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                                </svg>
+                                <span>{new Date(selectedPost.created_time).toLocaleDateString((language || 'th') === 'th' ? 'th-TH' : 'en-US', {
+                                    year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'
+                                })}</span>
+                            </div>
+                            <p style={{ whiteSpace: 'pre-wrap', lineHeight: '1.7', fontSize: '1.1rem', color: '#334155', margin: 0 }}>
+                                {selectedPost.message || ''}
+                            </p>
+                            <div style={{ marginTop: '24px', paddingTop: '20px', borderTop: '1px solid #e2e8f0', textAlign: 'center' }}>
+                                <a href={selectedPost.permalink_url} target="_blank" rel="noopener noreferrer" style={{
+                                    display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '10px', 
+                                    background: '#1877F2', color: 'white', padding: '12px 24px', 
+                                    borderRadius: '50px', textDecoration: 'none', fontWeight: 'bold',
+                                    transition: 'all 0.2s ease', boxShadow: '0 4px 12px rgba(24, 119, 242, 0.3)'
+                                }}>
+                                    เปิดแสดงความคิดเห็นบน Facebook
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             )}
