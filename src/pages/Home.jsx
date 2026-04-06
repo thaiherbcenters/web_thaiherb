@@ -470,16 +470,8 @@ const Home = () => {
             )}
             {/* Facebook Post Detail Modal */}
             {selectedPost && (
-                <div className="fb-post-modal" style={{
-                    position: 'fixed', top: 0, left: 0, width: '100%', height: '100%',
-                    backgroundColor: 'rgba(0,0,0,0.85)', zIndex: 9999,
-                    display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px'
-                }} onClick={() => setSelectedPost(null)}>
-                    <div className="fb-post-modal-content" style={{
-                        backgroundColor: '#fff', borderRadius: '16px', width: '100%', maxWidth: '650px',
-                        maxHeight: '90vh', overflowY: 'auto', position: 'relative', display: 'flex', flexDirection: 'column',
-                        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)'
-                    }} onClick={(e) => e.stopPropagation()}>
+                <div className="fb-post-modal" onClick={() => setSelectedPost(null)}>
+                    <div className="fb-post-modal-content" onClick={(e) => e.stopPropagation()}>
                         <button style={{
                             position: 'absolute', top: '15px', right: '15px', background: 'rgba(0,0,0,0.6)', 
                             color: 'white', border: 'none', borderRadius: '50%', width: '36px', height: '36px', 
