@@ -769,7 +769,8 @@
 
 .news-card-content h3 {
     font-size: 1.1rem;
-    color: var(--primary-green-dark);
+    color: #333333;
+    font-weight: 500;
     margin-bottom: 0.75rem;
     line-height: 1.4;
     display: -webkit-box;
