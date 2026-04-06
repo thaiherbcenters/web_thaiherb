@@ -184,7 +184,7 @@
 }
 
 /* Responsive */
-@media (max-width: 1100px) {
+@media (max-width: 1250px) {
     .standards-info-col {
         padding: 3rem 0 3rem 2rem;
         max-width: 50%;
