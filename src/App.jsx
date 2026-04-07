@@ -11,7 +11,7 @@ import ProductDetail from './pages/ProductDetail';
 import Cart from './pages/Cart';
 import Contact from './pages/Contact';
 import News from './pages/News';
-
+import PRPlan from './pages/PRPlan';
 import OemOverview from './pages/oem/OemOverview';
 import Checkout from './pages/Checkout';
 import Admin from './pages/Admin';
@@ -36,6 +36,7 @@ function App() {
                 <Route path="/oem" element={<OemOverview />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/news" element={<News />} />
+                {/* <Route path="/pr-plan" element={<PRPlan />} /> */}
                 <Route path="/admin" element={<Admin />} />
               </Routes>
             </main>

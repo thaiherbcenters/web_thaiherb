@@ -1249,3 +1249,8 @@
         border-top-color: #334155;
     }
 }
+
+/* TikTok Home Carousel */
+.tiktok-home-carousel::-webkit-scrollbar {
+    display: none;
+}

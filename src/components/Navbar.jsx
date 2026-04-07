@@ -31,6 +31,7 @@ const Navbar = () => {
         { path: '/oem', label: t('navbar.oem') },
         { path: '/products', label: t('navbar.products') },
         { path: '/news', label: t('navbar.news') },
+        // { path: '/pr-plan', label: t('navbar.prPlan') },
         { path: '/contact', label: t('navbar.contact') },
     ];
 

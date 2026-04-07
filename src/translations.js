@@ -28,6 +28,11 @@ const translations = {
             th: 'ข่าวสาร',
             en: 'News',
             zh: '新闻'
+        },
+        prPlan: {
+            th: 'แผนการประชาสัมพันธ์',
+            en: 'PR Plan',
+            zh: '公关计划'
         }
     },
 

@@ -1,3 +1,5 @@
+import React from 'react';
+import { TIKTOK_EMBEDS } from './News';
 import { Link } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
 import ImageSlider from '../components/ImageSlider';
@@ -141,7 +143,7 @@ const Home = () => {
                 : language === 'en'
                     ? 'High-quality herbal products, retail and wholesale. Nationwide delivery service.'
                     : '高品质草药产品，零售和批发。全国配送服务。',
-            link: '/products'
+            link: '/oem'
         },
         {
             icon: '/images/service-registration.png',
@@ -151,7 +153,7 @@ const Home = () => {
                 : language === 'en'
                     ? 'FDA registration, GMP certification, production licenses, complete brand and packaging design.'
                     : 'FDA注册、GMP认证、生产许可证、完整的品牌和包装设计。',
-            link: '/contact'
+            link: '/oem'
         }
     ];
 
@@ -329,7 +331,8 @@ const Home = () => {
 
                     <div className="services-list">
                         {services.map((service, index) => (
-                            <div key={index} className="service-item">
+                            <Link key={index} to={service.link} className="service-item-link">
+                                <div className="service-item">
                                 <div className="service-left">
                                     <h3>{service.title}</h3>
                                     <div className="service-icon">
@@ -343,7 +346,8 @@ const Home = () => {
                                 <div className="service-right">
                                     <p>{service.description}</p>
                                 </div>
-                            </div>
+                                </div>
+                            </Link>
                         ))}
                     </div>
                 </div>
@@ -435,8 +439,63 @@ const Home = () => {
                             </svg>
                         </button>
                     </div>
+
+                    <div style={{ textAlign: 'center', marginTop: '24px' }}>
+                        <Link to="/news" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '10px 28px', borderRadius: '50px', background: 'transparent', border: '2px solid #10b981', color: '#10b981', fontWeight: 600, fontSize: '0.95rem', textDecoration: 'none', transition: 'all 0.3s ease' }}>{language === 'th' ? 'ดูข่าวสารทั้งหมด' : language === 'en' ? 'View All News' : '查看所有新闻'} →</Link>
+                    </div>
                 </div>
             </section>
+
+            {/* TikTok Important Videos Section */}
+            {TIKTOK_EMBEDS.length > 0 && (() => {
+                const tiktokScrollRef = React.createRef();
+                const scrollTiktokLeft = () => { if (tiktokScrollRef.current) tiktokScrollRef.current.scrollBy({ left: -350, behavior: 'smooth' }); };
+                const scrollTiktokRight = () => { if (tiktokScrollRef.current) tiktokScrollRef.current.scrollBy({ left: 350, behavior: 'smooth' }); };
+                return (
+                <section className="tiktok-videos-section section" style={{ background: '#f8fafc' }}>
+                    <div className="container">
+                        <div className="section-title">
+                            <h2>
+                                {language === 'th' ? 'วิดีโอ' : language === 'en' ? 'Important' : '重要'}
+                                <span>{language === 'th' ? 'สำคัญ' : language === 'en' ? 'Videos' : '视频'}</span>
+                            </h2>
+                        </div>
+
+                        <div className="facebook-carousel-wrapper">
+                            <button className="fb-nav-btn fb-nav-prev" onClick={scrollTiktokLeft} aria-label="Previous Video">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 18l-6-6 6-6" /></svg>
+                            </button>
+
+                            <div ref={tiktokScrollRef} className="tiktok-home-carousel" style={{ display: 'flex', gap: '16px', overflowX: 'auto', scrollSnapType: 'x mandatory', scrollBehavior: 'smooth', padding: '10px 0 20px', msOverflowStyle: 'none', scrollbarWidth: 'none' }}>
+                                {TIKTOK_EMBEDS.map((embedHtml, index) => {
+                                    const match = embedHtml.match(/data-video-id="(\d+)"/);
+                                    const videoId = match ? match[1] : null;
+                                    if (!videoId) return null;
+                                    return (
+                                        <div key={`home-tiktok-${index}`} style={{ flex: '0 0 auto', scrollSnapAlign: 'start', width: '300px', height: '530px', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 4px 15px rgba(0,0,0,0.1)', background: '#000' }}>
+                                            <iframe 
+                                                src={`https://www.tiktok.com/embed/v2/${videoId}`}
+                                                style={{ width: '100%', height: '100%', border: 'none' }}
+                                                allowFullScreen
+                                                scrolling="no"
+                                                allow="encrypted-media;"
+                                            ></iframe>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+
+                            <button className="fb-nav-btn fb-nav-next" onClick={scrollTiktokRight} aria-label="Next Video">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 18l6-6-6-6" /></svg>
+                            </button>
+                        </div>
+                        <div style={{ textAlign: 'center', marginTop: '24px' }}>
+                            <Link to="/news?tab=video" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '10px 28px', borderRadius: '50px', background: 'transparent', border: '2px solid #e2434b', color: '#e2434b', fontWeight: 600, fontSize: '0.95rem', textDecoration: 'none' }}>{language === 'th' ? 'ดูวิดีโอทั้งหมด' : language === 'en' ? 'View All Videos' : '查看所有视频'} →</Link>
+                        </div>
+                    </div>
+                </section>
+                );
+            })()}
 
             {/* CTA Section */}
             <section className="cta section">

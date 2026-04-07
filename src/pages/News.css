@@ -636,3 +636,8 @@
     background: #10b981;
     transform: scale(1.2);
 }
+
+/* TikTok Carousel */
+.tiktok-carousel::-webkit-scrollbar {
+    display: none;
+}

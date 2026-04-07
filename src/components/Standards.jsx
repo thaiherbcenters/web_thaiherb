@@ -135,13 +135,6 @@ const Standards = () => {
                     : '绿色工业二级，对社区和环境友好'
         },
         {
-            icon: <img src="/images/tls_logo.png" alt="TLS 8001" />,
-            title: 'TLS 8001',
-            description: language === 'th' ? 'มาตรฐานแรงงานไทย (Thai Labour Standard)'
-                : language === 'en' ? 'Thai Labour Standard certification'
-                    : '泰国劳工标准认证'
-        },
-        {
             icon: <img src="/images/mit_logo.png" alt="Made in Thailand" />,
             title: 'Made in Thailand',
             description: language === 'th' ? 'สินค้ามาตรฐานที่ผลิตในประเทศไทย'
@@ -168,6 +161,13 @@ const Standards = () => {
             description: language === 'th' ? 'ผลิตภัณฑ์สมุนไพรคุณภาพ (Premium Herbal Products)'
                 : language === 'en' ? 'Premium quality herbal products certification'
                     : '优质草药产品认证'
+        },
+        {
+            icon: <img src="/images/tls_logo.png" alt="TLS 8001" />,
+            title: 'TLS 8001',
+            description: language === 'th' ? 'มาตรฐานแรงงานไทย (Thai Labour Standard)'
+                : language === 'en' ? 'Thai Labour Standard certification'
+                    : '泰国劳工标准认证'
         },
         {
             icon: <img src="/images/iso9001_logo.png" alt="ISO 9001:2015" />,
