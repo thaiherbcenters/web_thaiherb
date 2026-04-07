@@ -40,7 +40,7 @@ const translations = {
                 zh: '社区企业'
             },
             title: {
-                th: 'ไทย เฮิร์บ เซ็นเตอร์',
+                th: 'ไทยเฮิร์บเซ็นเตอร์',
                 en: 'Thai Herb Centers',
                 zh: '泰国草药中心'
             },
@@ -633,7 +633,7 @@ const translations = {
                 zh: '关于我们'
             },
             description: {
-                th: 'วิสาหกิจชุมชน ไทย เฮิร์บ เซ็นเตอร์ ผู้เชี่ยวชาญด้านการผลิตสมุนไพรไทยมาตรฐานสากล',
+                th: 'วิสาหกิจชุมชน ไทยเฮิร์บเซ็นเตอร์ ผู้เชี่ยวชาญด้านการผลิตสมุนไพรไทยมาตรฐานสากล',
                 en: 'Thai Herb Centers Community Enterprise - Expert in producing Thai herbs to international standards',
                 zh: '泰国草药中心社区企业 - 专业生产符合国际标准的泰国草药产品'
             }

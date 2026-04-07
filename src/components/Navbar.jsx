@@ -42,7 +42,7 @@ const Navbar = () => {
                     <img src="/logo-icon.png" alt="Thai Herb Centers" className="logo-icon" />
                     <div className="logo-text">
                         <span className="logo-name">THAI HERB CENTERS</span>
-                        <span className="logo-tagline">ไทย เฮิร์บ เซ็นเตอร์</span>
+                        <span className="logo-tagline">ไทยเฮิร์บเซ็นเตอร์</span>
                     </div>
                 </Link>
 

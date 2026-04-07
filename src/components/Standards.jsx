@@ -79,7 +79,7 @@ const Standards = () => {
 
     // Profile translations
     const getCompanySubtitle = () => {
-        if (language === 'th') return 'ไทย เฮิร์บ เซ็นเตอร์/';
+        if (language === 'th') return 'ไทยเฮิร์บเซ็นเตอร์/';
         if (language === 'en') return 'Thai Herb Centers/';
         return '泰国草药中心/';
     };
@@ -87,7 +87,7 @@ const Standards = () => {
     const getProfile = () => ({
         name: 'ธวัช จรุงพิรวงศ์',
         titles: language === 'th' ? [
-            'ประธานวิสาหกิจชุมชนไทย เฮิร์บ เซ็นเตอร์',
+            'ประธานวิสาหกิจชุมชนไทยเฮิร์บเซ็นเตอร์',
             'ที่ปรึกษาสถาบันการแพทย์แผนไทย',
             'กรรมการผลักดันสมุนไพรไทยไปสู่ตลาดโลก'
         ] : language === 'en' ? [

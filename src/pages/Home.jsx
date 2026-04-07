@@ -238,7 +238,7 @@ const Home = () => {
                                     {language === 'th' ? 'วิสาหกิจชุมชน' : language === 'en' ? 'Community Enterprise' : '社区企业'}
                                 </span>
                                 <span className="text-white d-block animate-slide-in delay-2">
-                                    {language === 'th' ? 'ไทย เฮิร์บ เซ็นเตอร์' : language === 'en' ? 'Thai Herb Centers' : '泰国草药中心'}
+                                    {language === 'th' ? 'ไทยเฮิร์บเซ็นเตอร์' : language === 'en' ? 'Thai Herb Centers' : '泰国草药中心'}
                                 </span>
                                 <span className="text-white d-block animate-slide-in delay-3">THAI HERB CENTERS</span>
                             </h1>
