@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from '../hooks/useTranslation';
 import './Documents.css';
 
@@ -26,28 +26,35 @@ const certImages = [
     '/images/certificate/certificate_21.png',
     '/images/certificate/certificate_22.png',
     '/images/certificate/certificate_23.png',
-    '/images/certificate/certificate_24.png',
-    '/images/certificate/certificate_25.JPG',
-    '/images/certificate/certificate_26.JPG',
-    '/images/certificate/certificate_27.JPG',
-    '/images/certificate/certificate_28.JPG',
-    '/images/certificate/certificate_29.jpg',
-    '/images/certificate/certificate_30.jpg',
-    '/images/certificate/certificate_31.jpg'
+    '/images/certificate/certificate_24.jpg',
+    '/images/certificate/certificate_25.jpg',
+    '/images/certificate/certificate_26.jpg'
 ];
 
 const Documents = () => {
     const { t, language } = useTranslation();
     const [selectedImage, setSelectedImage] = useState(null);
-    const [visibleCerts, setVisibleCerts] = useState(8);
-    const [visibleRecipes, setVisibleRecipes] = useState(8);
+    const getStepSize = () => (typeof window !== 'undefined' && window.innerWidth <= 768) ? 8 : 9;
+    
+    const [visibleCerts, setVisibleCerts] = useState(getStepSize());
+    const [visibleRecipes, setVisibleRecipes] = useState(getStepSize());
+
+    useEffect(() => {
+        const handleResize = () => {
+            setVisibleCerts(prev => (prev === 8 || prev === 9) ? getStepSize() : prev);
+            setVisibleRecipes(prev => (prev === 8 || prev === 9) ? getStepSize() : prev);
+        };
+        window.addEventListener('resize', handleResize);
+        handleResize(); // trigger on mount
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     const handleLoadMore = () => {
-        setVisibleCerts(prev => Math.min(prev + 8, certImages.length));
+        setVisibleCerts(prev => Math.min(prev + getStepSize(), certImages.length));
     };
 
     const handleLoadMoreRecipes = () => {
-        setVisibleRecipes(prev => Math.min(prev + 8, 19));
+        setVisibleRecipes(prev => Math.min(prev + getStepSize(), 19));
     };
 
     // Placeholder or path for new document images
@@ -79,9 +86,12 @@ const Documents = () => {
     // สร้างอาเรย์รูปภาพใบสำคัญการขึ้นทะเบียนตำรับจำนวน 19 ภาพ
     const recipeImages = Array.from({ length: 19 }, (_, i) => `/images/certificate/recipe_${i + 1}.jpg`);
 
-    const fallbackImg = (e) => {
-        // If image not found, use a placeholder
-        e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='550' viewBox='0 0 400 550'%3E%3Crect width='400' height='550' fill='%23f1f5f9'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='18' fill='%2394a3b8'%3Eรอรูปภาพ / Image Here%3C/text%3E%3C/svg%3E";
+    const hideMissingImg = (e) => {
+        // หากไม่มีไฟล์รูปจริง ให้ซ่อนการ์ดใบนั้นพ้นจากหน้าจอไปเลย
+        const card = e.target.closest('.cert-card');
+        if (card) {
+            card.style.display = 'none';
+        }
     };
 
     return (
@@ -120,7 +130,7 @@ const Documents = () => {
                                 onClick={() => setSelectedImage(img)}
                             >
                                 <div className="cert-image-wrapper">
-                                    <img src={img} alt={`Certificate ${index + 1}`} loading="lazy" />
+                                    <img src={img} alt={`Certificate ${index + 1}`} onError={hideMissingImg} loading="lazy" />
                                 </div>
                             </div>
                         ))}
@@ -133,7 +143,7 @@ const Documents = () => {
                             </button>
                         ) : (
                             <button className="btn-load-more" onClick={() => {
-                                setVisibleCerts(8);
+                                setVisibleCerts(getStepSize());
                                 window.scrollTo({ top: document.querySelector('.section-standards').offsetTop, behavior: 'smooth' });
                             }}>
                                 {language === 'th' ? 'ซ่อนรูปภาพ' : language === 'en' ? 'Show Less' : '收缩图片'}
@@ -168,7 +178,7 @@ const Documents = () => {
                                 onClick={() => setSelectedImage(doc.img)}
                             >
                                 <div className="cert-image-wrapper">
-                                    <img src={doc.img} alt={doc.title} onError={fallbackImg} loading="lazy" />
+                                    <img src={doc.img} alt={doc.title} onError={hideMissingImg} loading="lazy" />
                                 </div>
                                 <div className="cert-title">
                                     <h3>{doc.title}</h3>
@@ -195,7 +205,7 @@ const Documents = () => {
                                 onClick={() => setSelectedImage(img)}
                             >
                                 <div className="cert-image-wrapper">
-                                    <img src={img} alt={`Recipe Certificate ${index + 1}`} onError={fallbackImg} loading="lazy" />
+                                    <img src={img} alt={`Recipe Certificate ${index + 1}`} onError={hideMissingImg} loading="lazy" />
                                 </div>
                             </div>
                         ))}
@@ -208,7 +218,7 @@ const Documents = () => {
                             </button>
                         ) : (
                             <button className="btn-load-more" onClick={() => {
-                                setVisibleRecipes(8);
+                                setVisibleRecipes(getStepSize());
                                 window.scrollTo({ top: document.querySelector('.section-recipe').offsetTop, behavior: 'smooth' });
                             }}>
                                 {language === 'th' ? 'ซ่อนรูปภาพ' : language === 'en' ? 'Show Less' : '收缩图片'}
@@ -232,7 +242,7 @@ const Documents = () => {
                 <div className="doc-lightbox" onClick={() => setSelectedImage(null)}>
                     <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
                         <button className="lightbox-close" onClick={() => setSelectedImage(null)}>✕</button>
-                        <img src={selectedImage} alt="Document Zoom" onError={fallbackImg} />
+                        <img src={selectedImage} alt="Document Zoom" />
                     </div>
                 </div>
             )}

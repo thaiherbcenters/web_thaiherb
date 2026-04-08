@@ -218,14 +218,9 @@ const Home = () => {
         '/images/certificate/certificate_21.png',
         '/images/certificate/certificate_22.png',
         '/images/certificate/certificate_23.png',
-        '/images/certificate/certificate_24.png',
-        '/images/certificate/certificate_25.JPG',
-        '/images/certificate/certificate_26.JPG',
-        '/images/certificate/certificate_27.JPG',
-        '/images/certificate/certificate_28.JPG',
-        '/images/certificate/certificate_29.jpg',
-        '/images/certificate/certificate_30.jpg',
-        '/images/certificate/certificate_31.jpg'
+        '/images/certificate/certificate_24.jpg',
+        '/images/certificate/certificate_25.jpg',
+        '/images/certificate/certificate_26.jpg'
     ];
 
     return (
@@ -301,7 +296,10 @@ const Home = () => {
                         <div className="cert-carousel" ref={certContainerRef}>
                             {certImages.map((img, index) => (
                                 <div key={index} className="cert-item" onClick={() => setSelectedImage(img)} style={{ cursor: 'pointer' }}>
-                                    <img src={img} alt={`Certificate ${index + 1}`} />
+                                    <img src={img} alt={`Certificate ${index + 1}`} onError={(e) => {
+                                        const card = e.target.closest('.cert-item');
+                                        if (card) card.style.display = 'none';
+                                    }} loading="lazy" />
                                 </div>
                             ))}
                         </div>
