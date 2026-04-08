@@ -32,6 +32,7 @@ const Navbar = () => {
         { path: '/products', label: t('navbar.products') },
         { path: '/news', label: t('navbar.news') },
         // { path: '/pr-plan', label: t('navbar.prPlan') },
+        { path: '/documents', label: t('navbar.documents') },
         { path: '/contact', label: t('navbar.contact') },
     ];
 

@@ -33,6 +33,11 @@ const translations = {
             th: 'แผนการประชาสัมพันธ์',
             en: 'PR Plan',
             zh: '公关计划'
+        },
+        documents: {
+            th: 'เอกสารสำคัญ',
+            en: 'Documents',
+            zh: '重要文件'
         }
     },
 
@@ -690,6 +695,73 @@ const translations = {
             th: 'บาท',
             en: 'THB',
             zh: '泰铢'
+        }
+    },
+
+    // Documents Page
+    documents: {
+        hero: {
+            badge: {
+                th: 'เอกสารสำคัญ',
+                en: 'Important Documents',
+                zh: '重要文件'
+            },
+            title: {
+                th: 'เอกสาร',
+                en: 'Our ',
+                zh: '我们的'
+            },
+            highlight: {
+                th: 'สำคัญ',
+                en: 'Documents',
+                zh: '文件'
+            },
+            description: {
+                th: 'ใบรับรองมาตรฐานและเอกสารสำคัญของวิสาหกิจชุมชนไทยเฮิร์บเซ็นเตอร์',
+                en: 'Standard certificates and important documents of Thai Herb Centers Community Enterprise.',
+                zh: '泰国草药中心社区企业的标准证书和重要文件。'
+            }
+        },
+        section1: {
+            title: {
+                th: 'ใบรับรองมาตรฐาน',
+                en: 'Standard Certificates',
+                zh: '标准证书'
+            }
+        },
+        section2: {
+            title: {
+                th: 'เอกสารสำคัญของวิสาหกิจชุมชนไทยเฮิร์บเซ็นเตอร์',
+                en: 'Important Documents of Thai Herb Centers Community Enterprise',
+                zh: '泰国草药中心社区企业的重要文件'
+            },
+            subs: {
+                registration: {
+                    th: 'หนังสือขึ้นทะเบียน',
+                    en: 'Registration Certificate',
+                    zh: '注册证书'
+                },
+                commercial: {
+                    th: 'ใบทะเบียนพาณิชย์',
+                    en: 'Commercial Registration',
+                    zh: '商业注册'
+                },
+                production: {
+                    th: 'ใบอนุญาตผลิต',
+                    en: 'Production License',
+                    zh: '生产许可证'
+                },
+                distribution: {
+                    th: 'ใบอนุญาตจำหน่าย',
+                    en: 'Distribution License',
+                    zh: '销售许可证'
+                },
+                formulary: {
+                    th: 'ใบสำคัญการขึ้นทะเบียนตำรับ',
+                    en: 'Formulary Registration Certificate',
+                    zh: '处方注册证书'
+                }
+            }
         }
     }
 };

@@ -12,6 +12,7 @@ import Cart from './pages/Cart';
 import Contact from './pages/Contact';
 import News from './pages/News';
 import PRPlan from './pages/PRPlan';
+import Documents from './pages/Documents';
 import OemOverview from './pages/oem/OemOverview';
 import Checkout from './pages/Checkout';
 import Admin from './pages/Admin';
@@ -37,6 +38,7 @@ function App() {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/news" element={<News />} />
                 {/* <Route path="/pr-plan" element={<PRPlan />} /> */}
+                <Route path="/documents" element={<Documents />} />
                 <Route path="/admin" element={<Admin />} />
               </Routes>
             </main>

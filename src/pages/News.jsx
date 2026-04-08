@@ -95,16 +95,25 @@ const News = () => {
     };
 
     return (
-        <div className="news-page">
-            <div className="news-header">
-                <h1>{t('navbar.news')}</h1>
-                <p className="news-subtitle">
-                    {language === 'th' ? 'เกาะติดทุกความเคลื่อนไหว และอัปเดตข่าวสารล่าสุดจาก Thai Herb Centers'
-                        : language === 'en' ? 'Stay tuned for all the latest updates and news from Thai Herb Centers'
-                            : '随时了解泰国草药中心的最新动态和新闻'}
-                </p>
-                <div className="header-line"></div>
-            </div>
+        <div className="news-page page">
+            <section className="page-hero">
+                <div className="container page-hero-content">
+                    <span className="badge slide-text slide-0">
+                        {language === 'th' ? 'อัปเดตและก้าวทัน' : language === 'en' ? 'Stay Tuned' : '保持关注'}
+                    </span>
+                    <h1 className="animate-fadeInUp" style={{ animationDelay: '0.1s' }}>
+                        {language === 'th' ? 'ข่าว' : language === 'en' ? 'Our ' : '我们的'}
+                        <span className="text-blue">
+                            {language === 'th' ? 'สาร' : language === 'en' ? 'News' : '新闻'}
+                        </span>
+                    </h1>
+                    <p className="animate-fadeInUp" style={{ animationDelay: '0.2s' }}>
+                        {language === 'th' ? 'เกาะติดทุกความเคลื่อนไหว และอัปเดตข่าวสารล่าสุดจาก Thai Herb Centers'
+                            : language === 'en' ? 'Stay tuned for all the latest updates and news from Thai Herb Centers'
+                                : '随时了解泰国草药中心的最新动态和新闻'}
+                    </p>
+                </div>
+            </section>
 
             {loading ? (
                 <div className="news-container">

@@ -316,6 +316,14 @@ const Home = () => {
                             </svg>
                         </button>
                     </div>
+
+                    {/* NEW BUTTON FOR DOCUMENTS PAGE */}
+                    <div style={{ textAlign: 'center', marginTop: '32px' }}>
+                        <Link to="/documents" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '10px 28px', borderRadius: '50px', background: 'transparent', border: '2px solid #10b981', color: '#10b981', fontWeight: 600, fontSize: '0.95rem', textDecoration: 'none', transition: 'all 0.3s ease' }}>
+                            {language === 'th' ? 'ดูเอกสารทั้งหมด' : language === 'en' ? 'View All Documents' : '查看所有文件'} →
+                        </Link>
+                    </div>
+
                 </div>
             </section>
 
