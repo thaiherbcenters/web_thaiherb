@@ -478,7 +478,7 @@ const Home = () => {
                                     const videoId = match ? match[1] : null;
                                     if (!videoId) return null;
                                     return (
-                                        <div key={`home-tiktok-${index}`} style={{ flex: '0 0 auto', scrollSnapAlign: 'start', width: '300px', height: '530px', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 4px 15px rgba(0,0,0,0.1)', background: '#000' }}>
+                                        <div key={`home-tiktok-${index}`} className="tiktok-home-item" style={{ flex: '0 0 auto', scrollSnapAlign: 'center', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 4px 15px rgba(0,0,0,0.1)', background: '#000' }}>
                                             <iframe 
                                                 src={`https://www.tiktok.com/embed/v2/${videoId}`}
                                                 style={{ width: '100%', height: '100%', border: 'none' }}

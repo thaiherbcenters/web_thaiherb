@@ -383,7 +383,7 @@
 
     .cert-carousel {
         grid-auto-columns: calc((100% - 0.5rem) / 2);
-        grid-template-rows: 1fr;
+        grid-template-rows: repeat(2, 1fr);
         gap: 0.5rem;
         padding: 1rem 0;
     }
@@ -646,6 +646,11 @@
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
 }
 
+.tiktok-home-item {
+    width: 325px;
+    height: 580px;
+}
+
 /* Mobile responsive for Facebook carousel */
 @media (max-width: 768px) {
     .facebook-carousel-wrapper {
@@ -663,25 +668,44 @@
     }
 
     .fb-nav-btn {
-        width: 40px;
-        height: 40px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 36px;
+        height: 36px;
+        z-index: 20;
+    }
+
+    .fb-nav-prev {
+        left: -5px;
+    }
+
+    .fb-nav-next {
+        right: -5px;
     }
 
     .fb-nav-btn svg {
-        width: 20px;
-        height: 20px;
+        width: 18px;
+        height: 18px;
     }
 }
 
 @media (max-width: 480px) {
     .facebook-feed-container iframe {
-        width: calc(100vw - 100px) !important;
+        width: calc(100vw - 30px) !important;
         max-width: 300px;
     }
 
     .fb-nav-btn {
-        width: 36px;
-        height: 36px;
+        width: 32px;
+        height: 32px;
+    }
+
+    .tiktok-home-item {
+        width: 100%;
+        height: 80vh;
+        max-height: 580px;
+        min-height: 500px;
     }
 }
 
