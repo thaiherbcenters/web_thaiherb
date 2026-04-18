@@ -142,11 +142,11 @@ const Standards = () => {
                     : '泰国制造的优质产品'
         },
         {
-            icon: <img src="/images/otop_logo.png" alt="OTOP 5 Stars" />,
-            title: 'OTOP 5 Stars',
-            description: language === 'th' ? 'สินค้าหนึ่งตำบล หนึ่งผลิตภัณฑ์ ระดับ 5 ดาว'
-                : language === 'en' ? 'One Tambon One Product, 5-star rating'
-                    : '一村一品，五星级产品'
+            icon: <img src="/images/otop_logo.png" alt="OTOP 3 Stars" />,
+            title: 'OTOP 3 Stars',
+            description: language === 'th' ? 'สินค้าหนึ่งตำบล หนึ่งผลิตภัณฑ์ ระดับ 3 ดาว'
+                : language === 'en' ? 'One Tambon One Product, 3-star rating'
+                    : '一村一品，三星级产品'
         },
         {
             icon: <img src="/images/halal_logo.png" alt="Halal Certified" />,
