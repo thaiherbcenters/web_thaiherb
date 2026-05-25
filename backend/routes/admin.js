@@ -51,7 +51,7 @@ router.post('/products', async (req, res) => {
             OUTPUT inserted.*
             VALUES ((SELECT ISNULL(MAX(id), 0) + 1 FROM products), $1, $2, $3, $4, $5, $6, $7, $8, 1)
         `, [
-            product_code || \`PRD\${Date.now()}\`,
+            product_code || `PRD${Date.now()}`,
             name,
             category || 'ทั่วไป',
             description || '',
