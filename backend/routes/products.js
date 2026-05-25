@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
                 icon, tag, price, stock, is_active, sort_order,
                 created_at, updated_at
             FROM products 
-            WHERE is_active = true
+            WHERE is_active = 1
             ORDER BY COALESCE(sort_order, 999999) ASC, id ASC
         `);
 
@@ -39,7 +39,7 @@ router.get('/categories', async (req, res) => {
         const result = await pool.query(`
             SELECT DISTINCT category, COUNT(*) as count
             FROM products 
-            WHERE is_active = true
+            WHERE is_active = 1
             GROUP BY category
             ORDER BY count DESC
         `);
@@ -69,7 +69,7 @@ router.get('/category/:category', async (req, res) => {
                 icon, tag, price, stock, is_active, sort_order,
                 created_at, updated_at
             FROM products 
-            WHERE category = $1 AND is_active = true
+            WHERE category = $1 AND is_active = 1
             ORDER BY COALESCE(sort_order, 999999) ASC, id ASC
         `, [category]);
 
@@ -167,8 +167,8 @@ router.get('/search/:query', async (req, res) => {
                 icon, tag, price, stock, is_active,
                 created_at, updated_at
             FROM products 
-            WHERE (name ILIKE $1 OR description ILIKE $1 OR category ILIKE $1)
-            AND is_active = true
+            WHERE (name LIKE $1 OR description LIKE $1 OR category LIKE $1)
+            AND is_active = 1
             ORDER BY name ASC
         `, [`%${query}%`]);
 

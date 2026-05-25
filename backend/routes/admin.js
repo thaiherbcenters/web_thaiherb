@@ -47,11 +47,11 @@ router.post('/products', async (req, res) => {
         }
 
         const result = await pool.query(`
-            INSERT INTO products (product_code, name, category, description, icon, tag, price, stock, is_active)
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, true)
-            RETURNING *
+            INSERT INTO products (id, product_code, name, category, description, icon, tag, price, stock, is_active)
+            OUTPUT inserted.*
+            VALUES ((SELECT ISNULL(MAX(id), 0) + 1 FROM products), $1, $2, $3, $4, $5, $6, $7, $8, 1)
         `, [
-            product_code || `PRD${Date.now()}`,
+            product_code || \`PRD\${Date.now()}\`,
             name,
             category || 'ทั่วไป',
             description || '',
@@ -97,9 +97,9 @@ router.put('/products/:id', async (req, res) => {
                 price = COALESCE($7, price),
                 stock = COALESCE($8, stock),
                 is_active = COALESCE($9, is_active),
-                updated_at = NOW()
+                updated_at = GETDATE()
+            OUTPUT inserted.*
             WHERE id = $10
-            RETURNING *
         `, [product_code, name, category, description, icon, tag, price, stock, is_active, id]);
 
         console.log('Update Result Row Count:', result.rowCount);
@@ -135,9 +135,9 @@ router.delete('/products/:id', async (req, res) => {
 
         const result = await pool.query(`
             UPDATE products 
-            SET is_active = false, updated_at = NOW()
+            SET is_active = 0, updated_at = GETDATE()
+            OUTPUT inserted.id, inserted.name
             WHERE id = $1
-            RETURNING id, name
         `, [id]);
 
         if (result.rows.length === 0) {
@@ -176,9 +176,9 @@ router.put('/products/:id/stock', async (req, res) => {
 
         const result = await pool.query(`
             UPDATE products 
-            SET stock = $1, updated_at = NOW()
+            SET stock = $1, updated_at = GETDATE()
+            OUTPUT inserted.id, inserted.name, inserted.stock
             WHERE id = $2
-            RETURNING id, name, stock
         `, [stock, id]);
 
         if (result.rows.length === 0) {
@@ -205,10 +205,10 @@ router.put('/products/:id/stock', async (req, res) => {
 // GET /api/admin/stats - Get dashboard stats
 router.get('/stats', async (req, res) => {
     try {
-        const productsCount = await pool.query('SELECT COUNT(*) FROM products WHERE is_active = true');
-        const lowStock = await pool.query('SELECT COUNT(*) FROM products WHERE stock < 10 AND is_active = true');
-        const outOfStock = await pool.query('SELECT COUNT(*) FROM products WHERE stock = 0 AND is_active = true');
-        const categories = await pool.query('SELECT COUNT(DISTINCT category) FROM products WHERE is_active = true');
+        const productsCount = await pool.query('SELECT COUNT(*) as count FROM products WHERE is_active = 1');
+        const lowStock = await pool.query('SELECT COUNT(*) as count FROM products WHERE stock < 10 AND is_active = 1');
+        const outOfStock = await pool.query('SELECT COUNT(*) as count FROM products WHERE stock = 0 AND is_active = 1');
+        const categories = await pool.query('SELECT COUNT(DISTINCT category) as count FROM products WHERE is_active = 1');
 
         res.json({
             success: true,
@@ -243,9 +243,9 @@ router.put('/products/:id/sort-order', async (req, res) => {
 
         const result = await pool.query(`
             UPDATE products 
-            SET sort_order = $1, updated_at = NOW()
+            SET sort_order = $1, updated_at = GETDATE()
+            OUTPUT inserted.id, inserted.name, inserted.sort_order
             WHERE id = $2
-            RETURNING id, name, sort_order
         `, [sort_order, id]);
 
         if (result.rows.length === 0) {
