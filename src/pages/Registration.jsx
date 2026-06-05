@@ -247,12 +247,9 @@ function Registration() {
                         {language === 'th' ? '📋 คู่มือจดทะเบียน' : language === 'en' ? '📋 Registration Guide' : '📋 注册指南'}
                     </span>
                     <h1 className="animate-fadeInUp">
-                        <span className="slide-text slide-1">
-                            {language === 'th' ? 'ขั้นตอนการขึ้นทะเบียนตำรับ' : language === 'en' ? 'FDA Formula Registration' : 'FDA配方注册'}
-                        </span>
-                        <br />
-                        <span className="slide-text slide-2 text-blue">
-                            {language === 'th' ? 'อย. และการสร้างแบรนด์' : language === 'en' ? '& Brand Building Process' : '和品牌建设流程'}
+                        {language === 'th' ? 'ขั้นตอนการขึ้นทะเบียนตำรับ ' : language === 'en' ? 'FDA Registration ' : 'FDA注册'}
+                        <span className="text-blue">
+                            {language === 'th' ? 'อย.' : language === 'en' ? 'Process' : '流程'}
                         </span>
                     </h1>
                     <p className="animate-fadeInUp">
