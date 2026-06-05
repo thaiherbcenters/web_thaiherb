@@ -38,6 +38,11 @@ const translations = {
             th: 'เอกสารสำคัญ',
             en: 'Documents',
             zh: '重要文件'
+        },
+        registration: {
+            th: 'จด อย.',
+            en: 'FDA Guide',
+            zh: 'FDA指南'
         }
     },
 

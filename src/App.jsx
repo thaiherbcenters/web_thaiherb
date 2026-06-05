@@ -16,6 +16,7 @@ import Documents from './pages/Documents';
 import OemOverview from './pages/oem/OemOverview';
 import Checkout from './pages/Checkout';
 import Admin from './pages/Admin';
+import Registration from './pages/Registration';
 import './index.css';
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
                 <Route path="/news" element={<News />} />
                 {/* <Route path="/pr-plan" element={<PRPlan />} /> */}
                 <Route path="/documents" element={<Documents />} />
+                <Route path="/registration" element={<Registration />} />
                 <Route path="/admin" element={<Admin />} />
               </Routes>
             </main>
