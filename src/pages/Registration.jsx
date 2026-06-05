@@ -307,6 +307,95 @@ function Registration() {
                 </div>
             </section>
 
+            {/* คู่มือจดเครื่องหมายการค้า (Trademark) */}
+            <section className="reg-trademark-section">
+                <div className="container">
+                    <div className="reg-section-header">
+                        <span className="header-icon">®️</span>
+                        <h2>
+                            {language === 'th' ? 'คู่มือเตรียมตัวจด' : language === 'en' ? 'Trademark Registration ' : '商标注册'}
+                            <span>{language === 'th' ? 'เครื่องหมายการค้า' : language === 'en' ? 'Guide' : '指南'}</span>
+                        </h2>
+                        <p>
+                            {language === 'th'
+                                ? 'ก่อนจด อย. ต้องผ่านการจดเครื่องหมายการค้า (Trademark) เพื่อปกป้องแบรนด์ของคุณ นี่คือเอกสารและขั้นตอนที่ต้องรู้'
+                                : language === 'en'
+                                ? 'Before FDA registration, you must register a trademark to protect your brand. Here are the required documents and steps.'
+                                : '在FDA注册之前，您必须注册商标以保护您的品牌。这是所需的文件和步骤。'}
+                        </p>
+                    </div>
+
+                    <div className="trademark-grid">
+                        {/* Box 1: เอกสาร */}
+                        <div className="trademark-box">
+                            <h3 className="tm-box-title">
+                                📋 {language === 'th' ? 'เอกสารที่ต้องใช้' : language === 'en' ? 'Required Documents' : '所需文件'}
+                            </h3>
+                            <ul className="tm-doc-list">
+                                <li>
+                                    <span className="tm-icon">🖼️</span>
+                                    <div>
+                                        <strong>{language === 'th' ? 'ไฟล์รูปภาพโลโก้' : language === 'en' ? 'Logo Image File' : '标志图像文件'}</strong>
+                                        <p>{language === 'th' ? 'ความละเอียดสูง พื้นหลังขาว' : language === 'en' ? 'High resolution, white background' : '高分辨率，白色背景'}</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span className="tm-icon">🏢</span>
+                                    <div>
+                                        <strong>{language === 'th' ? 'เอกสารยืนยันตัวตน' : language === 'en' ? 'Identity Documents' : '身份证明文件'}</strong>
+                                        <p>{language === 'th' ? 'หนังสือรับรองบริษัท (นิติบุคคล) หรือ บัตรประชาชน (บุคคลธรรมดา)' : language === 'en' ? 'Company Certificate or ID Card' : '公司证书或身份证'}</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span className="tm-icon">📝</span>
+                                    <div>
+                                        <strong>{language === 'th' ? 'หนังสือมอบอำนาจ' : language === 'en' ? 'Power of Attorney' : '授权书'}</strong>
+                                        <p>{language === 'th' ? 'กรณีให้ทางโรงงานหรือตัวแทนยื่นเรื่องแทน' : language === 'en' ? 'If using an agent or factory to submit' : '如果使用代理或工厂提交'}</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        {/* Box 2: ขั้นตอน */}
+                        <div className="trademark-box tm-steps-box">
+                            <h3 className="tm-box-title">
+                                🚀 {language === 'th' ? 'ขั้นตอนการดำเนินการเบื้องต้น' : language === 'en' ? 'Initial Steps' : '初步步骤'}
+                            </h3>
+                            <div className="tm-vertical-steps">
+                                <div className="tm-v-step">
+                                    <div className="tm-v-step-num">1</div>
+                                    <div className="tm-v-step-content">
+                                        <h4>{language === 'th' ? 'ตรวจสอบชื่อและโลโก้' : language === 'en' ? 'Check Name & Logo' : '检查名称和标志'}</h4>
+                                        <p>{language === 'th' ? 'เช็คความเหมือน/คล้าย ในระบบกรมทรัพย์สินทางปัญญา (ใช้เวลา 1-3 วัน)' : language === 'en' ? 'Check DIP system for similarities (1-3 days)' : '检查DIP系统中的相似性（1-3天）'}</p>
+                                    </div>
+                                </div>
+                                <div className="tm-v-step">
+                                    <div className="tm-v-step-num">2</div>
+                                    <div className="tm-v-step-content">
+                                        <h4>{language === 'th' ? 'ยื่นคำขอจดทะเบียน' : language === 'en' ? 'Submit Application' : '提交申请'}</h4>
+                                        <p>{language === 'th' ? 'ได้รับ "เลขที่คำขอ" สามารถนำเอกสารรับเรื่องไปใช้ยื่นขอ อย. ต่อได้เลยทันที' : language === 'en' ? 'Get Request Number to proceed with FDA application' : '获取请求号以继续FDA申请'}</p>
+                                    </div>
+                                </div>
+                                <div className="tm-v-step">
+                                    <div className="tm-v-step-num">3</div>
+                                    <div className="tm-v-step-content">
+                                        <h4>{language === 'th' ? 'รอประกาศโฆษณา' : language === 'en' ? 'Publication' : '出版'}</h4>
+                                        <p>{language === 'th' ? 'รอประกาศโฆษณาตามกระบวนการ เพื่อให้โอกาสผู้อื่นคัดค้าน' : language === 'en' ? 'Wait for publication process for any opposition' : '等待出版过程以提出任何异议'}</p>
+                                    </div>
+                                </div>
+                                <div className="tm-v-step">
+                                    <div className="tm-v-step-num">4</div>
+                                    <div className="tm-v-step-content">
+                                        <h4>{language === 'th' ? 'รับหนังสือสำคัญ' : language === 'en' ? 'Receive Certificate' : '收到证书'}</h4>
+                                        <p>{language === 'th' ? 'ชำระค่าธรรมเนียมและรับใบจริง (ระยะเวลารวมประมาณ 6-12 เดือน)' : language === 'en' ? 'Pay fee and receive certificate (Total approx. 6-12 months)' : '支付费用并获得证书（总计约6-12个月）'}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             {/* เอกสารที่ต้องเตรียม - แบ่งตามประเภท */}
             <section className="reg-docs-section bg-light">
                 <div className="container">

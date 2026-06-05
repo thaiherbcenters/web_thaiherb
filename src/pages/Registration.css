@@ -356,6 +356,141 @@
   flex-shrink: 0;
 }
 
+/* Trademark Section */
+.reg-trademark-section {
+  padding: 4rem 0;
+}
+
+.trademark-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.trademark-box {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow-sm);
+  border-top: 4px solid var(--secondary-blue);
+  transition: var(--transition-normal);
+}
+
+.trademark-box:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+}
+
+.tm-box-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--bg-light);
+  padding-bottom: 1rem;
+}
+
+.tm-doc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.tm-doc-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.tm-icon {
+  font-size: 1.8rem;
+  flex-shrink: 0;
+  background: var(--bg-light);
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.tm-doc-list strong {
+  display: block;
+  font-size: 1rem;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.tm-doc-list p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.tm-vertical-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: relative;
+}
+
+.tm-vertical-steps::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: 17px;
+  width: 2px;
+  background: var(--secondary-blue-light);
+  z-index: 0;
+}
+
+.tm-v-step {
+  display: flex;
+  gap: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.tm-v-step-num {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  background: var(--secondary-blue);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1rem;
+  box-shadow: 0 0 0 4px #fff;
+}
+
+.tm-v-step-content {
+  padding-top: 0.25rem;
+}
+
+.tm-v-step-content h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.tm-v-step-content p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.5;
+}
+
 /* Documents Required Section */
 .reg-docs-section {
   padding: 4rem 0;
