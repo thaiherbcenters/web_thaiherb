@@ -118,7 +118,7 @@
 .reg-steps-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.5rem;
+  gap: 2.5rem; /* Increased gap to make room for arrows */
   max-width: 900px;
   margin: 0 auto;
 }
@@ -133,6 +133,32 @@
   border-left: 4px solid var(--primary-green);
   transition: var(--transition-normal);
   position: relative;
+}
+
+/* Arrow pointing to the next step */
+.step-card:not(:last-child)::after {
+  content: '▼';
+  position: absolute;
+  bottom: -2rem; /* Halfway in the gap */
+  left: 3.25rem; /* Centers under the step number (1.75rem padding + 24px half-width = 52px = 3.25rem) */
+  transform: translateX(-50%);
+  color: var(--primary-green);
+  font-size: 1.2rem;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  z-index: 1;
+}
+
+/* Line connecting the steps */
+.step-card:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  bottom: -2.5rem; /* Spans the entire gap */
+  left: 3.25rem;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 2.5rem;
+  background: linear-gradient(to bottom, var(--primary-green) 0%, rgba(16, 185, 129, 0.2) 100%);
+  z-index: 0;
 }
 
 .step-card:hover {
