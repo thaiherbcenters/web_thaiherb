@@ -2,52 +2,7 @@
    Registration / FDA Info Page Styles
    =================================== */
 
-/* Hero Section */
-.registration-page .page-hero {
-  background: linear-gradient(135deg, #064e3b 0%, #047857 40%, #0ea5e9 100%);
-  min-height: 340px;
-  display: flex;
-  align-items: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.registration-page .page-hero::before {
-  content: '';
-  position: absolute;
-  top: -60%;
-  right: -10%;
-  width: 500px;
-  height: 500px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.04);
-}
-
-.registration-page .page-hero::after {
-  content: '';
-  position: absolute;
-  bottom: -40%;
-  left: -5%;
-  width: 350px;
-  height: 350px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.03);
-}
-
-.registration-page .page-hero h1 {
-  font-size: 2.4rem;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 0.75rem;
-  line-height: 1.3;
-}
-
-.registration-page .page-hero p {
-  font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.85);
-  max-width: 650px;
-  line-height: 1.7;
-}
+/* Hero Section - uses global .page-hero styles */
 
 /* Intro Section */
 .reg-intro-section {
