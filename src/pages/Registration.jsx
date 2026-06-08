@@ -68,9 +68,6 @@ function Registration() {
             {/* ===== PHASE 1: เตรียมเอกสาร & เครื่องหมายการค้า ===== */}
             <section className="reg-phase-section">
                 <div className="container">
-                    <div className="phase-badge phase-1">
-                        {language === 'th' ? 'ขั้นตอนที่ 1' : language === 'en' ? 'Phase 1' : '第1阶段'}
-                    </div>
                     <div className="reg-section-header">
                         <h2>
                             {language === 'th' ? 'เตรียมเอกสาร & ' : language === 'en' ? 'Prepare Documents & ' : '准备文件和'}
@@ -213,9 +210,6 @@ function Registration() {
             {/* ===== PHASE 2: สั่งผลิต OEM & สร้างแบรนด์ ===== */}
             <section className="reg-phase-section bg-light">
                 <div className="container">
-                    <div className="phase-badge phase-2">
-                        {language === 'th' ? 'ขั้นตอนที่ 2' : language === 'en' ? 'Phase 2' : '第2阶段'}
-                    </div>
                     <div className="reg-section-header">
                         <h2>
                             {language === 'th' ? 'สั่งผลิตสินค้า OEM & ' : language === 'en' ? 'OEM Production & ' : 'OEM生产和'}
@@ -272,9 +266,6 @@ function Registration() {
             {/* ===== PHASE 3: กระบวนการขึ้นทะเบียน อย. ===== */}
             <section className="reg-phase-section">
                 <div className="container">
-                    <div className="phase-badge phase-3">
-                        {language === 'th' ? 'ขั้นตอนที่ 3' : language === 'en' ? 'Phase 3' : '第3阶段'}
-                    </div>
                     <div className="reg-section-header">
                         <h2>
                             {language === 'th' ? 'กระบวนการขึ้นทะเบียนตำรับ ' : language === 'en' ? 'FDA Formula Registration ' : 'FDA配方注册'}
