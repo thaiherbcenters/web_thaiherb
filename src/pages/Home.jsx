@@ -143,7 +143,7 @@ const Home = () => {
                 : language === 'en'
                     ? 'High-quality herbal products, retail and wholesale. Nationwide delivery service.'
                     : '高品质草药产品，零售和批发。全国配送服务。',
-            link: '/oem'
+            link: '/products'
         },
         {
             icon: '/images/service-registration.png',
@@ -153,7 +153,7 @@ const Home = () => {
                 : language === 'en'
                     ? 'FDA registration, GMP certification, production licenses, complete brand and packaging design.'
                     : 'FDA注册、GMP认证、生产许可证、完整的品牌和包装设计。',
-            link: '/oem'
+            link: '/registration'
         }
     ];
 
