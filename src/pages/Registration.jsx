@@ -104,28 +104,44 @@ function Registration() {
                             {activeDocTab === 'corporate' && (
                                 <ul className="doc-checklist">
                                     <li>
-                                        <span className="check-icon">✓</span>
+                                        <span className="check-icon">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
+                                                <polyline points="20 6 9 17 4 12"></polyline>
+                                            </svg>
+                                        </span>
                                         <div>
                                             <strong>{language === 'th' ? 'หนังสือรับรองบริษัท' : language === 'en' ? 'Company Certificate' : '公司证书'}</strong>
                                             <span>{language === 'th' ? 'อายุไม่เกิน 6 เดือน' : language === 'en' ? 'Not older than 6 months' : '不超过6个月'}</span>
                                         </div>
                                     </li>
                                     <li>
-                                        <span className="check-icon">✓</span>
+                                        <span className="check-icon">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
+                                                <polyline points="20 6 9 17 4 12"></polyline>
+                                            </svg>
+                                        </span>
                                         <div>
                                             <strong>{language === 'th' ? 'สำเนาบัตรประชาชนกรรมการ' : language === 'en' ? 'Director\'s ID Card Copy' : '董事身份证复印件'}</strong>
                                             <span>{language === 'th' ? 'ผู้ยื่นคำขอ / ผู้มีอำนาจลงนาม (1-2 ท่าน)' : language === 'en' ? 'Applicant / Authorized signatory (1-2 persons)' : '申请人/授权签字人（1-2人）'}</span>
                                         </div>
                                     </li>
                                     <li>
-                                        <span className="check-icon">✓</span>
+                                        <span className="check-icon">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
+                                                <polyline points="20 6 9 17 4 12"></polyline>
+                                            </svg>
+                                        </span>
                                         <div>
                                             <strong>{language === 'th' ? 'สำเนาทะเบียนกรรมการ' : language === 'en' ? 'Director\'s House Registration' : '董事户籍登记'}</strong>
                                             <span>{language === 'th' ? 'ของผู้ยื่นคำขอ' : language === 'en' ? 'Of the applicant' : '申请人的'}</span>
                                         </div>
                                     </li>
                                     <li>
-                                        <span className="check-icon">✓</span>
+                                        <span className="check-icon">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
+                                                <polyline points="20 6 9 17 4 12"></polyline>
+                                            </svg>
+                                        </span>
                                         <div>
                                             <strong>{language === 'th' ? 'ใบรับรองแพทย์' : language === 'en' ? 'Medical Certificate' : '医疗证明'}</strong>
                                             <span>{language === 'th' ? 'อายุไม่เกิน 1 ปี' : language === 'en' ? 'Not older than 1 year' : '不超过1年'}</span>
@@ -137,21 +153,33 @@ function Registration() {
                             {activeDocTab === 'individual' && (
                                 <ul className="doc-checklist">
                                     <li>
-                                        <span className="check-icon">✓</span>
+                                        <span className="check-icon">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
+                                                <polyline points="20 6 9 17 4 12"></polyline>
+                                            </svg>
+                                        </span>
                                         <div>
                                             <strong>{language === 'th' ? 'สำเนาบัตรประชาชน' : language === 'en' ? 'ID Card Copy' : '身份证复印件'}</strong>
                                             <span>{language === 'th' ? 'ของผู้ยื่นคำขอ' : language === 'en' ? 'Of the applicant' : '申请人的'}</span>
                                         </div>
                                     </li>
                                     <li>
-                                        <span className="check-icon">✓</span>
+                                        <span className="check-icon">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
+                                                <polyline points="20 6 9 17 4 12"></polyline>
+                                            </svg>
+                                        </span>
                                         <div>
                                             <strong>{language === 'th' ? 'สำเนาทะเบียนบ้าน' : language === 'en' ? 'House Registration Copy' : '户籍登记复印件'}</strong>
                                             <span>{language === 'th' ? 'ของผู้ยื่นคำขอ' : language === 'en' ? 'Of the applicant' : '申请人的'}</span>
                                         </div>
                                     </li>
                                     <li>
-                                        <span className="check-icon">✓</span>
+                                        <span className="check-icon">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
+                                                <polyline points="20 6 9 17 4 12"></polyline>
+                                            </svg>
+                                        </span>
                                         <div>
                                             <strong>{language === 'th' ? 'ใบรับรองแพทย์' : language === 'en' ? 'Medical Certificate' : '医疗证明'}</strong>
                                             <span>{language === 'th' ? 'อายุไม่เกิน 1 ปี' : language === 'en' ? 'Not older than 1 year' : '不超过1年'}</span>
