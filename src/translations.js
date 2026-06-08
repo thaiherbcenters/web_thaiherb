@@ -40,9 +40,9 @@ const translations = {
             zh: '重要文件'
         },
         registration: {
-            th: 'จด อย.',
-            en: 'FDA Guide',
-            zh: 'FDA指南'
+            th: 'คู่มือการจดทะเบียน',
+            en: 'Registration Guide',
+            zh: '注册指南'
         }
     },
 
