@@ -356,31 +356,6 @@ function Registration() {
                 </div>
             </section>
 
-            {/* CTA Section */}
-            <section className="reg-cta-section">
-                <div className="container">
-                    <div className="reg-cta-box">
-                        <h2>
-                            {language === 'th' ? 'ให้เราช่วยดูแลทุกขั้นตอนให้คุณ' : language === 'en' ? 'Let Us Handle Everything For You' : '让我们为您处理一切'}
-                        </h2>
-                        <p>
-                            {language === 'th'
-                                ? 'Thai Herb Centers ให้บริการ One Stop Service ครบวงจร ตั้งแต่คิดสูตร ผลิตสินค้า ออกแบบฉลาก จนถึงช่วยดำเนินการจด อย. ลูกค้าเพียงเซ็นชื่อ เราจัดการเอกสารทั้งหมดให้'
-                                : language === 'en'
-                                ? 'Thai Herb Centers offers complete One Stop Service — from formulation, manufacturing, label design, to FDA registration. You only need to sign; we handle all the paperwork.'
-                                : 'Thai Herb Centers提供一站式服务——从配方、制造、标签设计到FDA注册。您只需签名；我们处理所有文件。'}
-                        </p>
-                        <div className="reg-cta-buttons">
-                            <Link to="/contact" className="btn btn-white">
-                                📞 {language === 'th' ? 'ติดต่อเรา' : language === 'en' ? 'Contact Us' : '联系我们'}
-                            </Link>
-                            <Link to="/oem" className="btn btn-outline-white">
-                                🏭 {language === 'th' ? 'ดูบริการ OEM' : language === 'en' ? 'View OEM Service' : '查看OEM服务'}
-                            </Link>
-                        </div>
-                    </div>
-                </div>
-            </section>
         </div>
     );
 }
