@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import imageCompression from 'browser-image-compression';
 import {
     DndContext,
     closestCenter,
@@ -25,6 +26,7 @@ const Admin = () => {
     const [products, setProducts] = useState([]);
     const [stats, setStats] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [isUploading, setIsUploading] = useState(false);
     const [editingProduct, setEditingProduct] = useState(null);
     const [showAddForm, setShowAddForm] = useState(false);
     const [formData, setFormData] = useState({
@@ -225,17 +227,29 @@ const Admin = () => {
             return;
         }
 
-        const formData = new FormData();
-        formData.append('image', file);
+        setIsUploading(true);
+        showToast('กำลังบีบอัดและอัปโหลดรูปภาพ...', 'success', 'เพื่อความรวดเร็วในการโหลดหน้าเว็บ');
 
         try {
+            const options = {
+                maxSizeMB: 0.5, // 500KB Max
+                maxWidthOrHeight: 1920,
+                useWebWorker: true,
+                initialQuality: 0.85
+            };
+            
+            const compressedFile = await imageCompression(file, options);
+
+            const formData = new FormData();
+            formData.append('image', compressedFile, file.name);
+
             const res = await fetch(`${API_URL}/api/admin/popup-ad/${type}`, {
                 method: 'POST',
                 body: formData
             });
             const data = await res.json();
             if (data.success) {
-                showToast(`อัปโหลดแอดโฆษณา (${type === 'mobile' ? 'มือถือ' : 'PC'}) สำเร็จ!`, 'success', 'รูปภาพใหม่กำลังแสดงผลบนหน้าเว็บไซต์แล้ว');
+                showToast(`อัปโหลดแอดโฆษณา (${type === 'mobile' ? 'มือถือ' : 'PC'}) สำเร็จ!`, 'success', 'ขนาดรูปถูกบีบอัดให้โหลดไวขึ้นแล้ว');
                 if (type === 'mobile') {
                     setAdMobileFile(null);
                     setAdMobileLocalPreview(null);
@@ -251,6 +265,8 @@ const Admin = () => {
         } catch (error) {
             console.error('Error uploading ad:', error);
             showToast('เกิดข้อผิดพลาดในการอัปโหลด', 'error');
+        } finally {
+            setIsUploading(false);
         }
     };
 
@@ -441,10 +457,10 @@ const Admin = () => {
                             </div>
                         </div>
                         <div style={{ display: 'flex', gap: '10px', marginTop: 'auto', marginBottom: '20px' }}>
-                            <button className="btn btn-primary" onClick={() => handleUploadAd('desktop')} disabled={!adFile} style={{ flex: 1, padding: '10px', fontSize: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
-                                ⬆️ อัปโหลด
+                            <button className="btn btn-primary" onClick={() => handleUploadAd('desktop')} disabled={!adFile || isUploading} style={{ flex: 1, padding: '10px', fontSize: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', opacity: isUploading ? 0.7 : 1 }}>
+                                {isUploading ? '⏳ กำลังอัปโหลด...' : '⬆️ อัปโหลด'}
                             </button>
-                            <button className="btn btn-secondary" onClick={() => handleDeleteAd('desktop')} style={{ backgroundColor: '#ff4d4f', color: 'white', border: 'none', padding: '10px 15px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <button className="btn btn-secondary" onClick={() => handleDeleteAd('desktop')} disabled={isUploading} style={{ backgroundColor: '#ff4d4f', color: 'white', border: 'none', padding: '10px 15px', display: 'flex', alignItems: 'center', gap: '8px' }}>
                                 ❌ ลบ
                             </button>
                         </div>
@@ -491,10 +507,10 @@ const Admin = () => {
                             </div>
                         </div>
                         <div style={{ display: 'flex', gap: '10px', marginTop: 'auto', marginBottom: '20px' }}>
-                            <button className="btn btn-primary" onClick={() => handleUploadAd('mobile')} disabled={!adMobileFile} style={{ flex: 1, padding: '10px', fontSize: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
-                                ⬆️ อัปโหลด
+                            <button className="btn btn-primary" onClick={() => handleUploadAd('mobile')} disabled={!adMobileFile || isUploading} style={{ flex: 1, padding: '10px', fontSize: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', opacity: isUploading ? 0.7 : 1 }}>
+                                {isUploading ? '⏳ กำลังอัปโหลด...' : '⬆️ อัปโหลด'}
                             </button>
-                            <button className="btn btn-secondary" onClick={() => handleDeleteAd('mobile')} style={{ backgroundColor: '#ff4d4f', color: 'white', border: 'none', padding: '10px 15px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <button className="btn btn-secondary" onClick={() => handleDeleteAd('mobile')} disabled={isUploading} style={{ backgroundColor: '#ff4d4f', color: 'white', border: 'none', padding: '10px 15px', display: 'flex', alignItems: 'center', gap: '8px' }}>
                                 ❌ ลบ
                             </button>
                         </div>
