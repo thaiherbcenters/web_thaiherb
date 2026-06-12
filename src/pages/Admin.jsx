@@ -35,9 +35,26 @@ const Admin = () => {
         icon: '🌿',
         tag: '',
         price: '',
+        price: '',
         stock: '',
         is_active: true
     });
+
+    const [adFile, setAdFile] = useState(null);
+    const [adLocalPreview, setAdLocalPreview] = useState(null);
+    const [adPreview, setAdPreview] = useState(`/images/popup/popup-ad.png?t=${Date.now()}`);
+
+    const [adMobileFile, setAdMobileFile] = useState(null);
+    const [adMobileLocalPreview, setAdMobileLocalPreview] = useState(null);
+    const [adMobilePreview, setAdMobilePreview] = useState(`/images/popup/popup-ad-mobile.png?t=${Date.now()}`);
+
+    const [adEndDate, setAdEndDate] = useState('');
+    const [toast, setToast] = useState(null);
+
+    const showToast = (message, type = 'success', description = '') => {
+        setToast({ message, type, description, id: Date.now() });
+        setTimeout(() => setToast(null), 3000);
+    };
 
     // DnD Sensors
     const sensors = useSensors(
@@ -51,7 +68,20 @@ const Admin = () => {
     useEffect(() => {
         fetchProducts();
         fetchStats();
+        fetchAdConfig();
     }, []);
+
+    const fetchAdConfig = async () => {
+        try {
+            const res = await fetch(`${API_URL}/api/admin/popup-config`);
+            const data = await res.json();
+            if (data.success && data.data) {
+                setAdEndDate(data.data.endDate || '');
+            }
+        } catch (error) {
+            console.error('Error fetching ad config:', error);
+        }
+    };
 
     const fetchProducts = async () => {
         try {
@@ -175,6 +205,101 @@ const Admin = () => {
         }
     };
 
+    const handleAdFileChange = (e, type = 'desktop') => {
+        if (e.target.files && e.target.files[0]) {
+            const file = e.target.files[0];
+            if (type === 'mobile') {
+                setAdMobileFile(file);
+                setAdMobileLocalPreview(URL.createObjectURL(file));
+            } else {
+                setAdFile(file);
+                setAdLocalPreview(URL.createObjectURL(file));
+            }
+        }
+    };
+
+    const handleUploadAd = async (type = 'desktop') => {
+        const file = type === 'mobile' ? adMobileFile : adFile;
+        if (!file) {
+            showToast('กรุณาเลือกไฟล์รูปภาพก่อนครับ', 'error');
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('image', file);
+
+        try {
+            const res = await fetch(`${API_URL}/api/admin/popup-ad/${type}`, {
+                method: 'POST',
+                body: formData
+            });
+            const data = await res.json();
+            if (data.success) {
+                showToast(`อัปโหลดแอดโฆษณา (${type === 'mobile' ? 'มือถือ' : 'PC'}) สำเร็จ!`, 'success', 'รูปภาพใหม่กำลังแสดงผลบนหน้าเว็บไซต์แล้ว');
+                if (type === 'mobile') {
+                    setAdMobileFile(null);
+                    setAdMobileLocalPreview(null);
+                    setAdMobilePreview(`/images/popup/popup-ad-mobile.png?t=${Date.now()}`);
+                } else {
+                    setAdFile(null);
+                    setAdLocalPreview(null);
+                    setAdPreview(`/images/popup/popup-ad.png?t=${Date.now()}`);
+                }
+            } else {
+                showToast('เกิดข้อผิดพลาด: ' + data.error, 'error');
+            }
+        } catch (error) {
+            console.error('Error uploading ad:', error);
+            showToast('เกิดข้อผิดพลาดในการอัปโหลด', 'error');
+        }
+    };
+
+    const handleDeleteAd = async (type = 'desktop') => {
+        if (!window.confirm(`คุณต้องการปิดการแสดงผลแอดโฆษณา (${type === 'mobile' ? 'มือถือ' : 'PC'}) ใช่หรือไม่?`)) return;
+
+        try {
+            const res = await fetch(`${API_URL}/api/admin/popup-ad/${type}`, {
+                method: 'DELETE'
+            });
+            const data = await res.json();
+            if (data.success) {
+                showToast(`ลบแอดโฆษณา (${type === 'mobile' ? 'มือถือ' : 'PC'}) สำเร็จ!`, 'success');
+                if (type === 'mobile') {
+                    setAdMobilePreview(`/images/popup/popup-ad-mobile.png?t=${Date.now()}`);
+                } else {
+                    setAdPreview(`/images/popup/popup-ad.png?t=${Date.now()}`);
+                }
+            } else {
+                showToast('เกิดข้อผิดพลาด: ' + data.error, 'error');
+            }
+        } catch (error) {
+            console.error('Error deleting ad:', error);
+            showToast('เกิดข้อผิดพลาดในการลบแอด', 'error');
+        }
+    };
+
+    const handleSaveConfig = async (clearDate = false) => {
+        const dateToSave = clearDate ? '' : adEndDate;
+        if (clearDate) setAdEndDate('');
+        
+        try {
+            const res = await fetch(`${API_URL}/api/admin/popup-config`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ endDate: dateToSave })
+            });
+            const data = await res.json();
+            if (data.success) {
+                showToast(clearDate ? 'ยกเลิกการตั้งเวลาสำเร็จ!' : 'บันทึกเวลาสิ้นสุดสำเร็จ!', 'success');
+            } else {
+                showToast('เกิดข้อผิดพลาด: ' + data.error, 'error');
+            }
+        } catch (error) {
+            console.error('Error saving ad config:', error);
+            showToast('เกิดข้อผิดพลาดในการบันทึกเวลา', 'error');
+        }
+    };
+
     // Handle drag end - reorder products
     const handleDragEnd = async (event) => {
         const { active, over } = event;
@@ -286,6 +411,135 @@ const Admin = () => {
                     </div>
                 </div>
             )}
+
+            {/* Ad Management Section */}
+            <div className="admin-ad-management" style={{ background: '#fff', padding: '20px', borderRadius: '10px', boxShadow: '0 2px 10px rgba(0,0,0,0.05)', marginBottom: '30px' }}>
+                <h2>🖼️ จัดการป๊อปอัปหน้าแรก</h2>
+                <p>อัปโหลดรูปภาพเพื่อนำไปแสดงเป็นแอดโฆษณาเมื่อลูกค้าเข้าเว็บไซต์</p>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px', marginTop: '20px' }}>
+                    {/* Desktop Ad */}
+                    <div style={{ border: '1px solid #eee', padding: '20px', borderRadius: '8px', display: 'flex', flexDirection: 'column' }}>
+                        <h3 style={{ marginTop: 0, marginBottom: '15px', color: '#333' }}>💻 รูปสำหรับคอมพิวเตอร์ (แนวนอน)</h3>
+                        <div style={{ marginBottom: '20px' }}>
+                            <div className="custom-file-upload">
+                                <label className={`file-upload-label ${adFile ? 'has-file' : ''}`} style={{ padding: adLocalPreview ? '10px' : '30px' }}>
+                                    <input type="file" accept="image/*" onChange={(e) => handleAdFileChange(e, 'desktop')} />
+                                    {adLocalPreview ? (
+                                        <div style={{ textAlign: 'center' }}>
+                                            <p style={{ margin: '0 0 10px 0', color: 'var(--primary-green)', fontWeight: 'bold' }}>✨ รูปที่จะอัปโหลด (พรีวิว)</p>
+                                            <img src={adLocalPreview} alt="Local Preview" style={{ maxWidth: '100%', maxHeight: '200px', objectFit: 'contain', borderRadius: '8px' }} />
+                                            <p style={{ margin: '10px 0 0 0', fontSize: '0.85rem', color: '#666' }}>คลิกที่นี่เพื่อเปลี่ยนรูป</p>
+                                        </div>
+                                    ) : (
+                                        <>
+                                            <span className="upload-icon">📁</span>
+                                            <span className="upload-text">คลิกเพื่อเลือกรูปภาพ</span>
+                                            <span className="upload-subtext">แนะนำขนาด 1920x1080 (แนวนอน)</span>
+                                        </>
+                                    )}
+                                </label>
+                            </div>
+                        </div>
+                        <div style={{ display: 'flex', gap: '10px', marginTop: 'auto', marginBottom: '20px' }}>
+                            <button className="btn btn-primary" onClick={() => handleUploadAd('desktop')} disabled={!adFile} style={{ flex: 1, padding: '10px', fontSize: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+                                ⬆️ อัปโหลด
+                            </button>
+                            <button className="btn btn-secondary" onClick={() => handleDeleteAd('desktop')} style={{ backgroundColor: '#ff4d4f', color: 'white', border: 'none', padding: '10px 15px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                ❌ ลบ
+                            </button>
+                        </div>
+                        <div style={{ border: '1px dashed #ccc', padding: '10px', borderRadius: '8px', textAlign: 'center', background: '#fafafa' }}>
+                            <p style={{ margin: '0 0 10px 0', fontSize: '0.9rem', color: '#666' }}>รูปที่แสดงผลปัจจุบัน:</p>
+                            <img 
+                                src={adPreview} 
+                                alt="Current Desktop Ad" 
+                                style={{ maxWidth: '100%', maxHeight: '150px', objectFit: 'contain' }}
+                                onError={(e) => {
+                                    e.target.style.display = 'none';
+                                    e.target.nextSibling.style.display = 'block';
+                                }}
+                                onLoad={(e) => {
+                                    e.target.style.display = 'block';
+                                    if (e.target.nextSibling) e.target.nextSibling.style.display = 'none';
+                                }}
+                            />
+                            <div style={{ display: 'none', color: '#999', padding: '20px', fontSize: '0.9rem' }}>(ยังไม่มีแอดเปิดใช้งาน)</div>
+                        </div>
+                    </div>
+
+                    {/* Mobile Ad */}
+                    <div style={{ border: '1px solid #eee', padding: '20px', borderRadius: '8px', display: 'flex', flexDirection: 'column' }}>
+                        <h3 style={{ marginTop: 0, marginBottom: '15px', color: '#333' }}>📱 รูปสำหรับมือถือ (แนวตั้ง)</h3>
+                        <div style={{ marginBottom: '20px' }}>
+                            <div className="custom-file-upload">
+                                <label className={`file-upload-label ${adMobileFile ? 'has-file' : ''}`} style={{ padding: adMobileLocalPreview ? '10px' : '30px' }}>
+                                    <input type="file" accept="image/*" onChange={(e) => handleAdFileChange(e, 'mobile')} />
+                                    {adMobileLocalPreview ? (
+                                        <div style={{ textAlign: 'center' }}>
+                                            <p style={{ margin: '0 0 10px 0', color: 'var(--primary-green)', fontWeight: 'bold' }}>✨ รูปที่จะอัปโหลด (พรีวิว)</p>
+                                            <img src={adMobileLocalPreview} alt="Mobile Local Preview" style={{ maxWidth: '100%', maxHeight: '200px', objectFit: 'contain', borderRadius: '8px' }} />
+                                            <p style={{ margin: '10px 0 0 0', fontSize: '0.85rem', color: '#666' }}>คลิกที่นี่เพื่อเปลี่ยนรูป</p>
+                                        </div>
+                                    ) : (
+                                        <>
+                                            <span className="upload-icon">📱</span>
+                                            <span className="upload-text">คลิกเพื่อเลือกรูปภาพ</span>
+                                            <span className="upload-subtext">แนะนำขนาด 1080x1920 (แนวตั้ง)</span>
+                                        </>
+                                    )}
+                                </label>
+                            </div>
+                        </div>
+                        <div style={{ display: 'flex', gap: '10px', marginTop: 'auto', marginBottom: '20px' }}>
+                            <button className="btn btn-primary" onClick={() => handleUploadAd('mobile')} disabled={!adMobileFile} style={{ flex: 1, padding: '10px', fontSize: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+                                ⬆️ อัปโหลด
+                            </button>
+                            <button className="btn btn-secondary" onClick={() => handleDeleteAd('mobile')} style={{ backgroundColor: '#ff4d4f', color: 'white', border: 'none', padding: '10px 15px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                ❌ ลบ
+                            </button>
+                        </div>
+                        <div style={{ border: '1px dashed #ccc', padding: '10px', borderRadius: '8px', textAlign: 'center', background: '#fafafa' }}>
+                            <p style={{ margin: '0 0 10px 0', fontSize: '0.9rem', color: '#666' }}>รูปที่แสดงผลปัจจุบัน:</p>
+                            <img 
+                                src={adMobilePreview} 
+                                alt="Current Mobile Ad" 
+                                style={{ maxWidth: '100%', maxHeight: '150px', objectFit: 'contain' }}
+                                onError={(e) => {
+                                    e.target.style.display = 'none';
+                                    e.target.nextSibling.style.display = 'block';
+                                }}
+                                onLoad={(e) => {
+                                    e.target.style.display = 'block';
+                                    if (e.target.nextSibling) e.target.nextSibling.style.display = 'none';
+                                }}
+                            />
+                            <div style={{ display: 'none', color: '#999', padding: '20px', fontSize: '0.9rem' }}>(ยังไม่มีแอดเปิดใช้งาน)</div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Settings for Expiration */}
+                <div style={{ marginTop: '30px', borderTop: '1px solid #eee', paddingTop: '20px' }}>
+                    <h3 style={{ marginTop: 0, marginBottom: '15px', color: '#333' }}>⏱️ ตั้งเวลาสิ้นสุดการแสดงผลแอด (ถ้าต้องการ)</h3>
+                    <div style={{ display: 'flex', gap: '10px', alignItems: 'center', flexWrap: 'wrap' }}>
+                        <input 
+                            type="datetime-local" 
+                            value={adEndDate} 
+                            onChange={(e) => setAdEndDate(e.target.value)} 
+                            style={{ padding: '10px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '1rem', minWidth: '250px' }}
+                        />
+                        <button className="btn btn-primary" onClick={() => handleSaveConfig(false)} style={{ padding: '10px 20px' }}>
+                            💾 บันทึกเวลา
+                        </button>
+                        <button className="btn btn-secondary" onClick={() => handleSaveConfig(true)} style={{ padding: '10px 20px' }}>
+                            🔄 ยกเลิกการตั้งเวลา (แสดงตลอด)
+                        </button>
+                    </div>
+                    <p style={{ margin: '10px 0 0 0', fontSize: '0.85rem', color: '#666' }}>
+                        * แอดจะไม่แสดงผลเมื่อถึงเวลาที่กำหนด หากไม่ตั้งเวลาจะแสดงผลไปตลอดจนกว่าจะกดลบ
+                    </p>
+                </div>
+            </div>
 
             {/* Add Form Only */}
             {showAddForm && (
@@ -461,6 +715,21 @@ const Admin = () => {
                     </div>
                 </DndContext>
             </div>
+
+            {/* Custom Toast Notification */}
+            {toast && (
+                <div className="admin-toast-container">
+                    <div key={toast.id} className={`admin-toast ${toast.type}`}>
+                        <span className="toast-icon">
+                            {toast.type === 'success' ? '✅' : '❌'}
+                        </span>
+                        <div className="toast-content">
+                            <h4>{toast.message}</h4>
+                            {toast.description && <p>{toast.description}</p>}
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

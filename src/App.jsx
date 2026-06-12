@@ -18,11 +18,13 @@ import Checkout from './pages/Checkout';
 import Admin from './pages/Admin';
 import Registration from './pages/Registration';
 import './index.css';
+import MourningOverlay from './components/MourningOverlay';
 
 function App() {
   return (
     <LanguageProvider>
       <CartProvider>
+        <MourningOverlay />
         <Router>
           <ScrollToTop />
           <div className="app">

@@ -6,6 +6,90 @@
 const express = require('express');
 const router = express.Router();
 const { pool } = require('../config/database');
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
+
+// ตั้งค่าที่เก็บไฟล์ Popup Ad
+const popupAdDir = path.join(__dirname, '../../public/images/popup');
+if (!fs.existsSync(popupAdDir)) {
+    fs.mkdirSync(popupAdDir, { recursive: true });
+}
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, popupAdDir);
+    },
+    filename: function (req, file, cb) {
+        // แยกไฟล์ระหว่าง PC กับ Mobile
+        const type = req.params.type;
+        const fileName = type === 'mobile' ? 'popup-ad-mobile.png' : 'popup-ad.png';
+        cb(null, fileName);
+    }
+});
+const uploadPopup = multer({ storage: storage });
+
+const configPath = path.join(popupAdDir, 'config.json');
+
+// GET /api/admin/popup-config - Get popup configuration
+router.get('/popup-config', (req, res) => {
+    try {
+        if (fs.existsSync(configPath)) {
+            const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+            res.json({ success: true, data: config });
+        } else {
+            res.json({ success: true, data: { endDate: '' } });
+        }
+    } catch (error) {
+        console.error('Error reading popup config:', error);
+        res.status(500).json({ success: false, error: 'Failed to read config' });
+    }
+});
+
+// PUT /api/admin/popup-config - Save popup configuration
+router.put('/popup-config', (req, res) => {
+    try {
+        const { endDate } = req.body;
+        const config = { endDate: endDate || '' };
+        fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
+        res.json({ success: true, message: 'Config saved successfully', data: config });
+    } catch (error) {
+        console.error('Error saving popup config:', error);
+        res.status(500).json({ success: false, error: 'Failed to save config' });
+    }
+});
+
+// POST /api/admin/popup-ad/:type - Upload popup ad image
+router.post('/popup-ad/:type', uploadPopup.single('image'), (req, res) => {
+    try {
+        if (!req.file) {
+            return res.status(400).json({ success: false, error: 'No image uploaded' });
+        }
+        res.json({ success: true, message: 'Popup ad uploaded successfully' });
+    } catch (error) {
+        console.error('Error uploading popup ad:', error);
+        res.status(500).json({ success: false, error: 'Failed to upload popup ad' });
+    }
+});
+
+// DELETE /api/admin/popup-ad/:type - Delete popup ad image
+router.delete('/popup-ad/:type', (req, res) => {
+    try {
+        const type = req.params.type;
+        const fileName = type === 'mobile' ? 'popup-ad-mobile.png' : 'popup-ad.png';
+        const adPath = path.join(popupAdDir, fileName);
+        
+        if (fs.existsSync(adPath)) {
+            fs.unlinkSync(adPath);
+            res.json({ success: true, message: 'Popup ad deleted successfully' });
+        } else {
+            res.json({ success: true, message: 'Popup ad already deleted' });
+        }
+    } catch (error) {
+        console.error('Error deleting popup ad:', error);
+        res.status(500).json({ success: false, error: 'Failed to delete popup ad' });
+    }
+});
 
 // GET /api/admin/products - Get all products (including inactive)
 router.get('/products', async (req, res) => {
@@ -268,5 +352,4 @@ router.put('/products/:id/sort-order', async (req, res) => {
         });
     }
 });
-
 module.exports = router;
