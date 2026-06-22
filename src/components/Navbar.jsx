@@ -42,7 +42,7 @@ const Navbar = () => {
             <div className="navbar-container">
                 {/* Logo */}
                 <Link to="/" className="navbar-logo">
-                    <img src="/logo-icon.png" alt="Thai Herb Centers" className="logo-icon" />
+                    <img src="/logo-icon.webp" alt="Thai Herb Centers" className="logo-icon" />
                     <div className="logo-text">
                         <span className="logo-name">THAI HERB CENTERS</span>
                         <span className="logo-tagline">ไทยเฮิร์บเซ็นเตอร์</span>

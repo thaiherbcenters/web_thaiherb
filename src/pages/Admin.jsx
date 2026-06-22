@@ -44,11 +44,11 @@ const Admin = () => {
 
     const [adFile, setAdFile] = useState(null);
     const [adLocalPreview, setAdLocalPreview] = useState(null);
-    const [adPreview, setAdPreview] = useState(`/images/popup/popup-ad.png?t=${Date.now()}`);
+    const [adPreview, setAdPreview] = useState(`/images/popup/popup-ad.webp?t=${Date.now()}`);
 
     const [adMobileFile, setAdMobileFile] = useState(null);
     const [adMobileLocalPreview, setAdMobileLocalPreview] = useState(null);
-    const [adMobilePreview, setAdMobilePreview] = useState(`/images/popup/popup-ad-mobile.png?t=${Date.now()}`);
+    const [adMobilePreview, setAdMobilePreview] = useState(`/images/popup/popup-ad-mobile.webp?t=${Date.now()}`);
 
     const [adEndDate, setAdEndDate] = useState('');
     const [toast, setToast] = useState(null);
@@ -253,11 +253,11 @@ const Admin = () => {
                 if (type === 'mobile') {
                     setAdMobileFile(null);
                     setAdMobileLocalPreview(null);
-                    setAdMobilePreview(`/images/popup/popup-ad-mobile.png?t=${Date.now()}`);
+                    setAdMobilePreview(`/images/popup/popup-ad-mobile.webp?t=${Date.now()}`);
                 } else {
                     setAdFile(null);
                     setAdLocalPreview(null);
-                    setAdPreview(`/images/popup/popup-ad.png?t=${Date.now()}`);
+                    setAdPreview(`/images/popup/popup-ad.webp?t=${Date.now()}`);
                 }
             } else {
                 showToast('เกิดข้อผิดพลาด: ' + data.error, 'error');
@@ -281,9 +281,9 @@ const Admin = () => {
             if (data.success) {
                 showToast(`ลบแอดโฆษณา (${type === 'mobile' ? 'มือถือ' : 'PC'}) สำเร็จ!`, 'success');
                 if (type === 'mobile') {
-                    setAdMobilePreview(`/images/popup/popup-ad-mobile.png?t=${Date.now()}`);
+                    setAdMobilePreview(`/images/popup/popup-ad-mobile.webp?t=${Date.now()}`);
                 } else {
-                    setAdPreview(`/images/popup/popup-ad.png?t=${Date.now()}`);
+                    setAdPreview(`/images/popup/popup-ad.webp?t=${Date.now()}`);
                 }
             } else {
                 showToast('เกิดข้อผิดพลาด: ' + data.error, 'error');

@@ -7,6 +7,7 @@ const MourningOverlay = () => {
   const [imageExists, setImageExists] = useState(true); // เช็คว่ามีรูป PC หรือไม่
   const [mobileImageExists, setMobileImageExists] = useState(true); // เช็คว่ามีรูปมือถือหรือไม่
   const [isChecking, setIsChecking] = useState(true);
+  const [imageLoaded, setImageLoaded] = useState(false);
   const cacheBuster = React.useMemo(() => new Date().getTime(), []);
 
   // Check Expiration Date
@@ -57,18 +58,20 @@ const MourningOverlay = () => {
       onTouchMove={handleClose}
     >
       <img 
-        src={`/images/popup/popup-ad.png?t=${cacheBuster}`} 
+        src={`/images/popup/popup-ad.webp?t=${cacheBuster}`} 
         alt="โฆษณา / แอด PC" 
-        className={`mourning-bg-image ${mobileImageExists ? 'desktop-ad-only' : ''}`} 
+        className={`mourning-bg-image ${mobileImageExists ? 'desktop-ad-only' : ''} ${imageLoaded ? 'image-loaded' : ''}`} 
+        onLoad={() => setImageLoaded(true)}
         onError={(e) => {
           setImageExists(false);
         }}
       />
       {mobileImageExists && (
         <img 
-          src={`/images/popup/popup-ad-mobile.png?t=${cacheBuster}`} 
+          src={`/images/popup/popup-ad-mobile.webp?t=${cacheBuster}`} 
           alt="โฆษณา / แอด มือถือ" 
-          className="mourning-bg-image mobile-ad-only" 
+          className={`mourning-bg-image mobile-ad-only ${imageLoaded ? 'image-loaded' : ''}`} 
+          onLoad={() => setImageLoaded(true)}
           onError={(e) => {
             setMobileImageExists(false);
           }}

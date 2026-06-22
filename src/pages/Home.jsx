@@ -126,7 +126,7 @@ const Home = () => {
     // Services with translations
     const getServices = () => [
         {
-            icon: '/images/service-oem.png',
+            icon: '/images/service-oem.webp',
             title: language === 'th' ? 'รับทำ OEM' : language === 'en' ? 'OEM Services' : 'OEM代工',
             description: language === 'th'
                 ? 'รับผลิตสินค้าสมุนไพรและเครื่องสำอางตามแบรนด์ของคุณ ออกแบบสูตร, บรรจุภัณฑ์, ผลิตตามมาตรฐาน GMP'
@@ -146,7 +146,7 @@ const Home = () => {
             link: '/products'
         },
         {
-            icon: '/images/service-registration.png',
+            icon: '/images/service-registration.webp',
             title: language === 'th' ? 'ขึ้นทะเบียน' : language === 'en' ? 'Registration' : '注册服务',
             description: language === 'th'
                 ? 'จดทะเบียน อย., ขึ้นทะเบียน GMP, จด อ.ย., ขอใบอนุญาตผลิต, ออกแบบแบรนด์และบรรจุภัณฑ์ครบวงจร'
@@ -254,11 +254,12 @@ const Home = () => {
                             {/* Certifications Banner */}
                             <div className="hero-certifications">
                                 <img
-                                    src="/images/certifications-banner.png"
+                                    src="/images/certifications-banner.webp"
                                     alt={language === 'th' ? 'ได้รับมาตรฐาน GMP, OTOP, Green Industry'
                                         : language === 'en' ? 'GMP, OTOP, Green Industry Certified'
                                             : 'GMP、OTOP、绿色工业认证'}
                                     className="cert-banner-img animate-glow delay-3"
+                                    loading="lazy"
                                 />
                             </div>
                         </div>
@@ -343,7 +344,7 @@ const Home = () => {
                                     <h3>{service.title}</h3>
                                     <div className="service-icon">
                                         {service.icon.startsWith('/') ? (
-                                            <img src={service.icon} alt={service.title} />
+                                            <img src={service.icon} alt={service.title} loading="lazy" />
                                         ) : (
                                             service.icon
                                         )}
@@ -402,7 +403,8 @@ const Home = () => {
                                                         allowFullScreen={true}
                                                         webkitAllowFullScreen={true}
                                                         mozAllowFullScreen={true}
-                                                        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share; fullscreen">
+                                                        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share; fullscreen"
+                                                        loading="lazy">
                                                     </iframe>
                                                 ) : post.full_picture ? (
                                                     <img src={post.full_picture} alt="News" loading="lazy" />
@@ -485,6 +487,7 @@ const Home = () => {
                                                 allowFullScreen
                                                 scrolling="no"
                                                 allow="encrypted-media;"
+                                                loading="lazy"
                                             ></iframe>
                                         </div>
                                     );
@@ -549,7 +552,8 @@ const Home = () => {
                                     allowFullScreen={true}
                                     webkitAllowFullScreen={true}
                                     mozAllowFullScreen={true}
-                                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share; fullscreen">
+                                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share; fullscreen"
+                                    loading="lazy">
                                 </iframe>
                                 <button className="custom-fullscreen-btn" onClick={(e) => {
                                     e.stopPropagation();

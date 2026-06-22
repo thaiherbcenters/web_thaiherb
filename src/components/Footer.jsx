@@ -11,7 +11,7 @@ const Footer = () => {
                 <div className="footer-grid">
                     <div className="footer-brand">
                         <div className="footer-logo">
-                            <img src="/logo-icon.png" alt="Thai Herb Centers" />
+                            <img src="/logo-icon.webp" alt="Thai Herb Centers" />
                             <span>THAI HERB CENTERS</span>
                         </div>
                         <p>{t('footer.about.description')}</p>

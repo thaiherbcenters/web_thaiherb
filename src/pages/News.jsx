@@ -342,7 +342,7 @@ const News = () => {
                             <div className="modal-right-caption">
                                 <div className="modal-author-header">
                                     <div className="modal-author-avatar">
-                                        <img src="/logo-icon.png" alt="Thai Herb Centers" />
+                                        <img src="/logo-icon.webp" alt="Thai Herb Centers" />
                                     </div>
                                     <div className="modal-author-info">
                                         <h4>Thai Herb Centers</h4>
