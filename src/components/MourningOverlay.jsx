@@ -8,7 +8,8 @@ const MourningOverlay = () => {
   const [mobileImageExists, setMobileImageExists] = useState(true); // เช็คว่ามีรูปมือถือหรือไม่
   const [isChecking, setIsChecking] = useState(true);
   const [imageLoaded, setImageLoaded] = useState(false);
-  const cacheBuster = React.useMemo(() => new Date().getTime(), []);
+  // ใช้ วันที่ เป็น cacheBuster เพื่อให้แคชได้ใน 1 วัน (โหลดเร็วขึ้นสำหรับคนที่เข้าซ้ำ)
+  const cacheBuster = React.useMemo(() => new Date().toISOString().split('T')[0], []);
 
   // Check Expiration Date
   useEffect(() => {
@@ -39,8 +40,8 @@ const MourningOverlay = () => {
     };
   }, [isVisible, imageExists, isChecking]);
 
-  // ถ้ากำลังเช็คเวลา, ไม่มีรูป, หรือหมดเวลาแล้ว ไม่ต้องแสดงอะไรเลย
-  if (isChecking || !isVisible || !imageExists) return null;
+  // ไม่ return null เพื่อให้เบราว์เซอร์เจาะ DOM และเริ่มโหลดรูปได้ทันที (Parallel loading)
+  // แต่ซ่อนไว้ด้วย CSS จนกว่าจะเช็คเสร็จและรูปโหลดเสร็จ
 
   const handleClose = () => {
     if (isFadingOut) return;
@@ -53,6 +54,7 @@ const MourningOverlay = () => {
   return (
     <div 
       className={`mourning-overlay ${isFadingOut ? 'fade-out' : ''}`} 
+      style={{ display: (isChecking || !isVisible || !imageExists) ? 'none' : 'flex' }}
       onClick={handleClose}
       onWheel={handleClose}
       onTouchMove={handleClose}
@@ -61,6 +63,7 @@ const MourningOverlay = () => {
         src={`/images/popup/popup-ad.webp?t=${cacheBuster}`} 
         alt="โฆษณา / แอด PC" 
         className={`mourning-bg-image ${mobileImageExists ? 'desktop-ad-only' : ''} ${imageLoaded ? 'image-loaded' : ''}`} 
+        fetchpriority="high"
         onLoad={() => setImageLoaded(true)}
         onError={(e) => {
           setImageExists(false);
@@ -71,6 +74,7 @@ const MourningOverlay = () => {
           src={`/images/popup/popup-ad-mobile.webp?t=${cacheBuster}`} 
           alt="โฆษณา / แอด มือถือ" 
           className={`mourning-bg-image mobile-ad-only ${imageLoaded ? 'image-loaded' : ''}`} 
+          fetchpriority="high"
           onLoad={() => setImageLoaded(true)}
           onError={(e) => {
             setMobileImageExists(false);
