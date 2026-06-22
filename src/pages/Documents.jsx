@@ -3,32 +3,32 @@ import { useTranslation } from '../hooks/useTranslation';
 import './Documents.css';
 
 const certImages = [
-    '/images/certificate/certificate_1.png',
-    '/images/certificate/certificate_2.png',
-    '/images/certificate/certificate_3.jpg',
-    '/images/certificate/certificate_4.png',
-    '/images/certificate/certificate_5.png',
-    '/images/certificate/certificate_6.png',
-    '/images/certificate/certificate_7.png',
-    '/images/certificate/certificate_8.png',
-    '/images/certificate/certificate_9.jpg',
-    '/images/certificate/certificate_10.png',
-    '/images/certificate/certificate_11.png',
-    '/images/certificate/certificate_12.png',
-    '/images/certificate/certificate_13.png',
-    '/images/certificate/certificate_14.png',
-    '/images/certificate/certificate_15.png',
-    '/images/certificate/certificate_16.png',
-    '/images/certificate/certificate_17.png',
-    '/images/certificate/certificate_18.png',
-    '/images/certificate/certificate_19.png',
-    '/images/certificate/certificate_20.png',
-    '/images/certificate/certificate_21.png',
-    '/images/certificate/certificate_22.png',
-    '/images/certificate/certificate_23.png',
-    '/images/certificate/certificate_24.jpg',
-    '/images/certificate/certificate_25.jpg',
-    '/images/certificate/certificate_26.jpg'
+    '/images/certificate/.webp',
+    '/images/certificate/.webp',
+    '/images/certificate/.webp',
+    '/images/certificate/.webp',
+    '/images/certificate/.webp',
+    '/images/certificate/.webp',
+    '/images/certificate/.webp',
+    '/images/certificate/.webp',
+    '/images/certificate/.webp',
+    '/images/certificate/.webp',
+    '/images/certificate/.webp',
+    '/images/certificate/.webp',
+    '/images/certificate/.webp',
+    '/images/certificate/.webp',
+    '/images/certificate/.webp',
+    '/images/certificate/.webp',
+    '/images/certificate/.webp',
+    '/images/certificate/.webp',
+    '/images/certificate/.webp',
+    '/images/certificate/.webp',
+    '/images/certificate/.webp',
+    '/images/certificate/.webp',
+    '/images/certificate/.webp',
+    '/images/certificate/.webp',
+    '/images/certificate/.webp',
+    '/images/certificate/.webp'
 ];
 
 const Documents = () => {
@@ -64,22 +64,22 @@ const Documents = () => {
         {
             id: 'registration',
             title: t('documents.section2.subs.registration'),
-            img: '/images/certificate/doc_registration.jpg' // Placeholder path
+            img: '/images/certificate/.webp' // Placeholder path
         },
         {
             id: 'commercial',
             title: t('documents.section2.subs.commercial'),
-            img: '/images/certificate/doc_commercial.jpg'
+            img: '/images/certificate/.webp'
         },
         {
             id: 'production',
             title: t('documents.section2.subs.production'),
-            img: '/images/certificate/doc_production.jpg'
+            img: '/images/certificate/.webp'
         },
         {
             id: 'distribution',
             title: t('documents.section2.subs.distribution'),
-            img: '/images/certificate/doc_distribution.jpg'
+            img: '/images/certificate/.webp'
         }
     ];
 
