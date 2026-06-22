@@ -54,7 +54,6 @@ const MourningOverlay = () => {
   return (
     <div 
       className={`mourning-overlay ${isFadingOut ? 'fade-out' : ''}`} 
-      style={{ display: (isChecking || !isVisible || !imageExists) ? 'none' : 'flex' }}
       onClick={handleClose}
       onWheel={handleClose}
       onTouchMove={handleClose}
@@ -62,9 +61,8 @@ const MourningOverlay = () => {
       <img 
         src={`/images/popup/popup-ad.webp?t=${cacheBuster}`} 
         alt="โฆษณา / แอด PC" 
-        className={`mourning-bg-image ${mobileImageExists ? 'desktop-ad-only' : ''} ${imageLoaded ? 'image-loaded' : ''}`} 
+        className={`mourning-bg-image ${mobileImageExists ? 'desktop-ad-only' : ''}`} 
         fetchpriority="high"
-        onLoad={() => setImageLoaded(true)}
         onError={(e) => {
           setImageExists(false);
         }}
@@ -73,9 +71,8 @@ const MourningOverlay = () => {
         <img 
           src={`/images/popup/popup-ad-mobile.webp?t=${cacheBuster}`} 
           alt="โฆษณา / แอด มือถือ" 
-          className={`mourning-bg-image mobile-ad-only ${imageLoaded ? 'image-loaded' : ''}`} 
+          className={`mourning-bg-image mobile-ad-only`} 
           fetchpriority="high"
-          onLoad={() => setImageLoaded(true)}
           onError={(e) => {
             setMobileImageExists(false);
           }}
