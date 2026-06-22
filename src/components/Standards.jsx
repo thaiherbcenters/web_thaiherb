@@ -114,70 +114,70 @@ const Standards = () => {
 
     const getStandardsList = () => [
         {
-            icon: <img src="/images/ttm_logo.webp" alt="Thailand Trust Mark" loading="lazy" />,
+            icon: <img src="/images/ttm_logo.webp" alt="Thailand Trust Mark"  />,
             title: 'Thailand Trust Mark',
             description: language === 'th' ? 'สัญลักษณ์แห่งความเป็นเลิศและความเชื่อมั่นในคุณภาพสินค้าไทย'
                 : language === 'en' ? 'Symbol of excellence and confidence in Thai product quality'
                     : '泰国产品质量卓越和信心的象征'
         },
         {
-            icon: <img src="/images/gmp_logo.webp" alt="GMP Certified" loading="lazy" />,
+            icon: <img src="/images/gmp_logo.webp" alt="GMP Certified"  />,
             title: 'GMP Certified',
             description: language === 'th' ? 'หลักเกณฑ์วิธีการที่ดีในการผลิตอาหารและยา ปลอดภัยตามมาตรฐานสากล'
                 : language === 'en' ? 'Good Manufacturing Practice for food and drug safety to international standards'
                     : '符合国际标准的食品和药品生产良好规范'
         },
         {
-            icon: <img src="/images/green_industry_logo.webp" alt="Green Industry" loading="lazy" />,
+            icon: <img src="/images/green_industry_logo.webp" alt="Green Industry"  />,
             title: 'Green Industry',
             description: language === 'th' ? 'อุตสาหกรรมสีเขียว ระดับที่ 2 เป็นมิตรกับชุมชนและสิ่งแวดล้อม'
                 : language === 'en' ? 'Green Industry Level 2, environmentally and community friendly'
                     : '绿色工业二级，对社区和环境友好'
         },
         {
-            icon: <img src="/images/mit_logo.webp" alt="Made in Thailand" loading="lazy" />,
+            icon: <img src="/images/mit_logo.webp" alt="Made in Thailand"  />,
             title: 'Made in Thailand',
             description: language === 'th' ? 'สินค้ามาตรฐานที่ผลิตในประเทศไทย'
                 : language === 'en' ? 'Quality products manufactured in Thailand'
                     : '泰国制造的优质产品'
         },
         {
-            icon: <img src="/images/otop_logo.webp" alt="OTOP 3 Stars" loading="lazy" />,
+            icon: <img src="/images/otop_logo.webp" alt="OTOP 3 Stars"  />,
             title: 'OTOP 3 Stars',
             description: language === 'th' ? 'สินค้าหนึ่งตำบล หนึ่งผลิตภัณฑ์ ระดับ 3 ดาว'
                 : language === 'en' ? 'One Tambon One Product, 3-star rating'
                     : '一村一品，三星级产品'
         },
         {
-            icon: <img src="/images/halal_logo.webp" alt="Halal Certified" loading="lazy" />,
+            icon: <img src="/images/halal_logo.webp" alt="Halal Certified"  />,
             title: 'Halal Certified',
             description: language === 'th' ? 'ได้รับการรับรองมาตรฐานฮาลาล ถูกต้องตามหลักศาสนาอิสลาม'
                 : language === 'en' ? 'Halal certified according to Islamic principles'
                     : '符合伊斯兰教法的清真认证'
         },
         {
-            icon: <img src="/images/php_logo.webp" alt="Premium Herbal Products" loading="lazy" />,
+            icon: <img src="/images/php_logo.webp" alt="Premium Herbal Products"  />,
             title: 'Premium Herbal Products',
             description: language === 'th' ? 'ผลิตภัณฑ์สมุนไพรคุณภาพ (Premium Herbal Products)'
                 : language === 'en' ? 'Premium quality herbal products certification'
                     : '优质草药产品认证'
         },
         {
-            icon: <img src="/images/tls_logo.webp" alt="TLS 8001" loading="lazy" />,
+            icon: <img src="/images/tls_logo.webp" alt="TLS 8001"  />,
             title: 'TLS 8001',
             description: language === 'th' ? 'มาตรฐานแรงงานไทย (Thai Labour Standard)'
                 : language === 'en' ? 'Thai Labour Standard certification'
                     : '泰国劳工标准认证'
         },
         {
-            icon: <img src="/images/iso9001_logo.webp" alt="ISO 9001:2015" loading="lazy" />,
+            icon: <img src="/images/iso9001_logo.webp" alt="ISO 9001:2015"  />,
             title: 'ISO 9001:2015',
             description: language === 'th' ? 'ระบบบริหารงานคุณภาพมาตรฐานสากล'
                 : language === 'en' ? 'International quality management system standard'
                     : '国际质量管理体系标准'
         },
         {
-            icon: <img src="/images/iso14001_logo.webp" alt="ISO 14001:2015" loading="lazy" />,
+            icon: <img src="/images/iso14001_logo.webp" alt="ISO 14001:2015"  />,
             title: 'ISO 14001:2015',
             description: language === 'th' ? 'มาตรฐานระบบการจัดการสิ่งแวดล้อม'
                 : language === 'en' ? 'Environmental management system standard'
@@ -219,7 +219,7 @@ const Standards = () => {
                             </div>
                         </div>
                         <div className="standards-hero-image">
-                            <img src="/images/ceo_award.webp" alt="CEO Awards and Certification" loading="lazy" />
+                            <img src="/images/ceo_award.webp" alt="CEO Awards and Certification" />
                         </div>
                     </div>
                 </div>
@@ -227,9 +227,9 @@ const Standards = () => {
                 <div className="standards-container">
                     {/* Left Column: Image */}
                     <div className="standards-image-stack">
-                        <img src="/images/standards_1.JPG" alt="Factory Standards 1" loading="lazy" />
-                        <img src="/images/standards_2.JPG" alt="Factory Standards 2" loading="lazy" />
-                        <img src="/images/standards_3.png" alt="Factory Standards 3" loading="lazy" />
+                        <img src="/images/standards_1.JPG" alt="Factory Standards 1"  />
+                        <img src="/images/standards_2.JPG" alt="Factory Standards 2"  />
+                        <img src="/images/standards_3.png" alt="Factory Standards 3"  />
                     </div>
 
                     {/* Right Column: Content */}

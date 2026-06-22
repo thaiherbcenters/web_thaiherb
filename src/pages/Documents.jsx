@@ -130,7 +130,7 @@ const Documents = () => {
                                 onClick={() => setSelectedImage(img)}
                             >
                                 <div className="cert-image-wrapper">
-                                    <img src={img} alt={`Certificate ${index + 1}`} onError={hideMissingImg} loading="lazy" />
+                                    <img src={img} alt={`Certificate ${index + 1}`} onError={hideMissingImg}  />
                                 </div>
                             </div>
                         ))}
@@ -178,7 +178,7 @@ const Documents = () => {
                                 onClick={() => setSelectedImage(doc.img)}
                             >
                                 <div className="cert-image-wrapper">
-                                    <img src={doc.img} alt={doc.title} onError={hideMissingImg} loading="lazy" />
+                                    <img src={doc.img} alt={doc.title} onError={hideMissingImg}  />
                                 </div>
                                 <div className="cert-title">
                                     <h3>{doc.title}</h3>
@@ -205,7 +205,7 @@ const Documents = () => {
                                 onClick={() => setSelectedImage(img)}
                             >
                                 <div className="cert-image-wrapper">
-                                    <img src={img} alt={`Recipe Certificate ${index + 1}`} onError={hideMissingImg} loading="lazy" />
+                                    <img src={img} alt={`Recipe Certificate ${index + 1}`} onError={hideMissingImg}  />
                                 </div>
                             </div>
                         ))}

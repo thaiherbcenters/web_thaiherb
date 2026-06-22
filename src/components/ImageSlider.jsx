@@ -22,7 +22,7 @@ const ImageSlider = ({ images: customImages }) => {
                 <div className="slider-track">
                     {sliderImages.map((img, index) => (
                         <div className="slider-item" key={index}>
-                            <img src={img} alt={`Slide ${index + 1}`} loading="lazy" />
+                            <img src={img} alt={`Slide ${index + 1}`}  />
                         </div>
                     ))}
                 </div>

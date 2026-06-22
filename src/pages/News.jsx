@@ -254,7 +254,7 @@ const News = () => {
                                     <div key={post.id} className="grid-news-card">
                                         <div className="grid-image-wrapper" onClick={() => { setActivePost(post); setActiveImageIndex(0); }} style={{ cursor: 'pointer' }}>
                                             {post.full_picture ? (
-                                                <img src={post.full_picture} alt="News thumbnail" className="grid-image" loading="lazy" />
+                                                <img src={post.full_picture} alt="News thumbnail" className="grid-image"  />
                                             ) : (
                                                 <div className="grid-image placeholder">THAI HERB</div>
                                             )}

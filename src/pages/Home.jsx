@@ -259,7 +259,6 @@ const Home = () => {
                                         : language === 'en' ? 'GMP, OTOP, Green Industry Certified'
                                             : 'GMP、OTOP、绿色工业认证'}
                                     className="cert-banner-img animate-glow delay-3"
-                                    loading="lazy"
                                 />
                             </div>
                         </div>
@@ -344,7 +343,7 @@ const Home = () => {
                                     <h3>{service.title}</h3>
                                     <div className="service-icon">
                                         {service.icon.startsWith('/') ? (
-                                            <img src={service.icon} alt={service.title} loading="lazy" />
+                                            <img src={service.icon} alt={service.title}  />
                                         ) : (
                                             service.icon
                                         )}
@@ -407,7 +406,7 @@ const Home = () => {
                                                         loading="lazy">
                                                     </iframe>
                                                 ) : post.full_picture ? (
-                                                    <img src={post.full_picture} alt="News" loading="lazy" />
+                                                    <img src={post.full_picture} alt="News"  />
                                                 ) : (
                                                     <div style={{ background: '#f5f5f5', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ccc' }}>THAI HERB</div>
                                                 )}
