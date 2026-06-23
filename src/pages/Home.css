@@ -1177,7 +1177,7 @@
 
 .fb-post-modal-video {
     width: 100%;
-    aspect-ratio: 16/9;
+    height: 65vh;
     background: #000;
 }
 

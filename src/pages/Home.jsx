@@ -389,13 +389,7 @@ const Home = () => {
                                         year: 'numeric', month: 'short', day: 'numeric'
                                     });
                                     return (
-                                        <div className="news-card" key={post.id} style={{ textDecoration: 'none', cursor: 'pointer' }} onClick={() => {
-                                            if (post.isVideo) {
-                                                window.open(post.permalink_url, '_blank', 'noopener,noreferrer');
-                                            } else {
-                                                setSelectedPost(post);
-                                            }
-                                        }}>
+                                        <div className="news-card" key={post.id} style={{ textDecoration: 'none', cursor: 'pointer' }} onClick={() => setSelectedPost(post)}>
                                             <div className="news-card-image">
                                                 {post.full_picture ? (
                                                     <>
@@ -553,31 +547,6 @@ const Home = () => {
                                     allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share; fullscreen"
                                     loading="lazy">
                                 </iframe>
-                                <button className="custom-fullscreen-btn" onClick={(e) => {
-                                    e.stopPropagation();
-                                    const videoWrapper = e.currentTarget.parentElement;
-                                    if (videoWrapper.requestFullscreen) {
-                                        videoWrapper.requestFullscreen();
-                                    } else if (videoWrapper.webkitRequestFullscreen) { /* Safari */
-                                        videoWrapper.webkitRequestFullscreen();
-                                    } else if (videoWrapper.msRequestFullscreen) { /* IE11 */
-                                        videoWrapper.msRequestFullscreen();
-                                    }
-                                }} style={{
-                                    position: 'absolute', bottom: '15px', right: '15px', 
-                                    background: 'rgba(0,0,0,0.7)', color: 'white', 
-                                    border: '1px solid rgba(255,255,255,0.3)', borderRadius: '8px', 
-                                    padding: '8px 15px', cursor: 'pointer', zIndex: 10,
-                                    display: 'flex', alignItems: 'center', gap: '8px',
-                                    fontWeight: 'bold', fontSize: '0.95rem', backdropFilter: 'blur(4px)',
-                                    transition: 'background 0.2s'
-                                }} onMouseOver={(e) => e.currentTarget.style.background = 'rgba(0,0,0,0.9)'} 
-                                   onMouseOut={(e) => e.currentTarget.style.background = 'rgba(0,0,0,0.7)'}>
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M5 5h5v2H7v3H5V5zm9 0h5v5h-2V7h-3V5zm5 14h-5v-2h3v-3h2v5zm-14 0V14h2v3h3v2H5z"/>
-                                    </svg>
-                                    ขยายเต็มจอ
-                                </button>
                             </div>
                         ) : selectedPost.full_picture ? (
                             <div className="fb-post-modal-image">
