@@ -389,7 +389,13 @@ const Home = () => {
                                         year: 'numeric', month: 'short', day: 'numeric'
                                     });
                                     return (
-                                        <div className="news-card" key={post.id} style={{ textDecoration: 'none', cursor: 'pointer' }} onClick={() => setSelectedPost(post)}>
+                                        <div className="news-card" key={post.id} style={{ textDecoration: 'none', cursor: 'pointer' }} onClick={() => {
+                                            if (post.isVideo) {
+                                                window.open(post.permalink_url, '_blank', 'noopener,noreferrer');
+                                            } else {
+                                                setSelectedPost(post);
+                                            }
+                                        }}>
                                             <div className="news-card-image">
                                                 {post.full_picture ? (
                                                     <>
